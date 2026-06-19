@@ -1,6 +1,7 @@
 import { readFile } from "node:fs/promises";
 import path from "node:path";
 import { unstable_cache } from "next/cache";
+import { buildDataQualitySummary } from "./data-quality";
 import { dataStoreSchema } from "./schemas";
 import type {
   DataSource,
@@ -82,5 +83,14 @@ export async function getTeamBundle(id: string) {
     fixtures: store.fixtures.filter((fixture) => fixture.homeTeamId === id || fixture.awayTeamId === id),
     standing: store.standings.find((standing) => standing.teamId === id),
     ranking: store.rankings.find((ranking) => ranking.teamId === id)
+  };
+}
+
+export async function getSourcesBundle() {
+  const store = await loadStore();
+
+  return {
+    sources: store.sources,
+    summary: buildDataQualitySummary(store)
   };
 }

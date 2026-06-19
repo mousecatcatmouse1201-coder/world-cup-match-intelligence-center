@@ -16,6 +16,14 @@ interface RawManifestEntry extends FetchSource {
   error?: string;
 }
 
+interface FetchAuditReport {
+  generatedAt: string;
+  totalSources: number;
+  okSources: number;
+  failedSources: number;
+  sources: RawManifestEntry[];
+}
+
 const rawDir = path.join(process.cwd(), "data", "raw");
 
 const sources: FetchSource[] = [
@@ -87,7 +95,16 @@ async function main() {
   const previous = await loadExistingManifest();
   const results = await Promise.all(sources.map(fetchSource));
   const manifest = [...previous, ...results].slice(-30);
+  const report: FetchAuditReport = {
+    generatedAt: new Date().toISOString(),
+    totalSources: results.length,
+    okSources: results.filter((item) => item.ok).length,
+    failedSources: results.filter((item) => !item.ok).length,
+    sources: results
+  };
+
   await writeFile(path.join(rawDir, "manifest.json"), JSON.stringify(manifest, null, 2), "utf8");
+  await writeFile(path.join(rawDir, "fetch-report.json"), JSON.stringify(report, null, 2), "utf8");
 
   const failed = results.filter((item) => !item.ok);
   for (const item of results) {
@@ -98,6 +115,8 @@ async function main() {
   if (failed.length === results.length) {
     console.warn("所有远程来源抓取失败。normalize 会继续使用上一次 JSON 或内置基线数据。");
   }
+
+  console.log(`抓取审计报告完成：data/raw/fetch-report.json，成功 ${report.okSources}/${report.totalSources}。`);
 }
 
 main().catch((error) => {

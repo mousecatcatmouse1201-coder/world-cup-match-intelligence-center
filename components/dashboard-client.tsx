@@ -18,6 +18,7 @@ import {
   YAxis
 } from "recharts";
 import { AlertTriangle, Database, Star, Target } from "lucide-react";
+import { buildDataQualitySummary } from "../lib/data-quality";
 import { formatDisplayDateTime, formatFullDisplayDateTime } from "../lib/format";
 import type { DataStore, Fixture, PredictionResult, Team } from "../lib/types";
 import { SourceBadge } from "./source-badge";
@@ -50,6 +51,7 @@ export function DashboardClient({ store, predictions }: DashboardClientProps) {
   const [favoriteOnly, setFavoriteOnly] = useState(false);
   const [mounted, setMounted] = useState(false);
   const topFixture = store.fixtures[0];
+  const qualitySummary = useMemo(() => buildDataQualitySummary(store), [store]);
   const radarTeams = useMemo(() => {
     const fixture = topFixture;
     return fixture ? [teamById(store.teams, fixture.homeTeamId), teamById(store.teams, fixture.awayTeamId)] : store.teams.slice(0, 2);
@@ -140,6 +142,29 @@ export function DashboardClient({ store, predictions }: DashboardClientProps) {
           <span><Database size={18} /> {store.sources.length} 类来源</span>
           <span><Target size={18} /> {store.fixtures.length} 场比赛</span>
           <span><AlertTriangle size={18} /> 模型推断已标注</span>
+        </div>
+      </section>
+
+      <section className="qualityBand" aria-label="数据可信度摘要">
+        <div>
+          <span>可信记录</span>
+          <strong>{qualitySummary.trustedRecords}/{qualitySummary.totalRecords}</strong>
+          <small>官方与二级来源</small>
+        </div>
+        <div>
+          <span>演示/推断</span>
+          <strong>{qualitySummary.mockOrEstimatedRecords}</strong>
+          <small>已独立标注</small>
+        </div>
+        <div>
+          <span>来源目录</span>
+          <strong>{qualitySummary.sourceCount}</strong>
+          <small>含官方、二级、模型</small>
+        </div>
+        <div>
+          <span>最近更新</span>
+          <strong>{qualitySummary.latestFetchedAt ? formatFullDisplayDateTime(qualitySummary.latestFetchedAt) : "N/A"}</strong>
+          <small>上海时区显示</small>
         </div>
       </section>
 

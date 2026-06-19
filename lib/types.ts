@@ -111,6 +111,49 @@ export interface DataStore {
   sentiment: SentimentSnapshot[];
 }
 
+export type DataRecordGroupKey =
+  | "sources"
+  | "teams"
+  | "players"
+  | "fixtures"
+  | "standings"
+  | "rankings"
+  | "odds"
+  | "sentiment";
+
+export interface DataQualityGroup {
+  key: DataRecordGroupKey;
+  label: string;
+  totalRecords: number;
+  officialRecords: number;
+  secondaryRecords: number;
+  estimatedRecords: number;
+  modeledRecords: number;
+  mockOrEstimatedRecords: number;
+  trustedRecords: number;
+  latestFetchedAt: string | null;
+  sourceIds: string[];
+}
+
+export interface DataQualitySummary {
+  totalRecords: number;
+  sourceCount: number;
+  officialRecords: number;
+  secondaryRecords: number;
+  estimatedRecords: number;
+  modeledRecords: number;
+  mockOrEstimatedRecords: number;
+  trustedRecords: number;
+  latestFetchedAt: string | null;
+  groups: DataQualityGroup[];
+}
+
+export interface SourceAuditReport {
+  generatedAt: string;
+  summary: DataQualitySummary;
+  notes: string[];
+}
+
 export interface PredictionResult {
   fixtureId: string;
   probabilities: {

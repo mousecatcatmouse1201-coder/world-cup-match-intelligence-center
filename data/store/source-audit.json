@@ -1,0 +1,146 @@
+{
+  "generatedAt": "2026-06-19T00:53:54.548Z",
+  "summary": {
+    "totalRecords": 85,
+    "sourceCount": 5,
+    "officialRecords": 34,
+    "secondaryRecords": 5,
+    "estimatedRecords": 31,
+    "modeledRecords": 15,
+    "mockOrEstimatedRecords": 46,
+    "trustedRecords": 39,
+    "latestFetchedAt": "2026-06-19T00:53:54.539Z",
+    "groups": [
+      {
+        "key": "sources",
+        "label": "来源目录",
+        "totalRecords": 5,
+        "officialRecords": 2,
+        "secondaryRecords": 1,
+        "estimatedRecords": 1,
+        "modeledRecords": 1,
+        "mockOrEstimatedRecords": 2,
+        "trustedRecords": 3,
+        "latestFetchedAt": "2026-06-19T00:53:54.539Z",
+        "sourceIds": [
+          "espn-fixtures-secondary",
+          "fifa-fixtures-official",
+          "fifa-ranking-official",
+          "local-model-derived",
+          "manual-mvp-intel"
+        ]
+      },
+      {
+        "key": "teams",
+        "label": "球队与排名",
+        "totalRecords": 14,
+        "officialRecords": 14,
+        "secondaryRecords": 0,
+        "estimatedRecords": 0,
+        "modeledRecords": 0,
+        "mockOrEstimatedRecords": 0,
+        "trustedRecords": 14,
+        "latestFetchedAt": "2026-06-19T00:53:53.067Z",
+        "sourceIds": [
+          "fifa-ranking-official"
+        ]
+      },
+      {
+        "key": "players",
+        "label": "关键球员",
+        "totalRecords": 14,
+        "officialRecords": 0,
+        "secondaryRecords": 0,
+        "estimatedRecords": 14,
+        "modeledRecords": 0,
+        "mockOrEstimatedRecords": 14,
+        "trustedRecords": 0,
+        "latestFetchedAt": "2026-06-19T00:53:54.539Z",
+        "sourceIds": [
+          "manual-mvp-intel"
+        ]
+      },
+      {
+        "key": "fixtures",
+        "label": "赛程赛果",
+        "totalRecords": 8,
+        "officialRecords": 4,
+        "secondaryRecords": 4,
+        "estimatedRecords": 0,
+        "modeledRecords": 0,
+        "mockOrEstimatedRecords": 0,
+        "trustedRecords": 8,
+        "latestFetchedAt": "2026-06-19T00:53:53.067Z",
+        "sourceIds": [
+          "espn-fixtures-secondary",
+          "fifa-fixtures-official"
+        ]
+      },
+      {
+        "key": "standings",
+        "label": "积分与出线概率",
+        "totalRecords": 14,
+        "officialRecords": 0,
+        "secondaryRecords": 0,
+        "estimatedRecords": 0,
+        "modeledRecords": 14,
+        "mockOrEstimatedRecords": 14,
+        "trustedRecords": 0,
+        "latestFetchedAt": "2026-06-19T00:53:54.539Z",
+        "sourceIds": [
+          "local-model-derived"
+        ]
+      },
+      {
+        "key": "rankings",
+        "label": "FIFA 排名",
+        "totalRecords": 14,
+        "officialRecords": 14,
+        "secondaryRecords": 0,
+        "estimatedRecords": 0,
+        "modeledRecords": 0,
+        "mockOrEstimatedRecords": 0,
+        "trustedRecords": 14,
+        "latestFetchedAt": "2026-06-19T00:53:53.067Z",
+        "sourceIds": [
+          "fifa-ranking-official"
+        ]
+      },
+      {
+        "key": "odds",
+        "label": "赔率快照",
+        "totalRecords": 8,
+        "officialRecords": 0,
+        "secondaryRecords": 0,
+        "estimatedRecords": 8,
+        "modeledRecords": 0,
+        "mockOrEstimatedRecords": 8,
+        "trustedRecords": 0,
+        "latestFetchedAt": "2026-06-19T00:53:54.539Z",
+        "sourceIds": [
+          "manual-odds"
+        ]
+      },
+      {
+        "key": "sentiment",
+        "label": "舆情热度",
+        "totalRecords": 8,
+        "officialRecords": 0,
+        "secondaryRecords": 0,
+        "estimatedRecords": 8,
+        "modeledRecords": 0,
+        "mockOrEstimatedRecords": 8,
+        "trustedRecords": 0,
+        "latestFetchedAt": "2026-06-19T00:53:54.539Z",
+        "sourceIds": [
+          "manual-sentiment"
+        ]
+      }
+    ]
+  },
+  "notes": [
+    "可信记录 39/85，其余为演示数据或模型推断。",
+    "演示数据覆盖：来源目录、关键球员、赔率快照、舆情热度。",
+    "模型推断覆盖：来源目录、积分与出线概率。"
+  ]
+}

@@ -130,10 +130,42 @@ input {
 
 .toolbar,
 .teamStrip,
+.qualityBand,
 .sourcePanel,
 .matchHero,
 .teamHeader {
   margin-top: 22px;
+}
+
+.qualityBand {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.qualityBand div {
+  display: grid;
+  gap: 5px;
+  min-height: 98px;
+  padding: 14px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--surface);
+}
+
+.qualityBand span,
+.qualityBand small {
+  color: var(--muted);
+}
+
+.qualityBand span,
+.qualityBand small {
+  font-size: 12px;
+}
+
+.qualityBand strong {
+  font-size: 24px;
+  line-height: 1.1;
 }
 
 .toolbar {
@@ -462,6 +494,10 @@ input {
     grid-template-columns: 1fr;
   }
 
+  .qualityBand {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
   .heroStats {
     grid-template-columns: 1fr;
   }
@@ -488,5 +524,13 @@ input {
 
   .probabilityRows > div {
     grid-template-columns: minmax(42px, 64px) 48px 1fr;
+  }
+
+  .matchGrid,
+  .chartsGrid,
+  .detailGrid,
+  .qualityBand,
+  .sourceGrid {
+    grid-template-columns: 1fr;
   }
 }

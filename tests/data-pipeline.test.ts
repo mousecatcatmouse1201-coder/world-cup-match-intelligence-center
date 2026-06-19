@@ -1,9 +1,10 @@
 import { readFileSync } from "node:fs";
 import path from "node:path";
 import { describe, expect, it } from "vitest";
+import { buildDataQualitySummary } from "../lib/data-quality";
 import { formatDisplayDateTime } from "../lib/format";
 import { dataStoreSchema } from "../lib/schemas";
-import type { DataStore } from "../lib/types";
+import type { DataStore, SourceAuditReport } from "../lib/types";
 
 function readJson<T>(fileName: string): T {
   const raw = readFileSync(path.join(process.cwd(), "data", "store", fileName), "utf8");
@@ -54,5 +55,23 @@ describe("data pipeline output", () => {
 
   it("formats visible datetimes in a fixed display timezone", () => {
     expect(formatDisplayDateTime("2026-06-12T01:00:00.000Z")).toBe("06/12 09:00");
+  });
+
+  it("summarizes trusted and estimated data records", () => {
+    const summary = buildDataQualitySummary(loadStore());
+
+    expect(summary.totalRecords).toBeGreaterThan(0);
+    expect(summary.trustedRecords).toBeGreaterThan(0);
+    expect(summary.mockOrEstimatedRecords).toBeGreaterThan(0);
+    expect(summary.groups.map((group) => group.key)).toContain("fixtures");
+    expect(summary.latestFetchedAt).toBeTruthy();
+  });
+
+  it("writes a source audit report with every record group", () => {
+    const audit = readJson<SourceAuditReport>("source-audit.json");
+
+    expect(audit.generatedAt).toBeTruthy();
+    expect(audit.summary.groups.length).toBe(8);
+    expect(audit.notes.some((note) => note.includes("可信记录"))).toBe(true);
   });
 });

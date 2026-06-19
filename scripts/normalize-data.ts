@@ -1,5 +1,6 @@
 import { mkdir, readFile, rename, writeFile } from "node:fs/promises";
 import path from "node:path";
+import { buildSourceAuditReport } from "../lib/data-quality";
 import {
   dataSourceSchema,
   fixtureSchema,
@@ -12,6 +13,7 @@ import {
 } from "../lib/schemas";
 import type {
   DataSource,
+  DataStore,
   Fixture,
   OddsSnapshot,
   Player,
@@ -351,6 +353,16 @@ async function main() {
   }));
 
   const sources = [fifaFixtures, fifaRanking, espnFixtures, manualSeed, model];
+  const store: DataStore = {
+    sources,
+    teams,
+    players,
+    fixtures,
+    standings,
+    rankings,
+    odds,
+    sentiment
+  };
 
   const teamIds = new Set(teams.map((team) => team.id));
   for (const fixture of fixtures) {
@@ -367,8 +379,10 @@ async function main() {
   await writeValidatedJson("rankings.json", { parse: (value) => rankingSchema.array().parse(value) }, rankings);
   await writeValidatedJson("odds.json", { parse: (value) => oddsSchema.array().parse(value) }, odds);
   await writeValidatedJson("sentiment.json", { parse: (value) => sentimentSchema.array().parse(value) }, sentiment);
+  await writeFileAtomic("source-audit.json", JSON.stringify(buildSourceAuditReport(store), null, 2));
 
   console.log(`写入 ${teams.length} 支球队、${fixtures.length} 场比赛、${players.length} 名关键球员。`);
+  console.log("来源审计报告完成：data/store/source-audit.json");
   console.log("JSON 入库完成：data/store/*.json");
 }
 
