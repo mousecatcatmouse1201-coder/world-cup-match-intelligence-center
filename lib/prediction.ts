@@ -1,5 +1,8 @@
 import type { Fixture, OddsSnapshot, Player, PredictionResult, RecordSource, SentimentSnapshot, Team } from "./types";
 
+export const PREDICTION_TIME_ZONE = "Asia/Shanghai";
+export const PREDICTION_WINDOW_DAYS = 2;
+
 interface PredictInput {
   fixture: Fixture;
   homeTeam: Team;
@@ -10,11 +13,111 @@ interface PredictInput {
   sentiment?: SentimentSnapshot;
 }
 
+export interface PredictionWindowOptions {
+  now?: Date;
+  timeZone?: string;
+  days?: number;
+}
+
+export type PredictionUnavailableCode = "finished" | "past" | "outside-window";
+
+export interface PredictionEligibility {
+  canPredict: boolean;
+  code?: PredictionUnavailableCode;
+  message?: string;
+  fixtureDate: string;
+  windowStart: string;
+  windowEnd: string;
+}
+
 const clamp = (value: number, min: number, max: number) => Math.max(min, Math.min(max, value));
 
 const round1 = (value: number) => Math.round(value * 10) / 10;
 
 const roundPercent = (value: number) => Math.round(value * 1000) / 10;
+
+const dayMs = 24 * 60 * 60 * 1000;
+
+function dateKeyInTimeZone(date: Date, timeZone = PREDICTION_TIME_ZONE) {
+  const parts = new Intl.DateTimeFormat("en-US", {
+    timeZone,
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit"
+  }).formatToParts(date);
+
+  const year = parts.find((part) => part.type === "year")?.value;
+  const month = parts.find((part) => part.type === "month")?.value;
+  const day = parts.find((part) => part.type === "day")?.value;
+  return `${year}-${month}-${day}`;
+}
+
+function dateKeyToUtcDay(dateKey: string) {
+  const [year, month, day] = dateKey.split("-").map(Number);
+  return Math.floor(Date.UTC(year, month - 1, day) / dayMs);
+}
+
+function addDaysToDateKey(dateKey: string, days: number) {
+  const [year, month, day] = dateKey.split("-").map(Number);
+  return dateKeyInTimeZone(new Date(Date.UTC(year, month - 1, day + days)), "UTC");
+}
+
+export function getPredictionWindow(options: PredictionWindowOptions = {}) {
+  const days = options.days ?? PREDICTION_WINDOW_DAYS;
+  const timeZone = options.timeZone ?? PREDICTION_TIME_ZONE;
+  const start = dateKeyInTimeZone(options.now ?? new Date(), timeZone);
+  const end = addDaysToDateKey(start, days - 1);
+
+  return {
+    days,
+    timeZone,
+    start,
+    end
+  };
+}
+
+export function getFixturePredictionEligibility(fixture: Fixture, options: PredictionWindowOptions = {}): PredictionEligibility {
+  const window = getPredictionWindow(options);
+  const fixtureDate = dateKeyInTimeZone(new Date(fixture.kickoff), window.timeZone);
+  const daysFromWindowStart = dateKeyToUtcDay(fixtureDate) - dateKeyToUtcDay(window.start);
+  const base = {
+    fixtureDate,
+    windowStart: window.start,
+    windowEnd: window.end
+  };
+
+  if (fixture.status === "finished") {
+    return {
+      ...base,
+      canPredict: false,
+      code: "finished",
+      message: "比赛已经结束，不再生成赛前预测。"
+    };
+  }
+
+  if (daysFromWindowStart < 0) {
+    return {
+      ...base,
+      canPredict: false,
+      code: "past",
+      message: "比赛日期早于当前预测窗口，不再生成赛前预测。"
+    };
+  }
+
+  if (daysFromWindowStart >= window.days) {
+    return {
+      ...base,
+      canPredict: false,
+      code: "outside-window",
+      message: `仅预测 ${window.start} 至 ${window.end} 的未完赛比赛。`
+    };
+  }
+
+  return {
+    ...base,
+    canPredict: true
+  };
+}
 
 function modelSource(): RecordSource {
   return {
@@ -163,9 +266,11 @@ export function predictMany(
   teams: Team[],
   players: Player[],
   odds: OddsSnapshot[],
-  sentiment: SentimentSnapshot[]
+  sentiment: SentimentSnapshot[],
+  options: PredictionWindowOptions = {}
 ) {
   return fixtures
+    .filter((fixture) => getFixturePredictionEligibility(fixture, options).canPredict)
     .map((fixture) => {
       const homeTeam = teams.find((team) => team.id === fixture.homeTeamId);
       const awayTeam = teams.find((team) => team.id === fixture.awayTeamId);

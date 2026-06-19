@@ -32,12 +32,12 @@ npm run build
 
 ## API
 
-- `GET /api/matches`：返回完整数据仓库和批量预测。
-- `GET /api/matches/[id]`：返回单场比赛、球队、预测和分析。
+- `GET /api/matches`：返回完整数据仓库和未来两天未完赛比赛的批量预测。
+- `GET /api/matches/[id]`：返回单场比赛、球队、预测和分析；已完赛或窗口外比赛的预测字段为 `null`。
 - `GET /api/teams/[id]`：返回球队画像、球员、相关比赛和小组形势。
 - `GET /api/sources`：返回来源目录和数据质量摘要。
-- `POST /api/predict`：请求体 `{ "fixtureId": "match-001" }`，返回单场预测。
-- `POST /api/analyze`：请求体 `{ "fixtureId": "match-001" }`，返回单场中文分析。
+- `POST /api/predict`：请求体 `{ "fixtureId": "match-005" }`，对未来两天未完赛比赛返回单场预测。
+- `POST /api/analyze`：请求体 `{ "fixtureId": "match-005" }`，对未来两天未完赛比赛返回单场中文分析。
 
 ## 免责声明
 

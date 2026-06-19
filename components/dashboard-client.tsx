@@ -20,6 +20,7 @@ import {
 import { AlertTriangle, Database, Star, Target } from "lucide-react";
 import { buildDataQualitySummary } from "../lib/data-quality";
 import { formatDisplayDateTime, formatFullDisplayDateTime } from "../lib/format";
+import { getFixturePredictionEligibility } from "../lib/prediction";
 import type { DataStore, Fixture, PredictionResult, Team } from "../lib/types";
 import { SourceBadge } from "./source-badge";
 
@@ -50,7 +51,8 @@ export function DashboardClient({ store, predictions }: DashboardClientProps) {
   const [favoriteTeams, setFavoriteTeams] = useState<string[]>([]);
   const [favoriteOnly, setFavoriteOnly] = useState(false);
   const [mounted, setMounted] = useState(false);
-  const topFixture = store.fixtures[0];
+  const predictedFixtureIds = useMemo(() => new Set(predictions.map((prediction) => prediction.fixtureId)), [predictions]);
+  const topFixture = store.fixtures.find((fixture) => predictedFixtureIds.has(fixture.id)) ?? store.fixtures[0];
   const qualitySummary = useMemo(() => buildDataQualitySummary(store), [store]);
   const radarTeams = useMemo(() => {
     const fixture = topFixture;
@@ -140,8 +142,8 @@ export function DashboardClient({ store, predictions }: DashboardClientProps) {
         </div>
         <div className="heroStats">
           <span><Database size={18} /> {store.sources.length} 类来源</span>
-          <span><Target size={18} /> {store.fixtures.length} 场比赛</span>
-          <span><AlertTriangle size={18} /> 模型推断已标注</span>
+          <span><Target size={18} /> {predictions.length} 场预测</span>
+          <span><AlertTriangle size={18} /> 仅预测未来两天未完赛比赛</span>
         </div>
       </section>
 
@@ -199,6 +201,7 @@ export function DashboardClient({ store, predictions }: DashboardClientProps) {
           const home = teamById(store.teams, fixture.homeTeamId);
           const away = teamById(store.teams, fixture.awayTeamId);
           const isFavorite = favoriteTeams.includes(home.id) || favoriteTeams.includes(away.id);
+          const predictionEligibility = getFixturePredictionEligibility(fixture);
 
           return (
             <article className={`matchCard ${isFavorite ? "favorite" : ""}`} key={fixture.id}>
@@ -236,7 +239,16 @@ export function DashboardClient({ store, predictions }: DashboardClientProps) {
                   </div>
                   <p className="riskText">{prediction.riskFactors[0]}</p>
                 </>
-              ) : null}
+              ) : (
+                <>
+                  <div className="scoreForecast muted">
+                    <span>{fixture.score ? "实际比分" : "暂不预测"}</span>
+                    <strong>{fixture.score ? `${fixture.score.home}-${fixture.score.away}` : "--"}</strong>
+                    <small>{predictionEligibility.message ?? "该比赛不在当前预测窗口内。"}</small>
+                  </div>
+                  <p className="riskText">赛前预测仅覆盖未来两天未完赛比赛。</p>
+                </>
+              )}
             </article>
           );
         })}

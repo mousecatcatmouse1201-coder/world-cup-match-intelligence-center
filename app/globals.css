@@ -297,6 +297,10 @@ input {
   color: var(--muted);
 }
 
+.scoreForecast.muted strong {
+  color: var(--muted);
+}
+
 .probabilityRows {
   display: grid;
   gap: 12px;
@@ -433,6 +437,12 @@ input {
   color: #fff;
 }
 
+.scoreTile.muted {
+  border: 1px solid var(--line);
+  background: var(--surface-soft);
+  color: var(--text);
+}
+
 .scoreTile span,
 .scoreTile small,
 .scoreTile strong {
@@ -446,6 +456,10 @@ input {
 
 .scoreTile small {
   color: #cbd5e1;
+}
+
+.scoreTile.muted small {
+  color: var(--muted);
 }
 
 .backLink {

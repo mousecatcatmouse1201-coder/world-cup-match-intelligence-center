@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { predictMatch } from "../../../lib/prediction";
+import { getFixturePredictionEligibility, predictMatch } from "../../../lib/prediction";
 import { getFixtureBundle } from "../../../lib/store";
 
 export async function POST(request: Request) {
@@ -9,6 +9,12 @@ export async function POST(request: Request) {
 
   if (!bundle) {
     return NextResponse.json({ error: "fixtureId is required or invalid" }, { status: 400 });
+  }
+
+  const predictionEligibility = getFixturePredictionEligibility(bundle.fixture);
+
+  if (!predictionEligibility.canPredict) {
+    return NextResponse.json({ error: predictionEligibility.message, predictionEligibility }, { status: 400 });
   }
 
   return NextResponse.json(predictMatch(bundle));

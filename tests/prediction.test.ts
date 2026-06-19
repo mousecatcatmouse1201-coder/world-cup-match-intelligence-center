@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { generateMatchAnalysis } from "../lib/analysis";
-import { predictMatch } from "../lib/prediction";
+import { getFixturePredictionEligibility, predictMany, predictMatch } from "../lib/prediction";
 import type { Fixture, Player, Team } from "../lib/types";
 
 const source = {
@@ -62,6 +62,7 @@ const weakerTeam: Team = {
 };
 
 const players: Player[] = [];
+const baseNow = new Date("2026-06-19T12:00:00+08:00");
 
 describe("prediction engine", () => {
   it("returns normalized win draw loss probabilities", () => {
@@ -109,5 +110,42 @@ describe("prediction engine", () => {
 
     expect(analysis.summary).toContain("预测比分");
     expect(analysis.scorePrediction).toContain(`${prediction.predictedScore.home}-${prediction.predictedScore.away}`);
+  });
+
+  it("only allows predictions for unfinished matches in the next two Shanghai dates", () => {
+    const finishedFixture: Fixture = {
+      ...fixture,
+      id: "finished-match",
+      kickoff: "2026-06-12T01:00:00.000Z",
+      status: "finished",
+      score: { home: 1, away: 0 }
+    };
+    const windowFixture: Fixture = {
+      ...fixture,
+      id: "window-match",
+      kickoff: "2026-06-19T01:00:00.000Z",
+      status: "scheduled"
+    };
+    const outsideWindowFixture: Fixture = {
+      ...fixture,
+      id: "outside-window-match",
+      kickoff: "2026-06-21T01:00:00.000Z",
+      status: "scheduled"
+    };
+
+    expect(getFixturePredictionEligibility(finishedFixture, { now: baseNow }).canPredict).toBe(false);
+    expect(getFixturePredictionEligibility(windowFixture, { now: baseNow }).canPredict).toBe(true);
+    expect(getFixturePredictionEligibility(outsideWindowFixture, { now: baseNow }).canPredict).toBe(false);
+
+    const predictions = predictMany(
+      [finishedFixture, windowFixture, outsideWindowFixture],
+      [strongTeam, weakerTeam],
+      players,
+      [],
+      [],
+      { now: baseNow }
+    );
+
+    expect(predictions.map((prediction) => prediction.fixtureId)).toEqual(["window-match"]);
   });
 });
