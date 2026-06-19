@@ -2,6 +2,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { SourceBadge } from "../../../components/source-badge";
 import { generateMatchAnalysis } from "../../../lib/analysis";
+import { formatFullDisplayDateTime } from "../../../lib/format";
 import { predictMatch } from "../../../lib/prediction";
 import { getFixtureBundle } from "../../../lib/store";
 
@@ -37,7 +38,7 @@ export default async function MatchPage({ params }: PageProps) {
         <div>
           <p className="eyebrow">{bundle.fixture.stage} · {bundle.fixture.group} 组</p>
           <h1>{bundle.homeTeam.name} vs {bundle.awayTeam.name}</h1>
-          <p>{new Date(bundle.fixture.kickoff).toLocaleString("zh-CN")} · {bundle.fixture.city} · {bundle.fixture.venue}</p>
+          <p>{formatFullDisplayDateTime(bundle.fixture.kickoff)} · {bundle.fixture.city} · {bundle.fixture.venue}</p>
         </div>
         <div className="scoreTile">
           <span>预测比分</span>

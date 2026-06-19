@@ -1,6 +1,7 @@
 import { readFileSync } from "node:fs";
 import path from "node:path";
 import { describe, expect, it } from "vitest";
+import { formatDisplayDateTime } from "../lib/format";
 import { dataStoreSchema } from "../lib/schemas";
 import type { DataStore } from "../lib/types";
 
@@ -49,5 +50,9 @@ describe("data pipeline output", () => {
       expect(record.source.lastFetchedAt).toBeTruthy();
       expect(record.source.confidence).toBeTruthy();
     }
+  });
+
+  it("formats visible datetimes in a fixed display timezone", () => {
+    expect(formatDisplayDateTime("2026-06-12T01:00:00.000Z")).toBe("06/12 09:00");
   });
 });

@@ -18,6 +18,7 @@ import {
   YAxis
 } from "recharts";
 import { AlertTriangle, Database, Star, Target } from "lucide-react";
+import { formatDisplayDateTime, formatFullDisplayDateTime } from "../lib/format";
 import type { DataStore, Fixture, PredictionResult, Team } from "../lib/types";
 import { SourceBadge } from "./source-badge";
 
@@ -26,15 +27,6 @@ const FAVORITES_KEY = "wcmic.favoriteTeams";
 interface DashboardClientProps {
   store: DataStore;
   predictions: PredictionResult[];
-}
-
-function formatDate(value: string) {
-  return new Date(value).toLocaleString("zh-CN", {
-    month: "2-digit",
-    day: "2-digit",
-    hour: "2-digit",
-    minute: "2-digit"
-  });
 }
 
 function teamName(teams: Team[], id: string) {
@@ -192,7 +184,7 @@ export function DashboardClient({ store, predictions }: DashboardClientProps) {
               <Link href={`/matches/${fixture.id}`} className="matchTitle">
                 {home.name} <span>vs</span> {away.name}
               </Link>
-              <div className="matchMeta">{formatDate(fixture.kickoff)} · {fixture.city}</div>
+              <div className="matchMeta">{formatDisplayDateTime(fixture.kickoff)} · {fixture.city}</div>
               {prediction ? (
                 <>
                   <div className="scoreForecast">
@@ -314,7 +306,7 @@ export function DashboardClient({ store, predictions }: DashboardClientProps) {
             <a href={source.sourceUrl} target="_blank" rel="noreferrer" key={source.sourceId}>
               <strong>{source.sourceName}</strong>
               <span>{source.description}</span>
-              <small>{source.confidence} · {new Date(source.lastFetchedAt).toLocaleString("zh-CN")}</small>
+              <small>{source.confidence} · {formatFullDisplayDateTime(source.lastFetchedAt)}</small>
             </a>
           ))}
         </div>
