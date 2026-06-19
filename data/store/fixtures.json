@@ -1,0 +1,186 @@
+[
+  {
+    "id": "match-001",
+    "group": "A",
+    "stage": "小组赛",
+    "kickoff": "2026-06-11T19:00:00-06:00",
+    "venue": "Mexico City Stadium",
+    "city": "Mexico City",
+    "homeTeamId": "mexico",
+    "awayTeamId": "south-africa",
+    "status": "finished",
+    "score": {
+      "home": 2,
+      "away": 0
+    },
+    "heatIndex": 94,
+    "source": {
+      "sourceId": "espn-fixtures-secondary",
+      "sourceName": "ESPN 2026 World Cup 赛程校验",
+      "sourceUrl": "https://www.espn.com/soccer/schedule/_/league/fifa.world",
+      "sourceKind": "secondary",
+      "lastFetchedAt": "2026-06-19T00:36:40.188Z",
+      "confidence": "secondary",
+      "isMockOrEstimated": false
+    }
+  },
+  {
+    "id": "match-002",
+    "group": "B",
+    "stage": "小组赛",
+    "kickoff": "2026-06-12T16:00:00-04:00",
+    "venue": "Toronto Stadium",
+    "city": "Toronto",
+    "homeTeamId": "canada",
+    "awayTeamId": "bosnia",
+    "status": "finished",
+    "score": {
+      "home": 1,
+      "away": 1
+    },
+    "heatIndex": 80,
+    "source": {
+      "sourceId": "espn-fixtures-secondary",
+      "sourceName": "ESPN 2026 World Cup 赛程校验",
+      "sourceUrl": "https://www.espn.com/soccer/schedule/_/league/fifa.world",
+      "sourceKind": "secondary",
+      "lastFetchedAt": "2026-06-19T00:36:40.188Z",
+      "confidence": "secondary",
+      "isMockOrEstimated": false
+    }
+  },
+  {
+    "id": "match-003",
+    "group": "D",
+    "stage": "小组赛",
+    "kickoff": "2026-06-12T18:00:00-07:00",
+    "venue": "Los Angeles Stadium",
+    "city": "Los Angeles",
+    "homeTeamId": "united-states",
+    "awayTeamId": "paraguay",
+    "status": "finished",
+    "score": {
+      "home": 4,
+      "away": 1
+    },
+    "heatIndex": 91,
+    "source": {
+      "sourceId": "espn-fixtures-secondary",
+      "sourceName": "ESPN 2026 World Cup 赛程校验",
+      "sourceUrl": "https://www.espn.com/soccer/schedule/_/league/fifa.world",
+      "sourceKind": "secondary",
+      "lastFetchedAt": "2026-06-19T00:36:40.188Z",
+      "confidence": "secondary",
+      "isMockOrEstimated": false
+    }
+  },
+  {
+    "id": "match-004",
+    "group": "A",
+    "stage": "小组赛",
+    "kickoff": "2026-06-13T13:00:00-06:00",
+    "venue": "Guadalajara Stadium",
+    "city": "Guadalajara",
+    "homeTeamId": "south-korea",
+    "awayTeamId": "czechia",
+    "status": "finished",
+    "score": {
+      "home": 2,
+      "away": 1
+    },
+    "heatIndex": 78,
+    "source": {
+      "sourceId": "espn-fixtures-secondary",
+      "sourceName": "ESPN 2026 World Cup 赛程校验",
+      "sourceUrl": "https://www.espn.com/soccer/schedule/_/league/fifa.world",
+      "sourceKind": "secondary",
+      "lastFetchedAt": "2026-06-19T00:36:40.188Z",
+      "confidence": "secondary",
+      "isMockOrEstimated": false
+    }
+  },
+  {
+    "id": "match-005",
+    "group": "L",
+    "stage": "小组赛",
+    "kickoff": "2026-06-18T19:00:00-04:00",
+    "venue": "New York New Jersey Stadium",
+    "city": "New York/New Jersey",
+    "homeTeamId": "england",
+    "awayTeamId": "croatia",
+    "status": "scheduled",
+    "heatIndex": 96,
+    "source": {
+      "sourceId": "fifa-fixtures-official",
+      "sourceName": "FIFA World Cup 2026 官方赛程",
+      "sourceUrl": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/scores-fixtures",
+      "sourceKind": "official",
+      "lastFetchedAt": "2026-06-19T00:36:40.160Z",
+      "confidence": "official",
+      "isMockOrEstimated": false
+    }
+  },
+  {
+    "id": "match-006",
+    "group": "K",
+    "stage": "小组赛",
+    "kickoff": "2026-06-18T16:00:00-05:00",
+    "venue": "Houston Stadium",
+    "city": "Houston",
+    "homeTeamId": "colombia",
+    "awayTeamId": "uzbekistan",
+    "status": "scheduled",
+    "heatIndex": 82,
+    "source": {
+      "sourceId": "fifa-fixtures-official",
+      "sourceName": "FIFA World Cup 2026 官方赛程",
+      "sourceUrl": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/scores-fixtures",
+      "sourceKind": "official",
+      "lastFetchedAt": "2026-06-19T00:36:40.160Z",
+      "confidence": "official",
+      "isMockOrEstimated": false
+    }
+  },
+  {
+    "id": "match-007",
+    "group": "L",
+    "stage": "小组赛",
+    "kickoff": "2026-06-18T13:00:00-05:00",
+    "venue": "Kansas City Stadium",
+    "city": "Kansas City",
+    "homeTeamId": "ghana",
+    "awayTeamId": "panama",
+    "status": "scheduled",
+    "heatIndex": 74,
+    "source": {
+      "sourceId": "fifa-fixtures-official",
+      "sourceName": "FIFA World Cup 2026 官方赛程",
+      "sourceUrl": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/scores-fixtures",
+      "sourceKind": "official",
+      "lastFetchedAt": "2026-06-19T00:36:40.160Z",
+      "confidence": "official",
+      "isMockOrEstimated": false
+    }
+  },
+  {
+    "id": "match-008",
+    "group": "A",
+    "stage": "小组赛",
+    "kickoff": "2026-06-18T15:00:00-06:00",
+    "venue": "Monterrey Stadium",
+    "city": "Monterrey",
+    "homeTeamId": "czechia",
+    "awayTeamId": "south-africa",
+    "status": "scheduled",
+    "heatIndex": 70,
+    "source": {
+      "sourceId": "fifa-fixtures-official",
+      "sourceName": "FIFA World Cup 2026 官方赛程",
+      "sourceUrl": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/scores-fixtures",
+      "sourceKind": "official",
+      "lastFetchedAt": "2026-06-19T00:36:40.160Z",
+      "confidence": "official",
+      "isMockOrEstimated": false
+    }
+  }
+]

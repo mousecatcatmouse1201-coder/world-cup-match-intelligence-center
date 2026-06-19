@@ -1,0 +1,296 @@
+[
+  {
+    "teamId": "mexico",
+    "group": "A",
+    "played": 1,
+    "won": 1,
+    "drawn": 0,
+    "lost": 0,
+    "goalsFor": 2,
+    "goalsAgainst": 0,
+    "points": 3,
+    "qualificationProbability": 92,
+    "source": {
+      "sourceId": "local-model-derived",
+      "sourceName": "本地规则模型推断",
+      "sourceUrl": "https://example.local/world-cup-match-intelligence-center/model",
+      "sourceKind": "model",
+      "lastFetchedAt": "2026-06-19T00:36:41.676Z",
+      "confidence": "modeled",
+      "isMockOrEstimated": true
+    }
+  },
+  {
+    "teamId": "south-africa",
+    "group": "A",
+    "played": 1,
+    "won": 0,
+    "drawn": 0,
+    "lost": 1,
+    "goalsFor": 0,
+    "goalsAgainst": 2,
+    "points": 0,
+    "qualificationProbability": 65.7,
+    "source": {
+      "sourceId": "local-model-derived",
+      "sourceName": "本地规则模型推断",
+      "sourceUrl": "https://example.local/world-cup-match-intelligence-center/model",
+      "sourceKind": "model",
+      "lastFetchedAt": "2026-06-19T00:36:41.676Z",
+      "confidence": "modeled",
+      "isMockOrEstimated": true
+    }
+  },
+  {
+    "teamId": "south-korea",
+    "group": "A",
+    "played": 1,
+    "won": 1,
+    "drawn": 0,
+    "lost": 0,
+    "goalsFor": 2,
+    "goalsAgainst": 1,
+    "points": 3,
+    "qualificationProbability": 92,
+    "source": {
+      "sourceId": "local-model-derived",
+      "sourceName": "本地规则模型推断",
+      "sourceUrl": "https://example.local/world-cup-match-intelligence-center/model",
+      "sourceKind": "model",
+      "lastFetchedAt": "2026-06-19T00:36:41.676Z",
+      "confidence": "modeled",
+      "isMockOrEstimated": true
+    }
+  },
+  {
+    "teamId": "czechia",
+    "group": "A",
+    "played": 1,
+    "won": 0,
+    "drawn": 0,
+    "lost": 1,
+    "goalsFor": 1,
+    "goalsAgainst": 2,
+    "points": 0,
+    "qualificationProbability": 79.7,
+    "source": {
+      "sourceId": "local-model-derived",
+      "sourceName": "本地规则模型推断",
+      "sourceUrl": "https://example.local/world-cup-match-intelligence-center/model",
+      "sourceKind": "model",
+      "lastFetchedAt": "2026-06-19T00:36:41.676Z",
+      "confidence": "modeled",
+      "isMockOrEstimated": true
+    }
+  },
+  {
+    "teamId": "canada",
+    "group": "B",
+    "played": 1,
+    "won": 0,
+    "drawn": 1,
+    "lost": 0,
+    "goalsFor": 1,
+    "goalsAgainst": 1,
+    "points": 1,
+    "qualificationProbability": 85.5,
+    "source": {
+      "sourceId": "local-model-derived",
+      "sourceName": "本地规则模型推断",
+      "sourceUrl": "https://example.local/world-cup-match-intelligence-center/model",
+      "sourceKind": "model",
+      "lastFetchedAt": "2026-06-19T00:36:41.676Z",
+      "confidence": "modeled",
+      "isMockOrEstimated": true
+    }
+  },
+  {
+    "teamId": "bosnia",
+    "group": "B",
+    "played": 1,
+    "won": 0,
+    "drawn": 1,
+    "lost": 0,
+    "goalsFor": 1,
+    "goalsAgainst": 1,
+    "points": 1,
+    "qualificationProbability": 72.2,
+    "source": {
+      "sourceId": "local-model-derived",
+      "sourceName": "本地规则模型推断",
+      "sourceUrl": "https://example.local/world-cup-match-intelligence-center/model",
+      "sourceKind": "model",
+      "lastFetchedAt": "2026-06-19T00:36:41.676Z",
+      "confidence": "modeled",
+      "isMockOrEstimated": true
+    }
+  },
+  {
+    "teamId": "united-states",
+    "group": "D",
+    "played": 1,
+    "won": 1,
+    "drawn": 0,
+    "lost": 0,
+    "goalsFor": 4,
+    "goalsAgainst": 1,
+    "points": 3,
+    "qualificationProbability": 92,
+    "source": {
+      "sourceId": "local-model-derived",
+      "sourceName": "本地规则模型推断",
+      "sourceUrl": "https://example.local/world-cup-match-intelligence-center/model",
+      "sourceKind": "model",
+      "lastFetchedAt": "2026-06-19T00:36:41.676Z",
+      "confidence": "modeled",
+      "isMockOrEstimated": true
+    }
+  },
+  {
+    "teamId": "paraguay",
+    "group": "D",
+    "played": 1,
+    "won": 0,
+    "drawn": 0,
+    "lost": 1,
+    "goalsFor": 1,
+    "goalsAgainst": 4,
+    "points": 0,
+    "qualificationProbability": 75.6,
+    "source": {
+      "sourceId": "local-model-derived",
+      "sourceName": "本地规则模型推断",
+      "sourceUrl": "https://example.local/world-cup-match-intelligence-center/model",
+      "sourceKind": "model",
+      "lastFetchedAt": "2026-06-19T00:36:41.676Z",
+      "confidence": "modeled",
+      "isMockOrEstimated": true
+    }
+  },
+  {
+    "teamId": "england",
+    "group": "L",
+    "played": 0,
+    "won": 0,
+    "drawn": 0,
+    "lost": 0,
+    "goalsFor": 0,
+    "goalsAgainst": 0,
+    "points": 0,
+    "qualificationProbability": 92,
+    "source": {
+      "sourceId": "local-model-derived",
+      "sourceName": "本地规则模型推断",
+      "sourceUrl": "https://example.local/world-cup-match-intelligence-center/model",
+      "sourceKind": "model",
+      "lastFetchedAt": "2026-06-19T00:36:41.676Z",
+      "confidence": "modeled",
+      "isMockOrEstimated": true
+    }
+  },
+  {
+    "teamId": "croatia",
+    "group": "L",
+    "played": 0,
+    "won": 0,
+    "drawn": 0,
+    "lost": 0,
+    "goalsFor": 0,
+    "goalsAgainst": 0,
+    "points": 0,
+    "qualificationProbability": 92,
+    "source": {
+      "sourceId": "local-model-derived",
+      "sourceName": "本地规则模型推断",
+      "sourceUrl": "https://example.local/world-cup-match-intelligence-center/model",
+      "sourceKind": "model",
+      "lastFetchedAt": "2026-06-19T00:36:41.676Z",
+      "confidence": "modeled",
+      "isMockOrEstimated": true
+    }
+  },
+  {
+    "teamId": "colombia",
+    "group": "K",
+    "played": 0,
+    "won": 0,
+    "drawn": 0,
+    "lost": 0,
+    "goalsFor": 0,
+    "goalsAgainst": 0,
+    "points": 0,
+    "qualificationProbability": 92,
+    "source": {
+      "sourceId": "local-model-derived",
+      "sourceName": "本地规则模型推断",
+      "sourceUrl": "https://example.local/world-cup-match-intelligence-center/model",
+      "sourceKind": "model",
+      "lastFetchedAt": "2026-06-19T00:36:41.676Z",
+      "confidence": "modeled",
+      "isMockOrEstimated": true
+    }
+  },
+  {
+    "teamId": "uzbekistan",
+    "group": "K",
+    "played": 0,
+    "won": 0,
+    "drawn": 0,
+    "lost": 0,
+    "goalsFor": 0,
+    "goalsAgainst": 0,
+    "points": 0,
+    "qualificationProbability": 67,
+    "source": {
+      "sourceId": "local-model-derived",
+      "sourceName": "本地规则模型推断",
+      "sourceUrl": "https://example.local/world-cup-match-intelligence-center/model",
+      "sourceKind": "model",
+      "lastFetchedAt": "2026-06-19T00:36:41.676Z",
+      "confidence": "modeled",
+      "isMockOrEstimated": true
+    }
+  },
+  {
+    "teamId": "ghana",
+    "group": "L",
+    "played": 0,
+    "won": 0,
+    "drawn": 0,
+    "lost": 0,
+    "goalsFor": 0,
+    "goalsAgainst": 0,
+    "points": 0,
+    "qualificationProbability": 53.400000000000006,
+    "source": {
+      "sourceId": "local-model-derived",
+      "sourceName": "本地规则模型推断",
+      "sourceUrl": "https://example.local/world-cup-match-intelligence-center/model",
+      "sourceKind": "model",
+      "lastFetchedAt": "2026-06-19T00:36:41.676Z",
+      "confidence": "modeled",
+      "isMockOrEstimated": true
+    }
+  },
+  {
+    "teamId": "panama",
+    "group": "L",
+    "played": 0,
+    "won": 0,
+    "drawn": 0,
+    "lost": 0,
+    "goalsFor": 0,
+    "goalsAgainst": 0,
+    "points": 0,
+    "qualificationProbability": 77.2,
+    "source": {
+      "sourceId": "local-model-derived",
+      "sourceName": "本地规则模型推断",
+      "sourceUrl": "https://example.local/world-cup-match-intelligence-center/model",
+      "sourceKind": "model",
+      "lastFetchedAt": "2026-06-19T00:36:41.676Z",
+      "confidence": "modeled",
+      "isMockOrEstimated": true
+    }
+  }
+]

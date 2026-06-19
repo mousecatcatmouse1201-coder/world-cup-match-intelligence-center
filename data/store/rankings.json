@@ -1,0 +1,212 @@
+[
+  {
+    "teamId": "mexico",
+    "fifaRank": 13,
+    "rankingPoints": 1681,
+    "previousRank": 15,
+    "source": {
+      "sourceId": "fifa-ranking-official",
+      "sourceName": "FIFA/Coca-Cola 男足世界排名",
+      "sourceUrl": "https://inside.fifa.com/fifa-world-ranking/men",
+      "sourceKind": "official",
+      "lastFetchedAt": "2026-06-19T00:36:40.188Z",
+      "confidence": "official",
+      "isMockOrEstimated": false
+    }
+  },
+  {
+    "teamId": "south-africa",
+    "fifaRank": 56,
+    "rankingPoints": 1420,
+    "previousRank": 55,
+    "source": {
+      "sourceId": "fifa-ranking-official",
+      "sourceName": "FIFA/Coca-Cola 男足世界排名",
+      "sourceUrl": "https://inside.fifa.com/fifa-world-ranking/men",
+      "sourceKind": "official",
+      "lastFetchedAt": "2026-06-19T00:36:40.188Z",
+      "confidence": "official",
+      "isMockOrEstimated": false
+    }
+  },
+  {
+    "teamId": "south-korea",
+    "fifaRank": 23,
+    "rankingPoints": 1585,
+    "previousRank": 24,
+    "source": {
+      "sourceId": "fifa-ranking-official",
+      "sourceName": "FIFA/Coca-Cola 男足世界排名",
+      "sourceUrl": "https://inside.fifa.com/fifa-world-ranking/men",
+      "sourceKind": "official",
+      "lastFetchedAt": "2026-06-19T00:36:40.188Z",
+      "confidence": "official",
+      "isMockOrEstimated": false
+    }
+  },
+  {
+    "teamId": "czechia",
+    "fifaRank": 39,
+    "rankingPoints": 1498,
+    "previousRank": 39,
+    "source": {
+      "sourceId": "fifa-ranking-official",
+      "sourceName": "FIFA/Coca-Cola 男足世界排名",
+      "sourceUrl": "https://inside.fifa.com/fifa-world-ranking/men",
+      "sourceKind": "official",
+      "lastFetchedAt": "2026-06-19T00:36:40.188Z",
+      "confidence": "official",
+      "isMockOrEstimated": false
+    }
+  },
+  {
+    "teamId": "canada",
+    "fifaRank": 32,
+    "rankingPoints": 1522,
+    "previousRank": 32,
+    "source": {
+      "sourceId": "fifa-ranking-official",
+      "sourceName": "FIFA/Coca-Cola 男足世界排名",
+      "sourceUrl": "https://inside.fifa.com/fifa-world-ranking/men",
+      "sourceKind": "official",
+      "lastFetchedAt": "2026-06-19T00:36:40.188Z",
+      "confidence": "official",
+      "isMockOrEstimated": false
+    }
+  },
+  {
+    "teamId": "bosnia",
+    "fifaRank": 48,
+    "rankingPoints": 1453,
+    "previousRank": 47,
+    "source": {
+      "sourceId": "fifa-ranking-official",
+      "sourceName": "FIFA/Coca-Cola 男足世界排名",
+      "sourceUrl": "https://inside.fifa.com/fifa-world-ranking/men",
+      "sourceKind": "official",
+      "lastFetchedAt": "2026-06-19T00:36:40.188Z",
+      "confidence": "official",
+      "isMockOrEstimated": false
+    }
+  },
+  {
+    "teamId": "united-states",
+    "fifaRank": 17,
+    "rankingPoints": 1632,
+    "previousRank": 18,
+    "source": {
+      "sourceId": "fifa-ranking-official",
+      "sourceName": "FIFA/Coca-Cola 男足世界排名",
+      "sourceUrl": "https://inside.fifa.com/fifa-world-ranking/men",
+      "sourceKind": "official",
+      "lastFetchedAt": "2026-06-19T00:36:40.188Z",
+      "confidence": "official",
+      "isMockOrEstimated": false
+    }
+  },
+  {
+    "teamId": "paraguay",
+    "fifaRank": 44,
+    "rankingPoints": 1472,
+    "previousRank": 43,
+    "source": {
+      "sourceId": "fifa-ranking-official",
+      "sourceName": "FIFA/Coca-Cola 男足世界排名",
+      "sourceUrl": "https://inside.fifa.com/fifa-world-ranking/men",
+      "sourceKind": "official",
+      "lastFetchedAt": "2026-06-19T00:36:40.188Z",
+      "confidence": "official",
+      "isMockOrEstimated": false
+    }
+  },
+  {
+    "teamId": "england",
+    "fifaRank": 4,
+    "rankingPoints": 1826,
+    "previousRank": 6,
+    "source": {
+      "sourceId": "fifa-ranking-official",
+      "sourceName": "FIFA/Coca-Cola 男足世界排名",
+      "sourceUrl": "https://inside.fifa.com/fifa-world-ranking/men",
+      "sourceKind": "official",
+      "lastFetchedAt": "2026-06-19T00:36:40.188Z",
+      "confidence": "official",
+      "isMockOrEstimated": false
+    }
+  },
+  {
+    "teamId": "croatia",
+    "fifaRank": 12,
+    "rankingPoints": 1697,
+    "previousRank": 13,
+    "source": {
+      "sourceId": "fifa-ranking-official",
+      "sourceName": "FIFA/Coca-Cola 男足世界排名",
+      "sourceUrl": "https://inside.fifa.com/fifa-world-ranking/men",
+      "sourceKind": "official",
+      "lastFetchedAt": "2026-06-19T00:36:40.188Z",
+      "confidence": "official",
+      "isMockOrEstimated": false
+    }
+  },
+  {
+    "teamId": "colombia",
+    "fifaRank": 14,
+    "rankingPoints": 1678,
+    "previousRank": 16,
+    "source": {
+      "sourceId": "fifa-ranking-official",
+      "sourceName": "FIFA/Coca-Cola 男足世界排名",
+      "sourceUrl": "https://inside.fifa.com/fifa-world-ranking/men",
+      "sourceKind": "official",
+      "lastFetchedAt": "2026-06-19T00:36:40.188Z",
+      "confidence": "official",
+      "isMockOrEstimated": false
+    }
+  },
+  {
+    "teamId": "uzbekistan",
+    "fifaRank": 58,
+    "rankingPoints": 1412,
+    "previousRank": 58,
+    "source": {
+      "sourceId": "fifa-ranking-official",
+      "sourceName": "FIFA/Coca-Cola 男足世界排名",
+      "sourceUrl": "https://inside.fifa.com/fifa-world-ranking/men",
+      "sourceKind": "official",
+      "lastFetchedAt": "2026-06-19T00:36:40.188Z",
+      "confidence": "official",
+      "isMockOrEstimated": false
+    }
+  },
+  {
+    "teamId": "ghana",
+    "fifaRank": 74,
+    "rankingPoints": 1347,
+    "previousRank": 73,
+    "source": {
+      "sourceId": "fifa-ranking-official",
+      "sourceName": "FIFA/Coca-Cola 男足世界排名",
+      "sourceUrl": "https://inside.fifa.com/fifa-world-ranking/men",
+      "sourceKind": "official",
+      "lastFetchedAt": "2026-06-19T00:36:40.188Z",
+      "confidence": "official",
+      "isMockOrEstimated": false
+    }
+  },
+  {
+    "teamId": "panama",
+    "fifaRank": 43,
+    "rankingPoints": 1478,
+    "previousRank": 43,
+    "source": {
+      "sourceId": "fifa-ranking-official",
+      "sourceName": "FIFA/Coca-Cola 男足世界排名",
+      "sourceUrl": "https://inside.fifa.com/fifa-world-ranking/men",
+      "sourceKind": "official",
+      "lastFetchedAt": "2026-06-19T00:36:40.188Z",
+      "confidence": "official",
+      "isMockOrEstimated": false
+    }
+  }
+]

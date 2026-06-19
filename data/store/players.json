@@ -1,0 +1,254 @@
+[
+  {
+    "id": "p-mex-1",
+    "teamId": "mexico",
+    "name": "Santiago Gimenez",
+    "role": "中锋",
+    "status": "fit",
+    "impact": 83,
+    "note": "禁区终结和前场压迫是核心看点。",
+    "source": {
+      "sourceId": "manual-mvp-intel",
+      "sourceName": "MVP 示例补充数据",
+      "sourceUrl": "https://example.local/world-cup-match-intelligence-center/manual-seed",
+      "sourceKind": "manual",
+      "lastFetchedAt": "2026-06-19T00:36:41.676Z",
+      "confidence": "estimated",
+      "isMockOrEstimated": true
+    }
+  },
+  {
+    "id": "p-mex-2",
+    "teamId": "mexico",
+    "name": "Edson Alvarez",
+    "role": "后腰",
+    "status": "fit",
+    "impact": 80,
+    "note": "中场屏障决定转换防守质量。",
+    "source": {
+      "sourceId": "manual-mvp-intel",
+      "sourceName": "MVP 示例补充数据",
+      "sourceUrl": "https://example.local/world-cup-match-intelligence-center/manual-seed",
+      "sourceKind": "manual",
+      "lastFetchedAt": "2026-06-19T00:36:41.676Z",
+      "confidence": "estimated",
+      "isMockOrEstimated": true
+    }
+  },
+  {
+    "id": "p-rsa-1",
+    "teamId": "south-africa",
+    "name": "Percy Tau",
+    "role": "边锋",
+    "status": "doubtful",
+    "impact": 76,
+    "note": "速度反击有威胁，但状态标注为赛前观察。",
+    "source": {
+      "sourceId": "manual-mvp-intel",
+      "sourceName": "MVP 示例补充数据",
+      "sourceUrl": "https://example.local/world-cup-match-intelligence-center/manual-seed",
+      "sourceKind": "manual",
+      "lastFetchedAt": "2026-06-19T00:36:41.676Z",
+      "confidence": "estimated",
+      "isMockOrEstimated": true
+    }
+  },
+  {
+    "id": "p-kor-1",
+    "teamId": "south-korea",
+    "name": "Son Heung-min",
+    "role": "前锋",
+    "status": "fit",
+    "impact": 91,
+    "note": "纵深跑动和反击终结能力突出。",
+    "source": {
+      "sourceId": "manual-mvp-intel",
+      "sourceName": "MVP 示例补充数据",
+      "sourceUrl": "https://example.local/world-cup-match-intelligence-center/manual-seed",
+      "sourceKind": "manual",
+      "lastFetchedAt": "2026-06-19T00:36:41.676Z",
+      "confidence": "estimated",
+      "isMockOrEstimated": true
+    }
+  },
+  {
+    "id": "p-cze-1",
+    "teamId": "czechia",
+    "name": "Patrik Schick",
+    "role": "中锋",
+    "status": "fit",
+    "impact": 84,
+    "note": "定位球和禁区争顶是主要威胁。",
+    "source": {
+      "sourceId": "manual-mvp-intel",
+      "sourceName": "MVP 示例补充数据",
+      "sourceUrl": "https://example.local/world-cup-match-intelligence-center/manual-seed",
+      "sourceKind": "manual",
+      "lastFetchedAt": "2026-06-19T00:36:41.676Z",
+      "confidence": "estimated",
+      "isMockOrEstimated": true
+    }
+  },
+  {
+    "id": "p-usa-1",
+    "teamId": "united-states",
+    "name": "Christian Pulisic",
+    "role": "边锋",
+    "status": "fit",
+    "impact": 86,
+    "note": "一对一推进和弱侧接应是进攻开关。",
+    "source": {
+      "sourceId": "manual-mvp-intel",
+      "sourceName": "MVP 示例补充数据",
+      "sourceUrl": "https://example.local/world-cup-match-intelligence-center/manual-seed",
+      "sourceKind": "manual",
+      "lastFetchedAt": "2026-06-19T00:36:41.676Z",
+      "confidence": "estimated",
+      "isMockOrEstimated": true
+    }
+  },
+  {
+    "id": "p-par-1",
+    "teamId": "paraguay",
+    "name": "Miguel Almiron",
+    "role": "前腰",
+    "status": "fit",
+    "impact": 81,
+    "note": "反击推进和二点球处理值得关注。",
+    "source": {
+      "sourceId": "manual-mvp-intel",
+      "sourceName": "MVP 示例补充数据",
+      "sourceUrl": "https://example.local/world-cup-match-intelligence-center/manual-seed",
+      "sourceKind": "manual",
+      "lastFetchedAt": "2026-06-19T00:36:41.676Z",
+      "confidence": "estimated",
+      "isMockOrEstimated": true
+    }
+  },
+  {
+    "id": "p-eng-1",
+    "teamId": "england",
+    "name": "Jude Bellingham",
+    "role": "中场",
+    "status": "fit",
+    "impact": 93,
+    "note": "前插和肋部串联能改变比赛节奏。",
+    "source": {
+      "sourceId": "manual-mvp-intel",
+      "sourceName": "MVP 示例补充数据",
+      "sourceUrl": "https://example.local/world-cup-match-intelligence-center/manual-seed",
+      "sourceKind": "manual",
+      "lastFetchedAt": "2026-06-19T00:36:41.676Z",
+      "confidence": "estimated",
+      "isMockOrEstimated": true
+    }
+  },
+  {
+    "id": "p-eng-2",
+    "teamId": "england",
+    "name": "Harry Kane",
+    "role": "中锋",
+    "status": "fit",
+    "impact": 91,
+    "note": "回撤组织和禁区终结同时在线。",
+    "source": {
+      "sourceId": "manual-mvp-intel",
+      "sourceName": "MVP 示例补充数据",
+      "sourceUrl": "https://example.local/world-cup-match-intelligence-center/manual-seed",
+      "sourceKind": "manual",
+      "lastFetchedAt": "2026-06-19T00:36:41.676Z",
+      "confidence": "estimated",
+      "isMockOrEstimated": true
+    }
+  },
+  {
+    "id": "p-cro-1",
+    "teamId": "croatia",
+    "name": "Luka Modric",
+    "role": "中场",
+    "status": "fit",
+    "impact": 86,
+    "note": "控节奏和定位球质量仍是关键变量。",
+    "source": {
+      "sourceId": "manual-mvp-intel",
+      "sourceName": "MVP 示例补充数据",
+      "sourceUrl": "https://example.local/world-cup-match-intelligence-center/manual-seed",
+      "sourceKind": "manual",
+      "lastFetchedAt": "2026-06-19T00:36:41.676Z",
+      "confidence": "estimated",
+      "isMockOrEstimated": true
+    }
+  },
+  {
+    "id": "p-col-1",
+    "teamId": "colombia",
+    "name": "Luis Diaz",
+    "role": "边锋",
+    "status": "fit",
+    "impact": 88,
+    "note": "左路爆点和转换进攻最具威胁。",
+    "source": {
+      "sourceId": "manual-mvp-intel",
+      "sourceName": "MVP 示例补充数据",
+      "sourceUrl": "https://example.local/world-cup-match-intelligence-center/manual-seed",
+      "sourceKind": "manual",
+      "lastFetchedAt": "2026-06-19T00:36:41.676Z",
+      "confidence": "estimated",
+      "isMockOrEstimated": true
+    }
+  },
+  {
+    "id": "p-uzb-1",
+    "teamId": "uzbekistan",
+    "name": "Eldor Shomurodov",
+    "role": "中锋",
+    "status": "fit",
+    "impact": 78,
+    "note": "支点和冲击禁区能力是进攻基础。",
+    "source": {
+      "sourceId": "manual-mvp-intel",
+      "sourceName": "MVP 示例补充数据",
+      "sourceUrl": "https://example.local/world-cup-match-intelligence-center/manual-seed",
+      "sourceKind": "manual",
+      "lastFetchedAt": "2026-06-19T00:36:41.676Z",
+      "confidence": "estimated",
+      "isMockOrEstimated": true
+    }
+  },
+  {
+    "id": "p-gha-1",
+    "teamId": "ghana",
+    "name": "Mohammed Kudus",
+    "role": "前腰",
+    "status": "fit",
+    "impact": 84,
+    "note": "中路摆脱和远射会影响防线站位。",
+    "source": {
+      "sourceId": "manual-mvp-intel",
+      "sourceName": "MVP 示例补充数据",
+      "sourceUrl": "https://example.local/world-cup-match-intelligence-center/manual-seed",
+      "sourceKind": "manual",
+      "lastFetchedAt": "2026-06-19T00:36:41.676Z",
+      "confidence": "estimated",
+      "isMockOrEstimated": true
+    }
+  },
+  {
+    "id": "p-pan-1",
+    "teamId": "panama",
+    "name": "Adalberto Carrasquilla",
+    "role": "中场",
+    "status": "fit",
+    "impact": 78,
+    "note": "攻守转换中的第一脚出球很重要。",
+    "source": {
+      "sourceId": "manual-mvp-intel",
+      "sourceName": "MVP 示例补充数据",
+      "sourceUrl": "https://example.local/world-cup-match-intelligence-center/manual-seed",
+      "sourceKind": "manual",
+      "lastFetchedAt": "2026-06-19T00:36:41.676Z",
+      "confidence": "estimated",
+      "isMockOrEstimated": true
+    }
+  }
+]

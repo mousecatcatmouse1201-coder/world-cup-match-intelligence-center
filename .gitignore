@@ -1,0 +1,10 @@
+.next
+.vercel
+node_modules
+coverage
+dist
+.DS_Store
+*.log
+data/raw/*.html
+data/raw/*.json
+!data/raw/.gitkeep
