@@ -31,6 +31,8 @@ export function generateMatchAnalysis(input: {
   const favorite = strongerSide(prediction, homeTeam, awayTeam);
   const keyPlayers = [...topPlayers(homePlayers), ...topPlayers(awayPlayers)];
   const xgGap = Math.abs(prediction.expectedGoals.home - prediction.expectedGoals.away);
+  const favoriteTeam = favorite === homeTeam.shortName ? homeTeam : favorite === awayTeam.shortName ? awayTeam : homeTeam;
+  const underdogTeam = favoriteTeam.id === homeTeam.id ? awayTeam : homeTeam;
 
   return {
     fixtureId: fixture.id,
@@ -49,6 +51,20 @@ export function generateMatchAnalysis(input: {
         ? "冷门风险偏高：概率差距有限，且预测比分集中在一球以内。"
         : "冷门风险中等：模型倾向较明确，但杯赛单场仍受红黄牌、早段进球和伤停影响。",
     scorePrediction: `预测比分 ${prediction.predictedScore.home}-${prediction.predictedScore.away}，期望进球 ${prediction.expectedGoals.home}-${prediction.expectedGoals.away}，合理区间 ${prediction.scoreRange}。`,
-    sourceNote: `事实数据来源：${fixture.source.sourceName}；模型与比分为 ${prediction.source.sourceName}，不是官方结论。`
+    sourceNote: `事实数据来源：${fixture.source.sourceName}；模型与比分为 ${prediction.source.sourceName}，不是官方结论。`,
+    scenarios: [
+      {
+        title: "强队顺利取胜剧本",
+        description: `${favoriteTeam.shortName} 如果能在前 30 分钟建立控球和射门优势，比赛会进入模型最看好的节奏，预测比分更接近 ${prediction.predictedScore.home}-${prediction.predictedScore.away}。`
+      },
+      {
+        title: "僵局/平局剧本",
+        description: `如果双方把节奏压低，且中场失误减少，平局概率会被放大；定位球和替补登场后的第一波冲击会成为关键。`
+      },
+      {
+        title: "冷门剧本",
+        description: `${underdogTeam.shortName} 需要利用反击、早段进球或对手伤停波动制造非线性优势；该判断为规则模型推断。`
+      }
+    ]
   };
 }

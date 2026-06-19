@@ -78,6 +78,27 @@ describe("prediction engine", () => {
     expect(Math.round(total * 10) / 10).toBe(100);
   });
 
+  it("uses dynamic draw probability and exposes explanation factors", () => {
+    const closePrediction = predictMatch({
+      fixture,
+      homeTeam: { ...strongTeam, fifaRank: 20, rankingPoints: 1600, attack: 76, defense: 76, midfield: 76, form: 76 },
+      awayTeam: { ...weakerTeam, fifaRank: 22, rankingPoints: 1580, attack: 75, defense: 75, midfield: 75, form: 75 },
+      homePlayers: players,
+      awayPlayers: players
+    });
+    const unevenPrediction = predictMatch({
+      fixture,
+      homeTeam: strongTeam,
+      awayTeam: weakerTeam,
+      homePlayers: players,
+      awayPlayers: players
+    });
+
+    expect(closePrediction.probabilities.draw).toBeGreaterThan(unevenPrediction.probabilities.draw);
+    expect(new Set([closePrediction.probabilities.draw, unevenPrediction.probabilities.draw]).size).toBeGreaterThan(1);
+    expect(unevenPrediction.explanations.map((item) => item.factor)).toContain("FIFA 排名差异");
+  });
+
   it("aligns score forecast with stronger team advantage", () => {
     const prediction = predictMatch({
       fixture,
@@ -110,6 +131,7 @@ describe("prediction engine", () => {
 
     expect(analysis.summary).toContain("预测比分");
     expect(analysis.scorePrediction).toContain(`${prediction.predictedScore.home}-${prediction.predictedScore.away}`);
+    expect(analysis.scenarios.length).toBe(3);
   });
 
   it("only allows predictions for unfinished matches in the next two Shanghai dates", () => {

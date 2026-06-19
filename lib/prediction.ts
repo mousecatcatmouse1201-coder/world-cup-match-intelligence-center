@@ -1,4 +1,4 @@
-import type { Fixture, OddsSnapshot, Player, PredictionResult, RecordSource, SentimentSnapshot, Team } from "./types";
+import type { Fixture, OddsSnapshot, Player, PredictionExplanation, PredictionResult, RecordSource, SentimentSnapshot, Team } from "./types";
 
 export const PREDICTION_TIME_ZONE = "Asia/Shanghai";
 export const PREDICTION_WINDOW_DAYS = 2;
@@ -17,6 +17,7 @@ export interface PredictionWindowOptions {
   now?: Date;
   timeZone?: string;
   days?: number;
+  includeIneligible?: boolean;
 }
 
 export type PredictionUnavailableCode = "finished" | "past" | "outside-window";
@@ -170,8 +171,13 @@ function teamStrength(team: Team) {
   return rankComponent + ratingComponent + profileComponent;
 }
 
-function drawShareFromDiff(diff: number) {
-  return clamp(0.3 - Math.abs(diff) / 520, 0.18, 0.34);
+function drawShareFromDiff(diff: number, input: PredictInput) {
+  const strengthGap = Math.abs(diff) / 720;
+  const attackGap = Math.abs(input.homeTeam.attack - input.awayTeam.attack) / 1000;
+  const defenseBalance = (100 - Math.abs(input.homeTeam.defense - input.awayTeam.defense)) / 900;
+  const formGap = Math.abs(input.homeTeam.form - input.awayTeam.form) / 1200;
+  const lowTempoBoost = (160 - input.homeTeam.tempo - input.awayTeam.tempo) / 1200;
+  return clamp(0.2 + defenseBalance + lowTempoBoost - strengthGap - attackGap - formGap, 0.12, 0.35);
 }
 
 function normalize(homeRaw: number, drawRaw: number, awayRaw: number) {
@@ -205,6 +211,63 @@ function expectedGoals(input: PredictInput, diff: number) {
   };
 }
 
+function explanationImpact(value: number) {
+  return Math.round(value * 10) / 10;
+}
+
+function buildExplanations(input: PredictInput, homePenalty: number, awayPenalty: number, homeVenue: number, odds: number, sentiment: number): PredictionExplanation[] {
+  const rankImpact = clamp((input.awayTeam.fifaRank - input.homeTeam.fifaRank) * 0.35, -18, 18);
+  const formImpact = clamp((input.homeTeam.form - input.awayTeam.form) * 0.45, -12, 12);
+  const attackImpact = clamp((input.homeTeam.attack - input.awayTeam.defense) * 0.32, -10, 10);
+  const defenseImpact = clamp((input.homeTeam.defense - input.awayTeam.attack) * 0.25, -8, 8);
+  const injuryImpact = clamp(awayPenalty - homePenalty, -10, 10);
+
+  const rows = [
+    {
+      factor: "FIFA 排名差异",
+      impact: rankImpact,
+      description: `${input.homeTeam.shortName} 排名第 ${input.homeTeam.fifaRank}，${input.awayTeam.shortName} 第 ${input.awayTeam.fifaRank}。`
+    },
+    {
+      factor: "近期状态",
+      impact: formImpact,
+      description: `${input.homeTeam.shortName} 状态 ${input.homeTeam.form}，${input.awayTeam.shortName} 状态 ${input.awayTeam.form}。`
+    },
+    {
+      factor: "进攻指数",
+      impact: attackImpact,
+      description: `${input.homeTeam.shortName} 进攻 ${input.homeTeam.attack} 对 ${input.awayTeam.shortName} 防守 ${input.awayTeam.defense}。`
+    },
+    {
+      factor: "防守指数",
+      impact: defenseImpact,
+      description: `${input.homeTeam.shortName} 防守 ${input.homeTeam.defense} 对 ${input.awayTeam.shortName} 进攻 ${input.awayTeam.attack}。`
+    },
+    {
+      factor: "赛地因素",
+      impact: homeVenue / 2,
+      description: "东道主或名义主队拥有轻微赛地倾向。"
+    },
+    {
+      factor: "伤停风险",
+      impact: injuryImpact,
+      description: `阵容可用性影响：主队 -${round1(homePenalty)}，客队 -${round1(awayPenalty)}。`
+    },
+    {
+      factor: "市场/舆情校准",
+      impact: odds + sentiment,
+      description: "赔率与舆情为演示或非官方输入，仅作弱校准。"
+    }
+  ];
+
+  return rows.map((row) => ({
+    factor: row.factor,
+    impact: explanationImpact(Math.abs(row.impact)),
+    direction: Math.abs(row.impact) < 1 ? "draw" : row.impact > 0 ? "home" : "away",
+    description: row.description
+  }));
+}
+
 function scoreFromExpected(homeXg: number, awayXg: number) {
   const home = clamp(Math.round(homeXg), 0, 5);
   const away = clamp(Math.round(awayXg), 0, 5);
@@ -220,10 +283,12 @@ export function predictMatch(input: PredictInput): PredictionResult {
   const homePenalty = squadPenalty(input.homePlayers);
   const awayPenalty = squadPenalty(input.awayPlayers);
   const homeVenue = ["mexico", "canada", "united-states"].includes(input.homeTeam.id) ? 18 : 4;
+  const oddsAdjustment = oddsLean(input.odds);
+  const sentimentAdjustment = sentimentLean(input.sentiment);
   const baseDiff = teamStrength(input.homeTeam) - teamStrength(input.awayTeam);
-  const diff = baseDiff - homePenalty + awayPenalty + homeVenue + oddsLean(input.odds) + sentimentLean(input.sentiment);
+  const diff = baseDiff - homePenalty + awayPenalty + homeVenue + oddsAdjustment + sentimentAdjustment;
   const winCurve = 1 / (1 + Math.exp(-diff / 145));
-  const drawRaw = drawShareFromDiff(diff);
+  const drawRaw = drawShareFromDiff(diff, input);
   const decisiveShare = 1 - drawRaw;
   const probabilities = normalize(winCurve * decisiveShare, drawRaw, (1 - winCurve) * decisiveShare);
   const xg = expectedGoals(input, diff);
@@ -257,6 +322,7 @@ export function predictMatch(input: PredictInput): PredictionResult {
     confidence: missingMarketData ? "medium" : "high",
     keyFactors,
     riskFactors,
+    explanations: buildExplanations(input, homePenalty, awayPenalty, homeVenue, oddsAdjustment, sentimentAdjustment),
     source: modelSource()
   };
 }
@@ -270,7 +336,7 @@ export function predictMany(
   options: PredictionWindowOptions = {}
 ) {
   return fixtures
-    .filter((fixture) => getFixturePredictionEligibility(fixture, options).canPredict)
+    .filter((fixture) => options.includeIneligible || getFixturePredictionEligibility(fixture, options).canPredict)
     .map((fixture) => {
       const homeTeam = teams.find((team) => team.id === fixture.homeTeamId);
       const awayTeam = teams.find((team) => team.id === fixture.awayTeamId);

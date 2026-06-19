@@ -51,7 +51,7 @@ export const fixtureSchema = z.object({
   city: z.string().min(1),
   homeTeamId: z.string().min(1),
   awayTeamId: z.string().min(1),
-  status: z.enum(["scheduled", "live", "finished"]),
+  status: z.enum(["scheduled", "live", "finished", "unknown"]),
   score: z
     .object({
       home: z.number().int().min(0),

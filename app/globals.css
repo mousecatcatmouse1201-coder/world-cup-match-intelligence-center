@@ -128,6 +128,16 @@ input {
   background: var(--surface);
 }
 
+.noticeBand {
+  margin-top: 18px;
+  padding: 12px 14px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #fff7ed;
+  color: #9a3412;
+  line-height: 1.55;
+}
+
 .toolbar,
 .teamStrip,
 .qualityBand,
@@ -141,6 +151,66 @@ input {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 12px;
+}
+
+.focusGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  margin-top: 22px;
+}
+
+.focusPanel h2,
+.dashboardSection h2 {
+  margin: 0;
+}
+
+.focusStats,
+.teamCenter {
+  display: grid;
+  gap: 10px;
+  margin-top: 14px;
+}
+
+.focusStats span {
+  display: flex;
+  justify-content: space-between;
+  gap: 14px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  background: var(--surface-soft);
+  color: var(--muted);
+}
+
+.focusStats strong,
+.teamCenter strong {
+  color: var(--text);
+}
+
+.teamCenter p {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.55;
+}
+
+.intelligenceToolbar {
+  align-items: flex-start;
+}
+
+.filterControls {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.filterControls select {
+  min-height: 36px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--surface);
+  color: var(--text);
+  padding: 0 10px;
 }
 
 .qualityBand div {
@@ -307,6 +377,76 @@ input {
   margin-top: 18px;
 }
 
+.resultBlock {
+  display: grid;
+  gap: 5px;
+  margin: 16px 0 10px;
+  padding: 12px;
+  border-radius: 8px;
+  background: var(--surface-soft);
+}
+
+.resultBlock span,
+.resultBlock small {
+  color: var(--muted);
+}
+
+.resultBlock strong {
+  font-size: 24px;
+}
+
+.reviewPills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.reviewPills span,
+.reviewPills a {
+  padding: 5px 8px;
+  border-radius: 999px;
+  background: #e0f2fe;
+  color: #075985;
+  font-size: 12px;
+}
+
+.confidenceBox {
+  display: grid;
+  gap: 8px;
+  margin-top: 14px;
+  padding-top: 12px;
+  border-top: 1px solid var(--line);
+}
+
+.confidenceBox strong {
+  font-size: 13px;
+}
+
+.confidenceBox dl {
+  display: grid;
+  gap: 6px;
+  margin: 0;
+}
+
+.confidenceBox dl div {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.confidenceBox dt,
+.confidenceBox dd {
+  margin: 0;
+}
+
+.confidenceBox dd {
+  color: var(--text);
+  font-weight: 700;
+}
+
 .probabilityRows.compact {
   gap: 9px;
   margin-top: 0;
@@ -342,6 +482,53 @@ input {
   margin-top: 24px;
 }
 
+.dashboardSection {
+  margin-top: 26px;
+}
+
+.sectionHeader {
+  display: flex;
+  justify-content: space-between;
+  gap: 14px;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.sectionHeader span {
+  color: var(--muted);
+}
+
+.emptyState {
+  display: grid;
+  min-height: 92px;
+  place-items: center;
+  padding: 18px;
+  border: 1px dashed var(--line);
+  border-radius: 8px;
+  background: var(--surface);
+  color: var(--muted);
+  text-align: center;
+}
+
+.rankList {
+  display: grid;
+  gap: 10px;
+}
+
+.rankList a {
+  display: flex;
+  justify-content: space-between;
+  gap: 14px;
+  padding: 12px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--surface);
+}
+
+.rankList span {
+  color: var(--muted);
+}
+
 .panel {
   padding: 18px;
 }
@@ -372,6 +559,29 @@ input {
   border-radius: 8px;
   background: var(--surface-soft);
   color: var(--muted);
+}
+
+.miniTable {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.miniTable th,
+.miniTable td {
+  padding: 9px 8px;
+  border-bottom: 1px solid var(--line);
+  text-align: left;
+  font-size: 13px;
+}
+
+.miniTable th {
+  color: var(--muted);
+  font-weight: 600;
+}
+
+.miniTable td {
+  text-align: right;
+  font-weight: 700;
 }
 
 .sourceBadge {
@@ -491,6 +701,58 @@ input {
   background: var(--surface-soft);
 }
 
+.explanationGrid,
+.scenarioGrid,
+.reviewGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.explanationGrid div,
+.scenarioGrid div,
+.reviewGrid span {
+  display: grid;
+  gap: 6px;
+  padding: 12px;
+  border-radius: 8px;
+  background: var(--surface-soft);
+}
+
+.explanationGrid span,
+.reviewGrid strong {
+  color: var(--accent-strong);
+  font-size: 18px;
+}
+
+.explanationGrid p,
+.scenarioGrid p {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.55;
+}
+
+.comparisonTable {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.comparisonTable th,
+.comparisonTable td {
+  padding: 11px 10px;
+  border-bottom: 1px solid var(--line);
+  text-align: left;
+}
+
+.comparisonTable th {
+  color: var(--muted);
+  width: 34%;
+}
+
+.comparisonTable td {
+  font-weight: 700;
+}
+
 @media (max-width: 900px) {
   .heroBand,
   .matchHero,
@@ -504,8 +766,16 @@ input {
   .matchGrid,
   .chartsGrid,
   .detailGrid,
+  .explanationGrid,
+  .scenarioGrid,
+  .reviewGrid,
+  .focusGrid,
   .sourceGrid {
     grid-template-columns: 1fr;
+  }
+
+  .filterControls {
+    justify-content: flex-start;
   }
 
   .qualityBand {
@@ -543,8 +813,14 @@ input {
   .matchGrid,
   .chartsGrid,
   .detailGrid,
+  .focusGrid,
   .qualityBand,
   .sourceGrid {
     grid-template-columns: 1fr;
+  }
+
+  .rankList a,
+  .focusStats span {
+    flex-direction: column;
   }
 }

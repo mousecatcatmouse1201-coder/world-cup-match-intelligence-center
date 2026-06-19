@@ -2,6 +2,8 @@ export type Confidence = "official" | "secondary" | "estimated" | "modeled";
 
 export type SourceKind = "official" | "secondary" | "manual" | "model";
 
+export type MatchStatus = "scheduled" | "live" | "finished" | "unknown";
+
 export interface RecordSource {
   sourceId: string;
   sourceName: string;
@@ -53,13 +55,53 @@ export interface Fixture {
   city: string;
   homeTeamId: string;
   awayTeamId: string;
-  status: "scheduled" | "live" | "finished";
+  status: MatchStatus;
   score?: {
     home: number;
     away: number;
   };
   heatIndex: number;
   source: RecordSource;
+}
+
+export interface MatchResult {
+  homeScore?: number;
+  awayScore?: number;
+  source?: string;
+  updatedAt?: string;
+}
+
+export interface PredictionReview {
+  predictedHomeScore: number;
+  predictedAwayScore: number;
+  actualHomeScore: number;
+  actualAwayScore: number;
+  outcomeHit: boolean;
+  exactScoreHit: boolean;
+  goalDiffError: number;
+  summary: string;
+  improvementNotes: string[];
+}
+
+export interface DataConfidence {
+  matchTime: "high" | "medium" | "low";
+  teamData: "high" | "medium" | "low";
+  lineup: "high" | "medium" | "low" | "demo";
+  injury: "high" | "medium" | "low" | "demo" | "missing";
+  prediction: "model";
+  result: "official" | "secondary" | "missing";
+}
+
+export interface PredictionExplanation {
+  factor: string;
+  impact: number;
+  direction: "home" | "away" | "draw";
+  description: string;
+}
+
+export interface MatchScenario {
+  title: string;
+  description: string;
 }
 
 export interface Standing {
@@ -174,6 +216,7 @@ export interface PredictionResult {
   confidence: "low" | "medium" | "high";
   keyFactors: string[];
   riskFactors: string[];
+  explanations: PredictionExplanation[];
   source: RecordSource;
 }
 
@@ -186,4 +229,5 @@ export interface MatchAnalysis {
   upsetRisk: string;
   scorePrediction: string;
   sourceNote: string;
+  scenarios: MatchScenario[];
 }
