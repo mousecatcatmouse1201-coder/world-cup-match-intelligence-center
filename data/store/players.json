@@ -12,7 +12,7 @@
       "sourceName": "MVP 示例补充数据",
       "sourceUrl": "https://example.local/world-cup-match-intelligence-center/manual-seed",
       "sourceKind": "manual",
-      "lastFetchedAt": "2026-06-19T00:53:54.539Z",
+      "lastFetchedAt": "2026-06-19T07:45:55.961Z",
       "confidence": "estimated",
       "isMockOrEstimated": true
     }
@@ -30,7 +30,7 @@
       "sourceName": "MVP 示例补充数据",
       "sourceUrl": "https://example.local/world-cup-match-intelligence-center/manual-seed",
       "sourceKind": "manual",
-      "lastFetchedAt": "2026-06-19T00:53:54.539Z",
+      "lastFetchedAt": "2026-06-19T07:45:55.961Z",
       "confidence": "estimated",
       "isMockOrEstimated": true
     }
@@ -48,7 +48,7 @@
       "sourceName": "MVP 示例补充数据",
       "sourceUrl": "https://example.local/world-cup-match-intelligence-center/manual-seed",
       "sourceKind": "manual",
-      "lastFetchedAt": "2026-06-19T00:53:54.539Z",
+      "lastFetchedAt": "2026-06-19T07:45:55.961Z",
       "confidence": "estimated",
       "isMockOrEstimated": true
     }
@@ -66,7 +66,7 @@
       "sourceName": "MVP 示例补充数据",
       "sourceUrl": "https://example.local/world-cup-match-intelligence-center/manual-seed",
       "sourceKind": "manual",
-      "lastFetchedAt": "2026-06-19T00:53:54.539Z",
+      "lastFetchedAt": "2026-06-19T07:45:55.961Z",
       "confidence": "estimated",
       "isMockOrEstimated": true
     }
@@ -84,7 +84,43 @@
       "sourceName": "MVP 示例补充数据",
       "sourceUrl": "https://example.local/world-cup-match-intelligence-center/manual-seed",
       "sourceKind": "manual",
-      "lastFetchedAt": "2026-06-19T00:53:54.539Z",
+      "lastFetchedAt": "2026-06-19T07:45:55.961Z",
+      "confidence": "estimated",
+      "isMockOrEstimated": true
+    }
+  },
+  {
+    "id": "p-sui-1",
+    "teamId": "switzerland",
+    "name": "Granit Xhaka",
+    "role": "中场",
+    "status": "fit",
+    "impact": 85,
+    "note": "中场出球和节奏控制是比赛稳定器。",
+    "source": {
+      "sourceId": "manual-mvp-intel",
+      "sourceName": "MVP 示例补充数据",
+      "sourceUrl": "https://example.local/world-cup-match-intelligence-center/manual-seed",
+      "sourceKind": "manual",
+      "lastFetchedAt": "2026-06-19T07:45:55.961Z",
+      "confidence": "estimated",
+      "isMockOrEstimated": true
+    }
+  },
+  {
+    "id": "p-qat-1",
+    "teamId": "qatar",
+    "name": "Akram Afif",
+    "role": "前锋",
+    "status": "fit",
+    "impact": 82,
+    "note": "反击推进和定位球处理是主要威胁。",
+    "source": {
+      "sourceId": "manual-mvp-intel",
+      "sourceName": "MVP 示例补充数据",
+      "sourceUrl": "https://example.local/world-cup-match-intelligence-center/manual-seed",
+      "sourceKind": "manual",
+      "lastFetchedAt": "2026-06-19T07:45:55.961Z",
       "confidence": "estimated",
       "isMockOrEstimated": true
     }
@@ -102,7 +138,7 @@
       "sourceName": "MVP 示例补充数据",
       "sourceUrl": "https://example.local/world-cup-match-intelligence-center/manual-seed",
       "sourceKind": "manual",
-      "lastFetchedAt": "2026-06-19T00:53:54.539Z",
+      "lastFetchedAt": "2026-06-19T07:45:55.961Z",
       "confidence": "estimated",
       "isMockOrEstimated": true
     }
@@ -120,7 +156,7 @@
       "sourceName": "MVP 示例补充数据",
       "sourceUrl": "https://example.local/world-cup-match-intelligence-center/manual-seed",
       "sourceKind": "manual",
-      "lastFetchedAt": "2026-06-19T00:53:54.539Z",
+      "lastFetchedAt": "2026-06-19T07:45:55.961Z",
       "confidence": "estimated",
       "isMockOrEstimated": true
     }
@@ -138,7 +174,7 @@
       "sourceName": "MVP 示例补充数据",
       "sourceUrl": "https://example.local/world-cup-match-intelligence-center/manual-seed",
       "sourceKind": "manual",
-      "lastFetchedAt": "2026-06-19T00:53:54.539Z",
+      "lastFetchedAt": "2026-06-19T07:45:55.961Z",
       "confidence": "estimated",
       "isMockOrEstimated": true
     }
@@ -156,7 +192,7 @@
       "sourceName": "MVP 示例补充数据",
       "sourceUrl": "https://example.local/world-cup-match-intelligence-center/manual-seed",
       "sourceKind": "manual",
-      "lastFetchedAt": "2026-06-19T00:53:54.539Z",
+      "lastFetchedAt": "2026-06-19T07:45:55.961Z",
       "confidence": "estimated",
       "isMockOrEstimated": true
     }
@@ -174,7 +210,7 @@
       "sourceName": "MVP 示例补充数据",
       "sourceUrl": "https://example.local/world-cup-match-intelligence-center/manual-seed",
       "sourceKind": "manual",
-      "lastFetchedAt": "2026-06-19T00:53:54.539Z",
+      "lastFetchedAt": "2026-06-19T07:45:55.961Z",
       "confidence": "estimated",
       "isMockOrEstimated": true
     }
@@ -192,7 +228,7 @@
       "sourceName": "MVP 示例补充数据",
       "sourceUrl": "https://example.local/world-cup-match-intelligence-center/manual-seed",
       "sourceKind": "manual",
-      "lastFetchedAt": "2026-06-19T00:53:54.539Z",
+      "lastFetchedAt": "2026-06-19T07:45:55.961Z",
       "confidence": "estimated",
       "isMockOrEstimated": true
     }
@@ -210,7 +246,7 @@
       "sourceName": "MVP 示例补充数据",
       "sourceUrl": "https://example.local/world-cup-match-intelligence-center/manual-seed",
       "sourceKind": "manual",
-      "lastFetchedAt": "2026-06-19T00:53:54.539Z",
+      "lastFetchedAt": "2026-06-19T07:45:55.961Z",
       "confidence": "estimated",
       "isMockOrEstimated": true
     }
@@ -228,7 +264,7 @@
       "sourceName": "MVP 示例补充数据",
       "sourceUrl": "https://example.local/world-cup-match-intelligence-center/manual-seed",
       "sourceKind": "manual",
-      "lastFetchedAt": "2026-06-19T00:53:54.539Z",
+      "lastFetchedAt": "2026-06-19T07:45:55.961Z",
       "confidence": "estimated",
       "isMockOrEstimated": true
     }
@@ -246,7 +282,79 @@
       "sourceName": "MVP 示例补充数据",
       "sourceUrl": "https://example.local/world-cup-match-intelligence-center/manual-seed",
       "sourceKind": "manual",
-      "lastFetchedAt": "2026-06-19T00:53:54.539Z",
+      "lastFetchedAt": "2026-06-19T07:45:55.961Z",
+      "confidence": "estimated",
+      "isMockOrEstimated": true
+    }
+  },
+  {
+    "id": "p-bra-1",
+    "teamId": "brazil",
+    "name": "Vinicius Junior",
+    "role": "边锋",
+    "status": "fit",
+    "impact": 92,
+    "note": "左路爆点和反击终结是核心威胁。",
+    "source": {
+      "sourceId": "manual-mvp-intel",
+      "sourceName": "MVP 示例补充数据",
+      "sourceUrl": "https://example.local/world-cup-match-intelligence-center/manual-seed",
+      "sourceKind": "manual",
+      "lastFetchedAt": "2026-06-19T07:45:55.961Z",
+      "confidence": "estimated",
+      "isMockOrEstimated": true
+    }
+  },
+  {
+    "id": "p-arg-1",
+    "teamId": "argentina",
+    "name": "Lionel Messi",
+    "role": "前锋",
+    "status": "fit",
+    "impact": 94,
+    "note": "定位球、终结和最后一传仍是核心变量。",
+    "source": {
+      "sourceId": "manual-mvp-intel",
+      "sourceName": "MVP 示例补充数据",
+      "sourceUrl": "https://example.local/world-cup-match-intelligence-center/manual-seed",
+      "sourceKind": "manual",
+      "lastFetchedAt": "2026-06-19T07:45:55.961Z",
+      "confidence": "estimated",
+      "isMockOrEstimated": true
+    }
+  },
+  {
+    "id": "p-fra-1",
+    "teamId": "france",
+    "name": "Kylian Mbappe",
+    "role": "前锋",
+    "status": "fit",
+    "impact": 95,
+    "note": "纵深冲击会持续拉扯防线。",
+    "source": {
+      "sourceId": "manual-mvp-intel",
+      "sourceName": "MVP 示例补充数据",
+      "sourceUrl": "https://example.local/world-cup-match-intelligence-center/manual-seed",
+      "sourceKind": "manual",
+      "lastFetchedAt": "2026-06-19T07:45:55.961Z",
+      "confidence": "estimated",
+      "isMockOrEstimated": true
+    }
+  },
+  {
+    "id": "p-ger-1",
+    "teamId": "germany",
+    "name": "Jamal Musiala",
+    "role": "前腰",
+    "status": "fit",
+    "impact": 89,
+    "note": "肋部持球推进是进攻关键。",
+    "source": {
+      "sourceId": "manual-mvp-intel",
+      "sourceName": "MVP 示例补充数据",
+      "sourceUrl": "https://example.local/world-cup-match-intelligence-center/manual-seed",
+      "sourceKind": "manual",
+      "lastFetchedAt": "2026-06-19T07:45:55.961Z",
       "confidence": "estimated",
       "isMockOrEstimated": true
     }

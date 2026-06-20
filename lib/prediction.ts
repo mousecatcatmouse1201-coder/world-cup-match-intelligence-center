@@ -20,7 +20,7 @@ export interface PredictionWindowOptions {
   includeIneligible?: boolean;
 }
 
-export type PredictionUnavailableCode = "finished" | "past" | "outside-window";
+export type PredictionUnavailableCode = "finished" | "past" | "outside-window" | "placeholder-teams";
 
 export interface PredictionEligibility {
   canPredict: boolean;
@@ -86,6 +86,15 @@ export function getFixturePredictionEligibility(fixture: Fixture, options: Predi
     windowStart: window.start,
     windowEnd: window.end
   };
+
+  if (!fixture.homeTeamId || !fixture.awayTeamId) {
+    return {
+      ...base,
+      canPredict: false,
+      code: "placeholder-teams",
+      message: "参赛队待确定，不生成赛前预测。"
+    };
+  }
 
   if (fixture.status === "finished") {
     return {
@@ -221,8 +230,17 @@ function buildExplanations(input: PredictInput, homePenalty: number, awayPenalty
   const attackImpact = clamp((input.homeTeam.attack - input.awayTeam.defense) * 0.32, -10, 10);
   const defenseImpact = clamp((input.homeTeam.defense - input.awayTeam.attack) * 0.25, -8, 8);
   const injuryImpact = clamp(awayPenalty - homePenalty, -10, 10);
+  const tempoAverage = (input.homeTeam.tempo + input.awayTeam.tempo) / 2;
+  const lowGoalImpact = clamp((76 - tempoAverage) * 0.45, 0, 8);
+  const strengthGap = Math.abs(teamStrength(input.homeTeam) - teamStrength(input.awayTeam)) / 70;
+  const upsetImpact = clamp(10 - strengthGap, 1, 10);
 
-  const rows = [
+  const rows: Array<{
+    factor: string;
+    impact: number;
+    direction?: PredictionExplanation["direction"];
+    description: string;
+  }> = [
     {
       factor: "FIFA 排名差异",
       impact: rankImpact,
@@ -254,6 +272,18 @@ function buildExplanations(input: PredictInput, homePenalty: number, awayPenalty
       description: `阵容可用性影响：主队 -${round1(homePenalty)}，客队 -${round1(awayPenalty)}。`
     },
     {
+      factor: "低进球倾向",
+      impact: lowGoalImpact,
+      direction: "draw",
+      description: `双方节奏指数均值 ${round1(tempoAverage)}，节奏越低，小比分和平局权重越高。`
+    },
+    {
+      factor: "冷门风险",
+      impact: upsetImpact,
+      direction: "neutral",
+      description: strengthGap < 8 ? "双方强弱差距有限，单场杯赛波动可能放大。" : "强弱差距较清晰，但早段进球、红黄牌和伤停仍可能制造波动。"
+    },
+    {
       factor: "市场/舆情校准",
       impact: odds + sentiment,
       description: "赔率与舆情为演示或非官方输入，仅作弱校准。"
@@ -263,9 +293,24 @@ function buildExplanations(input: PredictInput, homePenalty: number, awayPenalty
   return rows.map((row) => ({
     factor: row.factor,
     impact: explanationImpact(Math.abs(row.impact)),
-    direction: Math.abs(row.impact) < 1 ? "draw" : row.impact > 0 ? "home" : "away",
+    direction: row.direction ?? (Math.abs(row.impact) < 1 ? "neutral" : row.impact > 0 ? "home" : "away"),
     description: row.description
   }));
+}
+
+export function explainPrediction(input: PredictInput): PredictionExplanation[] {
+  const homePenalty = squadPenalty(input.homePlayers);
+  const awayPenalty = squadPenalty(input.awayPlayers);
+  const homeVenue = ["mexico", "canada", "united-states"].includes(input.homeTeam.id) ? 18 : 4;
+
+  return buildExplanations(
+    input,
+    homePenalty,
+    awayPenalty,
+    homeVenue,
+    oddsLean(input.odds),
+    sentimentLean(input.sentiment)
+  );
 }
 
 function scoreFromExpected(homeXg: number, awayXg: number) {
@@ -317,7 +362,7 @@ export function predictMatch(input: PredictInput): PredictionResult {
     probabilities,
     expectedGoals: xg,
     predictedScore,
-    scoreRange: `${Math.max(0, predictedScore.home - 1)}-${Math.max(0, predictedScore.away - 1)} 到 ${predictedScore.home + 1}-${predictedScore.away + 1}`,
+    scoreRange: `${Math.max(0, predictedScore.home - 1)} : ${Math.max(0, predictedScore.away - 1)} 到 ${predictedScore.home + 1} : ${predictedScore.away + 1}`,
     scoreConfidence: closeness > 24 ? "high" : closeness > 12 ? "medium" : "low",
     confidence: missingMarketData ? "medium" : "high",
     keyFactors,

@@ -1,7 +1,10 @@
 import { describe, expect, it } from "vitest";
 import { generateMatchAnalysis } from "../lib/analysis";
-import { getFixturePredictionEligibility, predictMany, predictMatch } from "../lib/prediction";
-import type { Fixture, Player, Team } from "../lib/types";
+import { getFavoriteTeamMatches, getHighestUpsetRiskMatch, getMostPopularMatch, getTodayMatches } from "../lib/dashboard-matches";
+import { buildModelPerformanceSummary, buildPredictionReview, enrichMatch, getEnrichedMatchById, resolveMatchStatus } from "../lib/match-intelligence";
+import { explainPrediction, getFixturePredictionEligibility, predictMany, predictMatch } from "../lib/prediction";
+import { formatDisplayDateKey, getTodayDateKeyInBeijing, isTodayInBeijing } from "../lib/format";
+import type { DataStore, Fixture, Player, Team } from "../lib/types";
 
 const source = {
   sourceId: "test-source",
@@ -97,6 +100,13 @@ describe("prediction engine", () => {
     expect(closePrediction.probabilities.draw).toBeGreaterThan(unevenPrediction.probabilities.draw);
     expect(new Set([closePrediction.probabilities.draw, unevenPrediction.probabilities.draw]).size).toBeGreaterThan(1);
     expect(unevenPrediction.explanations.map((item) => item.factor)).toContain("FIFA 排名差异");
+    expect(explainPrediction({
+      fixture,
+      homeTeam: strongTeam,
+      awayTeam: weakerTeam,
+      homePlayers: players,
+      awayPlayers: players
+    }).length).toBeGreaterThan(0);
   });
 
   it("aligns score forecast with stronger team advantage", () => {
@@ -130,7 +140,7 @@ describe("prediction engine", () => {
     });
 
     expect(analysis.summary).toContain("预测比分");
-    expect(analysis.scorePrediction).toContain(`${prediction.predictedScore.home}-${prediction.predictedScore.away}`);
+    expect(analysis.scorePrediction).toContain(`${prediction.predictedScore.home} : ${prediction.predictedScore.away}`);
     expect(analysis.scenarios.length).toBe(3);
   });
 
@@ -169,5 +179,139 @@ describe("prediction engine", () => {
     );
 
     expect(predictions.map((prediction) => prediction.fixtureId)).toEqual(["window-match"]);
+  });
+
+  it("resolves match status from explicit state, score and kickoff time", () => {
+    expect(resolveMatchStatus({ ...fixture, status: "finished", score: { home: 2, away: 1 } }, baseNow)).toBe("finished");
+    expect(resolveMatchStatus({ ...fixture, status: "scheduled", score: { home: 2, away: 1 } }, baseNow)).toBe("finished");
+    expect(resolveMatchStatus({ ...fixture, status: "scheduled", kickoff: "2026-06-20T12:00:00+08:00" }, baseNow)).toBe("scheduled");
+    expect(resolveMatchStatus({ ...fixture, status: "scheduled", kickoff: "2026-06-19T11:00:00+08:00" }, baseNow)).toBe("live_pending");
+    expect(resolveMatchStatus({ ...fixture, status: "scheduled", kickoff: "2026-06-18T08:00:00+08:00" }, baseNow)).toBe("result_pending");
+    expect(resolveMatchStatus({ ...fixture, status: "scheduled", kickoff: "not-a-date" }, baseNow)).toBe("unknown");
+  });
+
+  it("builds prediction reviews and model performance summary", () => {
+    const finishedFixture: Fixture = {
+      ...fixture,
+      status: "finished",
+      score: { home: 2, away: 0 }
+    };
+    const prediction = {
+      ...predictMatch({
+        fixture: finishedFixture,
+        homeTeam: strongTeam,
+        awayTeam: weakerTeam,
+        homePlayers: players,
+        awayPlayers: players
+      }),
+      predictedScore: { home: 1, away: 0 }
+    };
+    const review = buildPredictionReview(finishedFixture, prediction);
+    const summary = buildModelPerformanceSummary([review]);
+
+    expect(review?.outcomeHit).toBe(true);
+    expect(review?.exactScoreHit).toBe(false);
+    expect(review?.goalDiffError).toBe(1);
+    expect(review?.totalGoalError).toBe(1);
+    expect(summary.reviewedMatches).toBe(1);
+    expect(summary.outcomeHitRate).toBe(100);
+    expect(summary.exactScoreHits).toBe(0);
+    expect(buildModelPerformanceSummary([]).outcomeHitRate).toBeNull();
+  });
+
+  it("enriches list and detail matches through the same prediction path", () => {
+    const store: DataStore = {
+      sources: [{ ...source, description: "Test source" }],
+      teams: [strongTeam, weakerTeam],
+      players,
+      fixtures: [fixture],
+      standings: [],
+      rankings: [],
+      odds: [],
+      sentiment: []
+    };
+    const listMatch = enrichMatch(fixture, store, { now: baseNow });
+    const detailMatch = getEnrichedMatchById(store, fixture.id, { now: baseNow });
+
+    expect(detailMatch?.prediction?.probabilities).toEqual(listMatch.prediction?.probabilities);
+    expect(detailMatch?.reviewPrediction?.predictedScore).toEqual(listMatch.reviewPrediction?.predictedScore);
+    expect(detailMatch?.status).toBe(listMatch.status);
+    expect(detailMatch?.displayDateKey).toBe(formatDisplayDateKey(fixture.kickoff));
+    expect(detailMatch?.beijingDate).toBe(formatDisplayDateKey(fixture.kickoff));
+    expect(detailMatch?.displayTimezoneLabel).toBe("北京时间");
+  });
+
+  it("marks past matches without scores as pending result updates", () => {
+    const staleFixture: Fixture = {
+      ...fixture,
+      id: "stale-match",
+      kickoff: "2026-06-18T08:00:00+08:00",
+      status: "scheduled"
+    };
+    const match = enrichMatch(staleFixture, {
+      teams: [strongTeam, weakerTeam],
+      players,
+      odds: [],
+      sentiment: []
+    }, { now: baseNow });
+
+    expect(match.status).toBe("result_pending");
+    expect(match.dataConfidence.result).toBe("pending");
+    expect(match.staleResultMessage).toContain("赛果未抓取");
+  });
+
+  it("computes today and focus candidates only from Beijing-date matches", () => {
+    const now = new Date("2026-06-19T12:00:00+08:00");
+    const yesterdayHighHeat = {
+      beijingDate: "2026-06-18",
+      fixture: { heatIndex: 99 },
+      upsetRisk: 99,
+      home: { id: "old-home" },
+      away: { id: "old-away" }
+    };
+    const todayLowHeat = {
+      beijingDate: "2026-06-19",
+      fixture: { heatIndex: 60 },
+      upsetRisk: 30,
+      home: { id: "strong" },
+      away: { id: "weaker" }
+    };
+    const todayUpset = {
+      beijingDate: "2026-06-19",
+      fixture: { heatIndex: 50 },
+      upsetRisk: 80,
+      home: { id: "another" },
+      away: { id: "weaker" }
+    };
+    const todayMatches = getTodayMatches([yesterdayHighHeat, todayLowHeat, todayUpset], now);
+
+    expect(getTodayDateKeyInBeijing(now)).toBe("2026-06-19");
+    expect(isTodayInBeijing("2026-06-18T19:00:00-04:00", now)).toBe(true);
+    expect(todayMatches).toEqual([todayLowHeat, todayUpset]);
+    expect(getMostPopularMatch(todayMatches)).toBe(todayLowHeat);
+    expect(getHighestUpsetRiskMatch(todayMatches)).toBe(todayUpset);
+    expect(getFavoriteTeamMatches(todayMatches, ["strong"])).toEqual([todayLowHeat]);
+    expect(getTodayMatches([yesterdayHighHeat], now)).toEqual([]);
+  });
+
+  it("exposes required explanation factors for the detail intelligence view", () => {
+    const prediction = predictMatch({
+      fixture,
+      homeTeam: strongTeam,
+      awayTeam: weakerTeam,
+      homePlayers: players,
+      awayPlayers: players
+    });
+    const factors = prediction.explanations.map((item) => item.factor);
+
+    expect(factors).toEqual(expect.arrayContaining([
+      "FIFA 排名差异",
+      "近期状态",
+      "进攻指数",
+      "防守指数",
+      "伤停风险",
+      "低进球倾向",
+      "冷门风险"
+    ]));
   });
 });

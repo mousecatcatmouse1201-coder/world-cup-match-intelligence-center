@@ -5,6 +5,7 @@ coverage
 dist
 .DS_Store
 *.log
+tsconfig.tsbuildinfo
 data/raw/*.html
 data/raw/*.json
 !data/raw/.gitkeep

@@ -6,11 +6,20 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "lint": "tsc --noEmit",
     "start": "next start",
     "test": "vitest run",
     "data:fetch": "tsx scripts/fetch-data.ts",
     "data:normalize": "tsx scripts/normalize-data.ts",
-    "data:refresh": "npm run data:fetch && npm run data:normalize"
+    "data:refresh": "npm run data:fetch && npm run data:normalize",
+    "check:dates": "tsx scripts/check-dates.ts",
+    "check:results": "tsx scripts/check-results.ts",
+    "check:rankings": "tsx scripts/check-rankings.ts",
+    "check:schedule": "tsx scripts/check-schedule-coverage.ts",
+    "check:standings": "tsx scripts/check-standings.ts",
+    "check:standings-pages": "tsx scripts/check-standings-pages.ts",
+    "check:data": "npm run check:dates && npm run check:results && npm run check:rankings && npm run check:schedule && npm run check:standings && npm run check:standings-pages",
+    "deploy:prod": "node scripts/deploy-production.mjs"
   },
   "dependencies": {
     "lucide-react": "latest",

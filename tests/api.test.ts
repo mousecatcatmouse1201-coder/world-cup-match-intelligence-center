@@ -24,8 +24,34 @@ describe("api routes", () => {
     const body = await response.json();
 
     expect(body.fixtures.length).toBeGreaterThan(0);
+    expect(body.matches.length).toBe(body.fixtures.length);
+    expect(body.fixtures.length).toBe(72);
     expect(body.predictions.length).toBe(4);
+    expect(body.predictions.map((prediction: { fixtureId: string }) => prediction.fixtureId)).toEqual([
+      "match-029",
+      "match-030",
+      "match-031",
+      "match-032"
+    ]);
     expect(body.predictions.map((prediction: { fixtureId: string }) => prediction.fixtureId)).not.toContain("match-001");
+  });
+
+  it("keeps list and detail enriched predictions consistent", async () => {
+    const listResponse = await getMatches();
+    const listBody = await listResponse.json();
+    const detailResponse = await getMatchById(new Request("http://localhost/api/matches/match-011"), {
+      params: Promise.resolve({ id: "match-011" })
+    });
+    const detailBody = await detailResponse.json();
+    const listMatch = listBody.matches.find((match: { fixture: { id: string } }) => match.fixture.id === "match-011");
+
+    expect(listMatch.prediction).toBeNull();
+    expect(detailBody.enrichedMatch.prediction).toBeNull();
+    expect(listMatch.reviewPrediction.predictedScore).toEqual(detailBody.enrichedMatch.reviewPrediction.predictedScore);
+    expect(listMatch.status).toBe(detailBody.enrichedMatch.status);
+    expect(detailBody.enrichedMatch.status).toBe("finished");
+    expect(detailBody.enrichedMatch.result.homeScore).toBe(1);
+    expect(detailBody.enrichedMatch.result.awayScore).toBe(0);
   });
 
   it("returns source catalog and data quality summary", async () => {
@@ -46,6 +72,8 @@ describe("api routes", () => {
     expect(body.fixture.id).toBe("match-001");
     expect(body.prediction).toBeNull();
     expect(body.analysis).toBeNull();
+    expect(body.enrichedMatch.review).toBeTruthy();
+    expect(body.enrichedMatch.dataConfidence.result).toBe("secondary");
     expect(body.predictionEligibility.canPredict).toBe(false);
   });
 
@@ -62,26 +90,25 @@ describe("api routes", () => {
     expect(body.predictionEligibility.canPredict).toBe(false);
   });
 
-  it("keeps predict and analyze APIs for eligible matches", async () => {
+  it("rejects predict and analyze APIs for finished today matches", async () => {
     const predictResponse = await postPredict(
       new Request("http://localhost/api/predict", {
         method: "POST",
-        body: JSON.stringify({ fixtureId: "match-005" })
+        body: JSON.stringify({ fixtureId: "match-011" })
       })
     );
     const predictBody = await predictResponse.json();
     const analyzeResponse = await postAnalyze(
       new Request("http://localhost/api/analyze", {
         method: "POST",
-        body: JSON.stringify({ fixtureId: "match-005" })
+        body: JSON.stringify({ fixtureId: "match-011" })
       })
     );
     const analyzeBody = await analyzeResponse.json();
 
-    expect(predictResponse.status).toBe(200);
-    expect(predictBody.fixtureId).toBe("match-005");
-    expect(predictBody.predictedScore).toBeTruthy();
-    expect(analyzeResponse.status).toBe(200);
-    expect(analyzeBody.fixtureId).toBe("match-005");
+    expect(predictResponse.status).toBe(400);
+    expect(predictBody.predictionEligibility.canPredict).toBe(false);
+    expect(analyzeResponse.status).toBe(400);
+    expect(analyzeBody.predictionEligibility.canPredict).toBe(false);
   });
 });

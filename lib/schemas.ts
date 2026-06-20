@@ -44,18 +44,40 @@ export const playerSchema = z.object({
 
 export const fixtureSchema = z.object({
   id: z.string().min(1),
+  externalIds: z
+    .object({
+      fifa: z.string().min(1).optional(),
+      espn: z.string().min(1).optional()
+    })
+    .optional(),
   group: z.string().min(1),
   stage: z.string().min(1),
   kickoff: z.string().datetime({ offset: true }),
+  kickoffAtLocal: z.string().datetime({ offset: true }).optional(),
+  kickoffAtUtc: z.string().datetime().optional(),
+  kickoffAtBeijing: z.string().min(1).optional(),
+  beijingDate: z.string().min(1).optional(),
+  beijingTimeLabel: z.string().min(1).optional(),
   venue: z.string().min(1),
   city: z.string().min(1),
-  homeTeamId: z.string().min(1),
-  awayTeamId: z.string().min(1),
-  status: z.enum(["scheduled", "live", "finished", "unknown"]),
+  country: z.string().min(1).optional(),
+  homeTeamId: z.string().min(1).optional(),
+  awayTeamId: z.string().min(1).optional(),
+  homePlaceholder: z.string().min(1).optional(),
+  awayPlaceholder: z.string().min(1).optional(),
+  status: z.enum(["scheduled", "live", "live_pending", "finished", "result_pending", "unknown"]),
   score: z
     .object({
       home: z.number().int().min(0),
       away: z.number().int().min(0)
+    })
+    .optional(),
+  result: z
+    .object({
+      homeScore: z.number().int().min(0),
+      awayScore: z.number().int().min(0),
+      source: z.union([z.literal("official"), z.literal("secondary"), z.string()]),
+      updatedAt: z.string().datetime()
     })
     .optional(),
   heatIndex: z.number().min(0).max(100),

@@ -9,37 +9,7 @@
       "sourceName": "MVP 示例补充数据",
       "sourceUrl": "https://example.local/world-cup-match-intelligence-center/manual-seed",
       "sourceKind": "manual",
-      "lastFetchedAt": "2026-06-19T00:53:54.539Z",
-      "confidence": "estimated",
-      "isMockOrEstimated": true
-    }
-  },
-  {
-    "fixtureId": "match-002",
-    "homeWin": 2.05,
-    "draw": 3.25,
-    "awayWin": 3.1,
-    "source": {
-      "sourceId": "manual-odds",
-      "sourceName": "MVP 示例补充数据",
-      "sourceUrl": "https://example.local/world-cup-match-intelligence-center/manual-seed",
-      "sourceKind": "manual",
-      "lastFetchedAt": "2026-06-19T00:53:54.539Z",
-      "confidence": "estimated",
-      "isMockOrEstimated": true
-    }
-  },
-  {
-    "fixtureId": "match-003",
-    "homeWin": 2.05,
-    "draw": 3.25,
-    "awayWin": 3.3000000000000003,
-    "source": {
-      "sourceId": "manual-odds",
-      "sourceName": "MVP 示例补充数据",
-      "sourceUrl": "https://example.local/world-cup-match-intelligence-center/manual-seed",
-      "sourceKind": "manual",
-      "lastFetchedAt": "2026-06-19T00:53:54.539Z",
+      "lastFetchedAt": "2026-06-19T07:45:55.961Z",
       "confidence": "estimated",
       "isMockOrEstimated": true
     }
@@ -54,7 +24,292 @@
       "sourceName": "MVP 示例补充数据",
       "sourceUrl": "https://example.local/world-cup-match-intelligence-center/manual-seed",
       "sourceKind": "manual",
-      "lastFetchedAt": "2026-06-19T00:53:54.539Z",
+      "lastFetchedAt": "2026-06-19T07:45:55.961Z",
+      "confidence": "estimated",
+      "isMockOrEstimated": true
+    }
+  },
+  {
+    "fixtureId": "match-002",
+    "homeWin": 2.05,
+    "draw": 3.25,
+    "awayWin": 3.1,
+    "source": {
+      "sourceId": "manual-odds",
+      "sourceName": "MVP 示例补充数据",
+      "sourceUrl": "https://example.local/world-cup-match-intelligence-center/manual-seed",
+      "sourceKind": "manual",
+      "lastFetchedAt": "2026-06-19T07:45:55.961Z",
+      "confidence": "estimated",
+      "isMockOrEstimated": true
+    }
+  },
+  {
+    "fixtureId": "match-003",
+    "homeWin": 2.05,
+    "draw": 3.25,
+    "awayWin": 3.3000000000000003,
+    "source": {
+      "sourceId": "manual-odds",
+      "sourceName": "MVP 示例补充数据",
+      "sourceUrl": "https://example.local/world-cup-match-intelligence-center/manual-seed",
+      "sourceKind": "manual",
+      "lastFetchedAt": "2026-06-19T07:45:55.961Z",
+      "confidence": "estimated",
+      "isMockOrEstimated": true
+    }
+  },
+  {
+    "fixtureId": "match-012",
+    "homeWin": 2.3,
+    "draw": 3.25,
+    "awayWin": 3.1,
+    "source": {
+      "sourceId": "manual-odds",
+      "sourceName": "MVP 示例补充数据",
+      "sourceUrl": "https://example.local/world-cup-match-intelligence-center/manual-seed",
+      "sourceKind": "manual",
+      "lastFetchedAt": "2026-06-19T07:45:55.961Z",
+      "confidence": "estimated",
+      "isMockOrEstimated": true
+    }
+  },
+  {
+    "fixtureId": "match-013",
+    "homeWin": 2.05,
+    "draw": 3.25,
+    "awayWin": 3.1,
+    "source": {
+      "sourceId": "manual-odds",
+      "sourceName": "MVP 示例补充数据",
+      "sourceUrl": "https://example.local/world-cup-match-intelligence-center/manual-seed",
+      "sourceKind": "manual",
+      "lastFetchedAt": "2026-06-19T07:45:55.961Z",
+      "confidence": "estimated",
+      "isMockOrEstimated": true
+    }
+  },
+  {
+    "fixtureId": "match-014",
+    "homeWin": 2.3,
+    "draw": 3.25,
+    "awayWin": 3.1,
+    "source": {
+      "sourceId": "manual-odds",
+      "sourceName": "MVP 示例补充数据",
+      "sourceUrl": "https://example.local/world-cup-match-intelligence-center/manual-seed",
+      "sourceKind": "manual",
+      "lastFetchedAt": "2026-06-19T07:45:55.961Z",
+      "confidence": "estimated",
+      "isMockOrEstimated": true
+    }
+  },
+  {
+    "fixtureId": "match-015",
+    "homeWin": 2.3,
+    "draw": 3.25,
+    "awayWin": 3.1,
+    "source": {
+      "sourceId": "manual-odds",
+      "sourceName": "MVP 示例补充数据",
+      "sourceUrl": "https://example.local/world-cup-match-intelligence-center/manual-seed",
+      "sourceKind": "manual",
+      "lastFetchedAt": "2026-06-19T07:45:55.961Z",
+      "confidence": "estimated",
+      "isMockOrEstimated": true
+    }
+  },
+  {
+    "fixtureId": "match-016",
+    "homeWin": 2.05,
+    "draw": 3.25,
+    "awayWin": 3.1,
+    "source": {
+      "sourceId": "manual-odds",
+      "sourceName": "MVP 示例补充数据",
+      "sourceUrl": "https://example.local/world-cup-match-intelligence-center/manual-seed",
+      "sourceKind": "manual",
+      "lastFetchedAt": "2026-06-19T07:45:55.961Z",
+      "confidence": "estimated",
+      "isMockOrEstimated": true
+    }
+  },
+  {
+    "fixtureId": "match-017",
+    "homeWin": 2.05,
+    "draw": 3.25,
+    "awayWin": 3.1,
+    "source": {
+      "sourceId": "manual-odds",
+      "sourceName": "MVP 示例补充数据",
+      "sourceUrl": "https://example.local/world-cup-match-intelligence-center/manual-seed",
+      "sourceKind": "manual",
+      "lastFetchedAt": "2026-06-19T07:45:55.961Z",
+      "confidence": "estimated",
+      "isMockOrEstimated": true
+    }
+  },
+  {
+    "fixtureId": "match-018",
+    "homeWin": 2.3,
+    "draw": 3.25,
+    "awayWin": 3.1,
+    "source": {
+      "sourceId": "manual-odds",
+      "sourceName": "MVP 示例补充数据",
+      "sourceUrl": "https://example.local/world-cup-match-intelligence-center/manual-seed",
+      "sourceKind": "manual",
+      "lastFetchedAt": "2026-06-19T07:45:55.961Z",
+      "confidence": "estimated",
+      "isMockOrEstimated": true
+    }
+  },
+  {
+    "fixtureId": "match-019",
+    "homeWin": 2.3,
+    "draw": 3.25,
+    "awayWin": 3.1,
+    "source": {
+      "sourceId": "manual-odds",
+      "sourceName": "MVP 示例补充数据",
+      "sourceUrl": "https://example.local/world-cup-match-intelligence-center/manual-seed",
+      "sourceKind": "manual",
+      "lastFetchedAt": "2026-06-19T07:45:55.961Z",
+      "confidence": "estimated",
+      "isMockOrEstimated": true
+    }
+  },
+  {
+    "fixtureId": "match-020",
+    "homeWin": 2.3,
+    "draw": 3.25,
+    "awayWin": 3.1,
+    "source": {
+      "sourceId": "manual-odds",
+      "sourceName": "MVP 示例补充数据",
+      "sourceUrl": "https://example.local/world-cup-match-intelligence-center/manual-seed",
+      "sourceKind": "manual",
+      "lastFetchedAt": "2026-06-19T07:45:55.961Z",
+      "confidence": "estimated",
+      "isMockOrEstimated": true
+    }
+  },
+  {
+    "fixtureId": "match-021",
+    "homeWin": 2.05,
+    "draw": 3.25,
+    "awayWin": 3.1,
+    "source": {
+      "sourceId": "manual-odds",
+      "sourceName": "MVP 示例补充数据",
+      "sourceUrl": "https://example.local/world-cup-match-intelligence-center/manual-seed",
+      "sourceKind": "manual",
+      "lastFetchedAt": "2026-06-19T07:45:55.961Z",
+      "confidence": "estimated",
+      "isMockOrEstimated": true
+    }
+  },
+  {
+    "fixtureId": "match-022",
+    "homeWin": 2.3,
+    "draw": 3.25,
+    "awayWin": 3.1,
+    "source": {
+      "sourceId": "manual-odds",
+      "sourceName": "MVP 示例补充数据",
+      "sourceUrl": "https://example.local/world-cup-match-intelligence-center/manual-seed",
+      "sourceKind": "manual",
+      "lastFetchedAt": "2026-06-19T07:45:55.961Z",
+      "confidence": "estimated",
+      "isMockOrEstimated": true
+    }
+  },
+  {
+    "fixtureId": "match-023",
+    "homeWin": 2.3,
+    "draw": 3.25,
+    "awayWin": 3.1,
+    "source": {
+      "sourceId": "manual-odds",
+      "sourceName": "MVP 示例补充数据",
+      "sourceUrl": "https://example.local/world-cup-match-intelligence-center/manual-seed",
+      "sourceKind": "manual",
+      "lastFetchedAt": "2026-06-19T07:45:55.961Z",
+      "confidence": "estimated",
+      "isMockOrEstimated": true
+    }
+  },
+  {
+    "fixtureId": "match-024",
+    "homeWin": 2.05,
+    "draw": 3.25,
+    "awayWin": 3.1,
+    "source": {
+      "sourceId": "manual-odds",
+      "sourceName": "MVP 示例补充数据",
+      "sourceUrl": "https://example.local/world-cup-match-intelligence-center/manual-seed",
+      "sourceKind": "manual",
+      "lastFetchedAt": "2026-06-19T07:45:55.961Z",
+      "confidence": "estimated",
+      "isMockOrEstimated": true
+    }
+  },
+  {
+    "fixtureId": "match-025",
+    "homeWin": 2.3,
+    "draw": 3.25,
+    "awayWin": 3.1,
+    "source": {
+      "sourceId": "manual-odds",
+      "sourceName": "MVP 示例补充数据",
+      "sourceUrl": "https://example.local/world-cup-match-intelligence-center/manual-seed",
+      "sourceKind": "manual",
+      "lastFetchedAt": "2026-06-19T07:45:55.961Z",
+      "confidence": "estimated",
+      "isMockOrEstimated": true
+    }
+  },
+  {
+    "fixtureId": "match-026",
+    "homeWin": 2.05,
+    "draw": 3.25,
+    "awayWin": 3.3000000000000003,
+    "source": {
+      "sourceId": "manual-odds",
+      "sourceName": "MVP 示例补充数据",
+      "sourceUrl": "https://example.local/world-cup-match-intelligence-center/manual-seed",
+      "sourceKind": "manual",
+      "lastFetchedAt": "2026-06-19T07:45:55.961Z",
+      "confidence": "estimated",
+      "isMockOrEstimated": true
+    }
+  },
+  {
+    "fixtureId": "match-027",
+    "homeWin": 2.3,
+    "draw": 3.25,
+    "awayWin": 3.1,
+    "source": {
+      "sourceId": "manual-odds",
+      "sourceName": "MVP 示例补充数据",
+      "sourceUrl": "https://example.local/world-cup-match-intelligence-center/manual-seed",
+      "sourceKind": "manual",
+      "lastFetchedAt": "2026-06-19T07:45:55.961Z",
+      "confidence": "estimated",
+      "isMockOrEstimated": true
+    }
+  },
+  {
+    "fixtureId": "match-028",
+    "homeWin": 2.05,
+    "draw": 3.25,
+    "awayWin": 3.1,
+    "source": {
+      "sourceId": "manual-odds",
+      "sourceName": "MVP 示例补充数据",
+      "sourceUrl": "https://example.local/world-cup-match-intelligence-center/manual-seed",
+      "sourceKind": "manual",
+      "lastFetchedAt": "2026-06-19T07:45:55.961Z",
       "confidence": "estimated",
       "isMockOrEstimated": true
     }
@@ -69,22 +324,7 @@
       "sourceName": "MVP 示例补充数据",
       "sourceUrl": "https://example.local/world-cup-match-intelligence-center/manual-seed",
       "sourceKind": "manual",
-      "lastFetchedAt": "2026-06-19T00:53:54.539Z",
-      "confidence": "estimated",
-      "isMockOrEstimated": true
-    }
-  },
-  {
-    "fixtureId": "match-006",
-    "homeWin": 2.05,
-    "draw": 3.25,
-    "awayWin": 3.1,
-    "source": {
-      "sourceId": "manual-odds",
-      "sourceName": "MVP 示例补充数据",
-      "sourceUrl": "https://example.local/world-cup-match-intelligence-center/manual-seed",
-      "sourceKind": "manual",
-      "lastFetchedAt": "2026-06-19T00:53:54.539Z",
+      "lastFetchedAt": "2026-06-19T07:45:55.961Z",
       "confidence": "estimated",
       "isMockOrEstimated": true
     }
@@ -99,7 +339,22 @@
       "sourceName": "MVP 示例补充数据",
       "sourceUrl": "https://example.local/world-cup-match-intelligence-center/manual-seed",
       "sourceKind": "manual",
-      "lastFetchedAt": "2026-06-19T00:53:54.539Z",
+      "lastFetchedAt": "2026-06-19T07:45:55.961Z",
+      "confidence": "estimated",
+      "isMockOrEstimated": true
+    }
+  },
+  {
+    "fixtureId": "match-006",
+    "homeWin": 2.05,
+    "draw": 3.25,
+    "awayWin": 3.1,
+    "source": {
+      "sourceId": "manual-odds",
+      "sourceName": "MVP 示例补充数据",
+      "sourceUrl": "https://example.local/world-cup-match-intelligence-center/manual-seed",
+      "sourceKind": "manual",
+      "lastFetchedAt": "2026-06-19T07:45:55.961Z",
       "confidence": "estimated",
       "isMockOrEstimated": true
     }
@@ -114,7 +369,712 @@
       "sourceName": "MVP 示例补充数据",
       "sourceUrl": "https://example.local/world-cup-match-intelligence-center/manual-seed",
       "sourceKind": "manual",
-      "lastFetchedAt": "2026-06-19T00:53:54.539Z",
+      "lastFetchedAt": "2026-06-19T07:45:55.961Z",
+      "confidence": "estimated",
+      "isMockOrEstimated": true
+    }
+  },
+  {
+    "fixtureId": "match-009",
+    "homeWin": 2.3,
+    "draw": 3.25,
+    "awayWin": 3.1,
+    "source": {
+      "sourceId": "manual-odds",
+      "sourceName": "MVP 示例补充数据",
+      "sourceUrl": "https://example.local/world-cup-match-intelligence-center/manual-seed",
+      "sourceKind": "manual",
+      "lastFetchedAt": "2026-06-19T07:45:55.961Z",
+      "confidence": "estimated",
+      "isMockOrEstimated": true
+    }
+  },
+  {
+    "fixtureId": "match-010",
+    "homeWin": 2.05,
+    "draw": 3.25,
+    "awayWin": 3.1,
+    "source": {
+      "sourceId": "manual-odds",
+      "sourceName": "MVP 示例补充数据",
+      "sourceUrl": "https://example.local/world-cup-match-intelligence-center/manual-seed",
+      "sourceKind": "manual",
+      "lastFetchedAt": "2026-06-19T07:45:55.961Z",
+      "confidence": "estimated",
+      "isMockOrEstimated": true
+    }
+  },
+  {
+    "fixtureId": "match-011",
+    "homeWin": 2.05,
+    "draw": 3.25,
+    "awayWin": 3.3000000000000003,
+    "source": {
+      "sourceId": "manual-odds",
+      "sourceName": "MVP 示例补充数据",
+      "sourceUrl": "https://example.local/world-cup-match-intelligence-center/manual-seed",
+      "sourceKind": "manual",
+      "lastFetchedAt": "2026-06-19T07:45:55.961Z",
+      "confidence": "estimated",
+      "isMockOrEstimated": true
+    }
+  },
+  {
+    "fixtureId": "match-029",
+    "homeWin": 2.05,
+    "draw": 3.25,
+    "awayWin": 3.3000000000000003,
+    "source": {
+      "sourceId": "manual-odds",
+      "sourceName": "MVP 示例补充数据",
+      "sourceUrl": "https://example.local/world-cup-match-intelligence-center/manual-seed",
+      "sourceKind": "manual",
+      "lastFetchedAt": "2026-06-19T07:45:55.961Z",
+      "confidence": "estimated",
+      "isMockOrEstimated": true
+    }
+  },
+  {
+    "fixtureId": "match-030",
+    "homeWin": 2.3,
+    "draw": 3.25,
+    "awayWin": 3.1,
+    "source": {
+      "sourceId": "manual-odds",
+      "sourceName": "MVP 示例补充数据",
+      "sourceUrl": "https://example.local/world-cup-match-intelligence-center/manual-seed",
+      "sourceKind": "manual",
+      "lastFetchedAt": "2026-06-19T07:45:55.961Z",
+      "confidence": "estimated",
+      "isMockOrEstimated": true
+    }
+  },
+  {
+    "fixtureId": "match-031",
+    "homeWin": 2.05,
+    "draw": 3.25,
+    "awayWin": 3.1,
+    "source": {
+      "sourceId": "manual-odds",
+      "sourceName": "MVP 示例补充数据",
+      "sourceUrl": "https://example.local/world-cup-match-intelligence-center/manual-seed",
+      "sourceKind": "manual",
+      "lastFetchedAt": "2026-06-19T07:45:55.961Z",
+      "confidence": "estimated",
+      "isMockOrEstimated": true
+    }
+  },
+  {
+    "fixtureId": "match-032",
+    "homeWin": 2.3,
+    "draw": 3.25,
+    "awayWin": 3.1,
+    "source": {
+      "sourceId": "manual-odds",
+      "sourceName": "MVP 示例补充数据",
+      "sourceUrl": "https://example.local/world-cup-match-intelligence-center/manual-seed",
+      "sourceKind": "manual",
+      "lastFetchedAt": "2026-06-19T07:45:55.961Z",
+      "confidence": "estimated",
+      "isMockOrEstimated": true
+    }
+  },
+  {
+    "fixtureId": "match-033",
+    "homeWin": 2.05,
+    "draw": 3.25,
+    "awayWin": 3.1,
+    "source": {
+      "sourceId": "manual-odds",
+      "sourceName": "MVP 示例补充数据",
+      "sourceUrl": "https://example.local/world-cup-match-intelligence-center/manual-seed",
+      "sourceKind": "manual",
+      "lastFetchedAt": "2026-06-19T07:45:55.961Z",
+      "confidence": "estimated",
+      "isMockOrEstimated": true
+    }
+  },
+  {
+    "fixtureId": "match-034",
+    "homeWin": 2.05,
+    "draw": 3.25,
+    "awayWin": 3.1,
+    "source": {
+      "sourceId": "manual-odds",
+      "sourceName": "MVP 示例补充数据",
+      "sourceUrl": "https://example.local/world-cup-match-intelligence-center/manual-seed",
+      "sourceKind": "manual",
+      "lastFetchedAt": "2026-06-19T07:45:55.961Z",
+      "confidence": "estimated",
+      "isMockOrEstimated": true
+    }
+  },
+  {
+    "fixtureId": "match-035",
+    "homeWin": 2.3,
+    "draw": 3.25,
+    "awayWin": 3.1,
+    "source": {
+      "sourceId": "manual-odds",
+      "sourceName": "MVP 示例补充数据",
+      "sourceUrl": "https://example.local/world-cup-match-intelligence-center/manual-seed",
+      "sourceKind": "manual",
+      "lastFetchedAt": "2026-06-19T07:45:55.961Z",
+      "confidence": "estimated",
+      "isMockOrEstimated": true
+    }
+  },
+  {
+    "fixtureId": "match-036",
+    "homeWin": 2.3,
+    "draw": 3.25,
+    "awayWin": 3.1,
+    "source": {
+      "sourceId": "manual-odds",
+      "sourceName": "MVP 示例补充数据",
+      "sourceUrl": "https://example.local/world-cup-match-intelligence-center/manual-seed",
+      "sourceKind": "manual",
+      "lastFetchedAt": "2026-06-19T07:45:55.961Z",
+      "confidence": "estimated",
+      "isMockOrEstimated": true
+    }
+  },
+  {
+    "fixtureId": "match-037",
+    "homeWin": 2.05,
+    "draw": 3.25,
+    "awayWin": 3.1,
+    "source": {
+      "sourceId": "manual-odds",
+      "sourceName": "MVP 示例补充数据",
+      "sourceUrl": "https://example.local/world-cup-match-intelligence-center/manual-seed",
+      "sourceKind": "manual",
+      "lastFetchedAt": "2026-06-19T07:45:55.961Z",
+      "confidence": "estimated",
+      "isMockOrEstimated": true
+    }
+  },
+  {
+    "fixtureId": "match-038",
+    "homeWin": 2.05,
+    "draw": 3.25,
+    "awayWin": 3.1,
+    "source": {
+      "sourceId": "manual-odds",
+      "sourceName": "MVP 示例补充数据",
+      "sourceUrl": "https://example.local/world-cup-match-intelligence-center/manual-seed",
+      "sourceKind": "manual",
+      "lastFetchedAt": "2026-06-19T07:45:55.961Z",
+      "confidence": "estimated",
+      "isMockOrEstimated": true
+    }
+  },
+  {
+    "fixtureId": "match-039",
+    "homeWin": 2.3,
+    "draw": 3.25,
+    "awayWin": 3.1,
+    "source": {
+      "sourceId": "manual-odds",
+      "sourceName": "MVP 示例补充数据",
+      "sourceUrl": "https://example.local/world-cup-match-intelligence-center/manual-seed",
+      "sourceKind": "manual",
+      "lastFetchedAt": "2026-06-19T07:45:55.961Z",
+      "confidence": "estimated",
+      "isMockOrEstimated": true
+    }
+  },
+  {
+    "fixtureId": "match-040",
+    "homeWin": 2.3,
+    "draw": 3.25,
+    "awayWin": 3.1,
+    "source": {
+      "sourceId": "manual-odds",
+      "sourceName": "MVP 示例补充数据",
+      "sourceUrl": "https://example.local/world-cup-match-intelligence-center/manual-seed",
+      "sourceKind": "manual",
+      "lastFetchedAt": "2026-06-19T07:45:55.961Z",
+      "confidence": "estimated",
+      "isMockOrEstimated": true
+    }
+  },
+  {
+    "fixtureId": "match-041",
+    "homeWin": 2.05,
+    "draw": 3.25,
+    "awayWin": 3.3000000000000003,
+    "source": {
+      "sourceId": "manual-odds",
+      "sourceName": "MVP 示例补充数据",
+      "sourceUrl": "https://example.local/world-cup-match-intelligence-center/manual-seed",
+      "sourceKind": "manual",
+      "lastFetchedAt": "2026-06-19T07:45:55.961Z",
+      "confidence": "estimated",
+      "isMockOrEstimated": true
+    }
+  },
+  {
+    "fixtureId": "match-042",
+    "homeWin": 2.05,
+    "draw": 3.25,
+    "awayWin": 3.1,
+    "source": {
+      "sourceId": "manual-odds",
+      "sourceName": "MVP 示例补充数据",
+      "sourceUrl": "https://example.local/world-cup-match-intelligence-center/manual-seed",
+      "sourceKind": "manual",
+      "lastFetchedAt": "2026-06-19T07:45:55.961Z",
+      "confidence": "estimated",
+      "isMockOrEstimated": true
+    }
+  },
+  {
+    "fixtureId": "match-043",
+    "homeWin": 2.3,
+    "draw": 3.25,
+    "awayWin": 3.1,
+    "source": {
+      "sourceId": "manual-odds",
+      "sourceName": "MVP 示例补充数据",
+      "sourceUrl": "https://example.local/world-cup-match-intelligence-center/manual-seed",
+      "sourceKind": "manual",
+      "lastFetchedAt": "2026-06-19T07:45:55.961Z",
+      "confidence": "estimated",
+      "isMockOrEstimated": true
+    }
+  },
+  {
+    "fixtureId": "match-044",
+    "homeWin": 2.3,
+    "draw": 3.25,
+    "awayWin": 3.1,
+    "source": {
+      "sourceId": "manual-odds",
+      "sourceName": "MVP 示例补充数据",
+      "sourceUrl": "https://example.local/world-cup-match-intelligence-center/manual-seed",
+      "sourceKind": "manual",
+      "lastFetchedAt": "2026-06-19T07:45:55.961Z",
+      "confidence": "estimated",
+      "isMockOrEstimated": true
+    }
+  },
+  {
+    "fixtureId": "match-045",
+    "homeWin": 2.05,
+    "draw": 3.25,
+    "awayWin": 3.1,
+    "source": {
+      "sourceId": "manual-odds",
+      "sourceName": "MVP 示例补充数据",
+      "sourceUrl": "https://example.local/world-cup-match-intelligence-center/manual-seed",
+      "sourceKind": "manual",
+      "lastFetchedAt": "2026-06-19T07:45:55.961Z",
+      "confidence": "estimated",
+      "isMockOrEstimated": true
+    }
+  },
+  {
+    "fixtureId": "match-046",
+    "homeWin": 2.05,
+    "draw": 3.25,
+    "awayWin": 3.3000000000000003,
+    "source": {
+      "sourceId": "manual-odds",
+      "sourceName": "MVP 示例补充数据",
+      "sourceUrl": "https://example.local/world-cup-match-intelligence-center/manual-seed",
+      "sourceKind": "manual",
+      "lastFetchedAt": "2026-06-19T07:45:55.961Z",
+      "confidence": "estimated",
+      "isMockOrEstimated": true
+    }
+  },
+  {
+    "fixtureId": "match-047",
+    "homeWin": 2.3,
+    "draw": 3.25,
+    "awayWin": 3.1,
+    "source": {
+      "sourceId": "manual-odds",
+      "sourceName": "MVP 示例补充数据",
+      "sourceUrl": "https://example.local/world-cup-match-intelligence-center/manual-seed",
+      "sourceKind": "manual",
+      "lastFetchedAt": "2026-06-19T07:45:55.961Z",
+      "confidence": "estimated",
+      "isMockOrEstimated": true
+    }
+  },
+  {
+    "fixtureId": "match-048",
+    "homeWin": 2.05,
+    "draw": 3.25,
+    "awayWin": 3.1,
+    "source": {
+      "sourceId": "manual-odds",
+      "sourceName": "MVP 示例补充数据",
+      "sourceUrl": "https://example.local/world-cup-match-intelligence-center/manual-seed",
+      "sourceKind": "manual",
+      "lastFetchedAt": "2026-06-19T07:45:55.961Z",
+      "confidence": "estimated",
+      "isMockOrEstimated": true
+    }
+  },
+  {
+    "fixtureId": "match-049",
+    "homeWin": 2.05,
+    "draw": 3.25,
+    "awayWin": 3.1,
+    "source": {
+      "sourceId": "manual-odds",
+      "sourceName": "MVP 示例补充数据",
+      "sourceUrl": "https://example.local/world-cup-match-intelligence-center/manual-seed",
+      "sourceKind": "manual",
+      "lastFetchedAt": "2026-06-19T07:45:55.961Z",
+      "confidence": "estimated",
+      "isMockOrEstimated": true
+    }
+  },
+  {
+    "fixtureId": "match-050",
+    "homeWin": 2.3,
+    "draw": 3.25,
+    "awayWin": 3.1,
+    "source": {
+      "sourceId": "manual-odds",
+      "sourceName": "MVP 示例补充数据",
+      "sourceUrl": "https://example.local/world-cup-match-intelligence-center/manual-seed",
+      "sourceKind": "manual",
+      "lastFetchedAt": "2026-06-19T07:45:55.961Z",
+      "confidence": "estimated",
+      "isMockOrEstimated": true
+    }
+  },
+  {
+    "fixtureId": "match-051",
+    "homeWin": 2.3,
+    "draw": 3.25,
+    "awayWin": 3.1,
+    "source": {
+      "sourceId": "manual-odds",
+      "sourceName": "MVP 示例补充数据",
+      "sourceUrl": "https://example.local/world-cup-match-intelligence-center/manual-seed",
+      "sourceKind": "manual",
+      "lastFetchedAt": "2026-06-19T07:45:55.961Z",
+      "confidence": "estimated",
+      "isMockOrEstimated": true
+    }
+  },
+  {
+    "fixtureId": "match-052",
+    "homeWin": 2.05,
+    "draw": 3.25,
+    "awayWin": 3.1,
+    "source": {
+      "sourceId": "manual-odds",
+      "sourceName": "MVP 示例补充数据",
+      "sourceUrl": "https://example.local/world-cup-match-intelligence-center/manual-seed",
+      "sourceKind": "manual",
+      "lastFetchedAt": "2026-06-19T07:45:55.961Z",
+      "confidence": "estimated",
+      "isMockOrEstimated": true
+    }
+  },
+  {
+    "fixtureId": "match-053",
+    "homeWin": 2.3,
+    "draw": 3.25,
+    "awayWin": 3.1,
+    "source": {
+      "sourceId": "manual-odds",
+      "sourceName": "MVP 示例补充数据",
+      "sourceUrl": "https://example.local/world-cup-match-intelligence-center/manual-seed",
+      "sourceKind": "manual",
+      "lastFetchedAt": "2026-06-19T07:45:55.961Z",
+      "confidence": "estimated",
+      "isMockOrEstimated": true
+    }
+  },
+  {
+    "fixtureId": "match-054",
+    "homeWin": 2.05,
+    "draw": 3.25,
+    "awayWin": 3.3000000000000003,
+    "source": {
+      "sourceId": "manual-odds",
+      "sourceName": "MVP 示例补充数据",
+      "sourceUrl": "https://example.local/world-cup-match-intelligence-center/manual-seed",
+      "sourceKind": "manual",
+      "lastFetchedAt": "2026-06-19T07:45:55.961Z",
+      "confidence": "estimated",
+      "isMockOrEstimated": true
+    }
+  },
+  {
+    "fixtureId": "match-055",
+    "homeWin": 2.3,
+    "draw": 3.25,
+    "awayWin": 3.1,
+    "source": {
+      "sourceId": "manual-odds",
+      "sourceName": "MVP 示例补充数据",
+      "sourceUrl": "https://example.local/world-cup-match-intelligence-center/manual-seed",
+      "sourceKind": "manual",
+      "lastFetchedAt": "2026-06-19T07:45:55.961Z",
+      "confidence": "estimated",
+      "isMockOrEstimated": true
+    }
+  },
+  {
+    "fixtureId": "match-056",
+    "homeWin": 2.05,
+    "draw": 3.25,
+    "awayWin": 3.1,
+    "source": {
+      "sourceId": "manual-odds",
+      "sourceName": "MVP 示例补充数据",
+      "sourceUrl": "https://example.local/world-cup-match-intelligence-center/manual-seed",
+      "sourceKind": "manual",
+      "lastFetchedAt": "2026-06-19T07:45:55.961Z",
+      "confidence": "estimated",
+      "isMockOrEstimated": true
+    }
+  },
+  {
+    "fixtureId": "match-057",
+    "homeWin": 2.05,
+    "draw": 3.25,
+    "awayWin": 3.1,
+    "source": {
+      "sourceId": "manual-odds",
+      "sourceName": "MVP 示例补充数据",
+      "sourceUrl": "https://example.local/world-cup-match-intelligence-center/manual-seed",
+      "sourceKind": "manual",
+      "lastFetchedAt": "2026-06-19T07:45:55.961Z",
+      "confidence": "estimated",
+      "isMockOrEstimated": true
+    }
+  },
+  {
+    "fixtureId": "match-058",
+    "homeWin": 2.3,
+    "draw": 3.25,
+    "awayWin": 3.1,
+    "source": {
+      "sourceId": "manual-odds",
+      "sourceName": "MVP 示例补充数据",
+      "sourceUrl": "https://example.local/world-cup-match-intelligence-center/manual-seed",
+      "sourceKind": "manual",
+      "lastFetchedAt": "2026-06-19T07:45:55.961Z",
+      "confidence": "estimated",
+      "isMockOrEstimated": true
+    }
+  },
+  {
+    "fixtureId": "match-059",
+    "homeWin": 2.05,
+    "draw": 3.25,
+    "awayWin": 3.3000000000000003,
+    "source": {
+      "sourceId": "manual-odds",
+      "sourceName": "MVP 示例补充数据",
+      "sourceUrl": "https://example.local/world-cup-match-intelligence-center/manual-seed",
+      "sourceKind": "manual",
+      "lastFetchedAt": "2026-06-19T07:45:55.961Z",
+      "confidence": "estimated",
+      "isMockOrEstimated": true
+    }
+  },
+  {
+    "fixtureId": "match-060",
+    "homeWin": 2.3,
+    "draw": 3.25,
+    "awayWin": 3.1,
+    "source": {
+      "sourceId": "manual-odds",
+      "sourceName": "MVP 示例补充数据",
+      "sourceUrl": "https://example.local/world-cup-match-intelligence-center/manual-seed",
+      "sourceKind": "manual",
+      "lastFetchedAt": "2026-06-19T07:45:55.961Z",
+      "confidence": "estimated",
+      "isMockOrEstimated": true
+    }
+  },
+  {
+    "fixtureId": "match-061",
+    "homeWin": 2.05,
+    "draw": 3.25,
+    "awayWin": 3.1,
+    "source": {
+      "sourceId": "manual-odds",
+      "sourceName": "MVP 示例补充数据",
+      "sourceUrl": "https://example.local/world-cup-match-intelligence-center/manual-seed",
+      "sourceKind": "manual",
+      "lastFetchedAt": "2026-06-19T07:45:55.961Z",
+      "confidence": "estimated",
+      "isMockOrEstimated": true
+    }
+  },
+  {
+    "fixtureId": "match-062",
+    "homeWin": 2.3,
+    "draw": 3.25,
+    "awayWin": 3.1,
+    "source": {
+      "sourceId": "manual-odds",
+      "sourceName": "MVP 示例补充数据",
+      "sourceUrl": "https://example.local/world-cup-match-intelligence-center/manual-seed",
+      "sourceKind": "manual",
+      "lastFetchedAt": "2026-06-19T07:45:55.961Z",
+      "confidence": "estimated",
+      "isMockOrEstimated": true
+    }
+  },
+  {
+    "fixtureId": "match-063",
+    "homeWin": 2.3,
+    "draw": 3.25,
+    "awayWin": 3.1,
+    "source": {
+      "sourceId": "manual-odds",
+      "sourceName": "MVP 示例补充数据",
+      "sourceUrl": "https://example.local/world-cup-match-intelligence-center/manual-seed",
+      "sourceKind": "manual",
+      "lastFetchedAt": "2026-06-19T07:45:55.961Z",
+      "confidence": "estimated",
+      "isMockOrEstimated": true
+    }
+  },
+  {
+    "fixtureId": "match-064",
+    "homeWin": 2.05,
+    "draw": 3.25,
+    "awayWin": 3.1,
+    "source": {
+      "sourceId": "manual-odds",
+      "sourceName": "MVP 示例补充数据",
+      "sourceUrl": "https://example.local/world-cup-match-intelligence-center/manual-seed",
+      "sourceKind": "manual",
+      "lastFetchedAt": "2026-06-19T07:45:55.961Z",
+      "confidence": "estimated",
+      "isMockOrEstimated": true
+    }
+  },
+  {
+    "fixtureId": "match-065",
+    "homeWin": 2.05,
+    "draw": 3.25,
+    "awayWin": 3.1,
+    "source": {
+      "sourceId": "manual-odds",
+      "sourceName": "MVP 示例补充数据",
+      "sourceUrl": "https://example.local/world-cup-match-intelligence-center/manual-seed",
+      "sourceKind": "manual",
+      "lastFetchedAt": "2026-06-19T07:45:55.961Z",
+      "confidence": "estimated",
+      "isMockOrEstimated": true
+    }
+  },
+  {
+    "fixtureId": "match-066",
+    "homeWin": 2.3,
+    "draw": 3.25,
+    "awayWin": 3.1,
+    "source": {
+      "sourceId": "manual-odds",
+      "sourceName": "MVP 示例补充数据",
+      "sourceUrl": "https://example.local/world-cup-match-intelligence-center/manual-seed",
+      "sourceKind": "manual",
+      "lastFetchedAt": "2026-06-19T07:45:55.961Z",
+      "confidence": "estimated",
+      "isMockOrEstimated": true
+    }
+  },
+  {
+    "fixtureId": "match-067",
+    "homeWin": 2.05,
+    "draw": 3.25,
+    "awayWin": 3.3000000000000003,
+    "source": {
+      "sourceId": "manual-odds",
+      "sourceName": "MVP 示例补充数据",
+      "sourceUrl": "https://example.local/world-cup-match-intelligence-center/manual-seed",
+      "sourceKind": "manual",
+      "lastFetchedAt": "2026-06-19T07:45:55.961Z",
+      "confidence": "estimated",
+      "isMockOrEstimated": true
+    }
+  },
+  {
+    "fixtureId": "match-068",
+    "homeWin": 2.3,
+    "draw": 3.25,
+    "awayWin": 3.1,
+    "source": {
+      "sourceId": "manual-odds",
+      "sourceName": "MVP 示例补充数据",
+      "sourceUrl": "https://example.local/world-cup-match-intelligence-center/manual-seed",
+      "sourceKind": "manual",
+      "lastFetchedAt": "2026-06-19T07:45:55.961Z",
+      "confidence": "estimated",
+      "isMockOrEstimated": true
+    }
+  },
+  {
+    "fixtureId": "match-069",
+    "homeWin": 2.05,
+    "draw": 3.25,
+    "awayWin": 3.1,
+    "source": {
+      "sourceId": "manual-odds",
+      "sourceName": "MVP 示例补充数据",
+      "sourceUrl": "https://example.local/world-cup-match-intelligence-center/manual-seed",
+      "sourceKind": "manual",
+      "lastFetchedAt": "2026-06-19T07:45:55.961Z",
+      "confidence": "estimated",
+      "isMockOrEstimated": true
+    }
+  },
+  {
+    "fixtureId": "match-070",
+    "homeWin": 2.3,
+    "draw": 3.25,
+    "awayWin": 3.1,
+    "source": {
+      "sourceId": "manual-odds",
+      "sourceName": "MVP 示例补充数据",
+      "sourceUrl": "https://example.local/world-cup-match-intelligence-center/manual-seed",
+      "sourceKind": "manual",
+      "lastFetchedAt": "2026-06-19T07:45:55.961Z",
+      "confidence": "estimated",
+      "isMockOrEstimated": true
+    }
+  },
+  {
+    "fixtureId": "match-071",
+    "homeWin": 2.3,
+    "draw": 3.25,
+    "awayWin": 3.1,
+    "source": {
+      "sourceId": "manual-odds",
+      "sourceName": "MVP 示例补充数据",
+      "sourceUrl": "https://example.local/world-cup-match-intelligence-center/manual-seed",
+      "sourceKind": "manual",
+      "lastFetchedAt": "2026-06-19T07:45:55.961Z",
+      "confidence": "estimated",
+      "isMockOrEstimated": true
+    }
+  },
+  {
+    "fixtureId": "match-072",
+    "homeWin": 2.05,
+    "draw": 3.25,
+    "awayWin": 3.3000000000000003,
+    "source": {
+      "sourceId": "manual-odds",
+      "sourceName": "MVP 示例补充数据",
+      "sourceUrl": "https://example.local/world-cup-match-intelligence-center/manual-seed",
+      "sourceKind": "manual",
+      "lastFetchedAt": "2026-06-19T07:45:55.961Z",
       "confidence": "estimated",
       "isMockOrEstimated": true
     }

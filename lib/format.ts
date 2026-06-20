@@ -1,18 +1,31 @@
-const DISPLAY_LOCALE = "zh-CN";
-const DISPLAY_TIME_ZONE = "Asia/Shanghai";
+import {
+  BEIJING_TIME_ZONE_LABEL,
+  formatBeijingDateTime,
+  formatBeijingDataTimestamp,
+  formatFullBeijingDateTime,
+  getBeijingDateKey,
+  getTodayDateKeyInBeijing,
+  isTodayInBeijing
+} from "./time";
 
-export function formatDisplayDateTime(value: string) {
-  return new Date(value).toLocaleString(DISPLAY_LOCALE, {
-    timeZone: DISPLAY_TIME_ZONE,
-    month: "2-digit",
-    day: "2-digit",
-    hour: "2-digit",
-    minute: "2-digit"
-  });
+export const DISPLAY_TIME_ZONE_LABEL = BEIJING_TIME_ZONE_LABEL;
+
+export function formatDisplayDateTime(value: string | Date) {
+  return formatBeijingDateTime(value);
 }
 
-export function formatFullDisplayDateTime(value: string) {
-  return new Date(value).toLocaleString(DISPLAY_LOCALE, {
-    timeZone: DISPLAY_TIME_ZONE
-  });
+export function formatFullDisplayDateTime(value: string | Date) {
+  return formatFullBeijingDateTime(value);
 }
+
+export function formatDisplayDateKey(value: string | Date) {
+  return getBeijingDateKey(value);
+}
+
+export {
+  formatBeijingDateTime,
+  formatBeijingDataTimestamp,
+  getBeijingDateKey,
+  getTodayDateKeyInBeijing,
+  isTodayInBeijing
+};

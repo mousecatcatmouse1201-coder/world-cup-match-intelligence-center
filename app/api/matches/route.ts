@@ -1,9 +1,8 @@
 import { NextResponse } from "next/server";
-import { predictMany } from "../../../lib/prediction";
-import { loadStore } from "../../../lib/store";
+import { getEnrichedFixtureBundles } from "../../../lib/store";
 
 export async function GET() {
-  const store = await loadStore();
-  const predictions = predictMany(store.fixtures, store.teams, store.players, store.odds, store.sentiment);
-  return NextResponse.json({ ...store, predictions });
+  const { store, matches } = await getEnrichedFixtureBundles();
+  const predictions = matches.flatMap((match) => match.prediction ? [match.prediction] : []);
+  return NextResponse.json({ ...store, predictions, matches });
 }

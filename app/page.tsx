@@ -1,13 +1,13 @@
 import { DashboardClient } from "../components/dashboard-client";
-import { predictMany } from "../lib/prediction";
-import { loadStore } from "../lib/store";
+import { getEnrichedFixtureBundles } from "../lib/store";
+
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
 
 export default async function HomePage() {
-  const store = await loadStore();
-  const predictions = predictMany(store.fixtures, store.teams, store.players, store.odds, store.sentiment);
-  const reviewPredictions = predictMany(store.fixtures, store.teams, store.players, store.odds, store.sentiment, {
-    includeIneligible: true
-  });
+  const { store, matches } = await getEnrichedFixtureBundles();
+  const predictions = matches.flatMap((match) => match.prediction ? [match.prediction] : []);
+  const reviewPredictions = matches.flatMap((match) => match.reviewPrediction ? [match.reviewPrediction] : []);
 
-  return <DashboardClient store={store} predictions={predictions} reviewPredictions={reviewPredictions} />;
+  return <DashboardClient store={store} matches={matches} predictions={predictions} reviewPredictions={reviewPredictions} />;
 }

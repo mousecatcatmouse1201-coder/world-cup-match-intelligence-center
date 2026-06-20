@@ -19,6 +19,14 @@ function strongerSide(prediction: PredictionResult, homeTeam: Team, awayTeam: Te
   return "双方";
 }
 
+function scoreLabel(score: { home: number; away: number }) {
+  return `${score.home} : ${score.away}`;
+}
+
+function expectedGoalsLabel(expectedGoals: { home: number; away: number }) {
+  return `${expectedGoals.home} : ${expectedGoals.away}`;
+}
+
 export function generateMatchAnalysis(input: {
   fixture: Fixture;
   homeTeam: Team;
@@ -37,7 +45,7 @@ export function generateMatchAnalysis(input: {
   return {
     fixtureId: fixture.id,
     title: `${homeTeam.shortName} vs ${awayTeam.shortName} 赛前智能分析`,
-    summary: `根据 FIFA 官方赛程、FIFA 排名快照和本地规则模型整理，本场 ${favorite} 在模型中更占优势。当前主胜/平/客胜概率为 ${prediction.probabilities.homeWin}% / ${prediction.probabilities.draw}% / ${prediction.probabilities.awayWin}%，预测比分 ${prediction.predictedScore.home}-${prediction.predictedScore.away}。`,
+    summary: `根据 FIFA 官方赛程、FIFA 排名快照和本地规则模型整理，本场 ${favorite} 在模型中更占优势。当前主胜/平/客胜概率为 ${prediction.probabilities.homeWin}% / ${prediction.probabilities.draw}% / ${prediction.probabilities.awayWin}%，预测比分 ${scoreLabel(prediction.predictedScore)}。`,
     tacticalFocus: [
       `${homeTeam.shortName} 的进攻指数为 ${homeTeam.attack}，需要利用前场压迫和转换速度制造早段优势。`,
       `${awayTeam.shortName} 的防守指数为 ${awayTeam.defense}，如果能把比赛压到低节奏，平局概率会被放大。`,
@@ -50,12 +58,12 @@ export function generateMatchAnalysis(input: {
       prediction.scoreConfidence === "low"
         ? "冷门风险偏高：概率差距有限，且预测比分集中在一球以内。"
         : "冷门风险中等：模型倾向较明确，但杯赛单场仍受红黄牌、早段进球和伤停影响。",
-    scorePrediction: `预测比分 ${prediction.predictedScore.home}-${prediction.predictedScore.away}，期望进球 ${prediction.expectedGoals.home}-${prediction.expectedGoals.away}，合理区间 ${prediction.scoreRange}。`,
+    scorePrediction: `预测比分 ${scoreLabel(prediction.predictedScore)}，期望进球 ${expectedGoalsLabel(prediction.expectedGoals)}，合理区间 ${prediction.scoreRange}。`,
     sourceNote: `事实数据来源：${fixture.source.sourceName}；模型与比分为 ${prediction.source.sourceName}，不是官方结论。`,
     scenarios: [
       {
         title: "强队顺利取胜剧本",
-        description: `${favoriteTeam.shortName} 如果能在前 30 分钟建立控球和射门优势，比赛会进入模型最看好的节奏，预测比分更接近 ${prediction.predictedScore.home}-${prediction.predictedScore.away}。`
+        description: `${favoriteTeam.shortName} 如果能在前 30 分钟建立控球和射门优势，比赛会进入模型最看好的节奏，预测比分更接近 ${scoreLabel(prediction.predictedScore)}。`
       },
       {
         title: "僵局/平局剧本",

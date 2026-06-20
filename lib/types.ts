@@ -2,7 +2,7 @@ export type Confidence = "official" | "secondary" | "estimated" | "modeled";
 
 export type SourceKind = "official" | "secondary" | "manual" | "model";
 
-export type MatchStatus = "scheduled" | "live" | "finished" | "unknown";
+export type MatchStatus = "scheduled" | "live" | "live_pending" | "finished" | "result_pending" | "unknown";
 
 export interface RecordSource {
   sourceId: string;
@@ -48,18 +48,31 @@ export interface Player {
 
 export interface Fixture {
   id: string;
+  externalIds?: {
+    fifa?: string;
+    espn?: string;
+  };
   group: string;
   stage: string;
   kickoff: string;
+  kickoffAtLocal?: string;
+  kickoffAtUtc?: string;
+  kickoffAtBeijing?: string;
+  beijingDate?: string;
+  beijingTimeLabel?: string;
   venue: string;
   city: string;
-  homeTeamId: string;
-  awayTeamId: string;
+  country?: string;
+  homeTeamId?: string;
+  awayTeamId?: string;
+  homePlaceholder?: string;
+  awayPlaceholder?: string;
   status: MatchStatus;
   score?: {
     home: number;
     away: number;
   };
+  result?: MatchResult;
   heatIndex: number;
   source: RecordSource;
 }
@@ -67,7 +80,7 @@ export interface Fixture {
 export interface MatchResult {
   homeScore?: number;
   awayScore?: number;
-  source?: string;
+  source?: "official" | "secondary" | string;
   updatedAt?: string;
 }
 
@@ -79,23 +92,35 @@ export interface PredictionReview {
   outcomeHit: boolean;
   exactScoreHit: boolean;
   goalDiffError: number;
+  totalGoalError: number;
   summary: string;
   improvementNotes: string[];
+}
+
+export interface ModelPerformanceSummary {
+  reviewedMatches: number;
+  outcomeHits: number;
+  outcomeHitRate: number | null;
+  exactScoreHits: number;
+  averageGoalDiffError: number | null;
+  averageTotalGoalError: number | null;
 }
 
 export interface DataConfidence {
   matchTime: "high" | "medium" | "low";
   teamData: "high" | "medium" | "low";
-  lineup: "high" | "medium" | "low" | "demo";
+  lineup: "high" | "medium" | "low" | "demo" | "missing";
   injury: "high" | "medium" | "low" | "demo" | "missing";
+  keyPlayers: "high" | "medium" | "low" | "demo" | "missing";
   prediction: "model";
-  result: "official" | "secondary" | "missing";
+  result: "official" | "secondary" | "missing" | "pending";
+  dataSource: "official" | "secondary" | "demo" | "missing";
 }
 
 export interface PredictionExplanation {
   factor: string;
   impact: number;
-  direction: "home" | "away" | "draw";
+  direction: "home" | "away" | "draw" | "neutral";
   description: string;
 }
 
@@ -230,4 +255,47 @@ export interface MatchAnalysis {
   scorePrediction: string;
   sourceNote: string;
   scenarios: MatchScenario[];
+}
+
+export interface EnrichedMatch {
+  fixture: Fixture;
+  match: Fixture;
+  homeTeam: Team;
+  awayTeam: Team;
+  home: Team;
+  away: Team;
+  homeLabel: string;
+  awayLabel: string;
+  hasConfirmedTeams: boolean;
+  homePlayers: Player[];
+  awayPlayers: Player[];
+  odds?: OddsSnapshot;
+  sentiment?: SentimentSnapshot;
+  prediction: PredictionResult | null;
+  reviewPrediction: PredictionResult | null;
+  predictionEligibility: {
+    canPredict: boolean;
+    code?: "finished" | "past" | "outside-window" | "placeholder-teams";
+    message?: string;
+    fixtureDate: string;
+    windowStart: string;
+    windowEnd: string;
+  };
+  status: MatchStatus;
+  result: MatchResult;
+  review: PredictionReview | null;
+  dataConfidence: DataConfidence;
+  confidence: DataConfidence;
+  predictionExplanation: PredictionExplanation[];
+  analysis: MatchAnalysis;
+  upsetRisk: number;
+  kickoffAtUtc: string;
+  kickoffAtBeijing: string;
+  beijingDate: string;
+  beijingTimeLabel: string;
+  displayDate: string;
+  displayTime: string;
+  displayTimezoneLabel: "北京时间";
+  displayDateKey: string;
+  staleResultMessage?: string;
 }

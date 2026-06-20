@@ -2,6 +2,8 @@ import { readFile } from "node:fs/promises";
 import path from "node:path";
 import { unstable_cache } from "next/cache";
 import { buildDataQualitySummary } from "./data-quality";
+import { getEnrichedMatchById, getEnrichedMatches } from "./match-intelligence";
+import type { PredictionWindowOptions } from "./prediction";
 import { dataStoreSchema } from "./schemas";
 import type {
   DataSource,
@@ -65,6 +67,19 @@ export async function getFixtureBundle(id: string) {
     awayPlayers: store.players.filter((player) => player.teamId === awayTeam.id),
     odds: store.odds.find((item) => item.fixtureId === fixture.id),
     sentiment: store.sentiment.find((item) => item.fixtureId === fixture.id)
+  };
+}
+
+export async function getEnrichedFixtureBundle(id: string, options: PredictionWindowOptions = {}) {
+  const store = await loadStore();
+  return getEnrichedMatchById(store, id, options);
+}
+
+export async function getEnrichedFixtureBundles(options: PredictionWindowOptions = {}) {
+  const store = await loadStore();
+  return {
+    store,
+    matches: getEnrichedMatches(store, options)
   };
 }
 

@@ -30,7 +30,8 @@ a {
 }
 
 button,
-input {
+input,
+select {
   font: inherit;
 }
 
@@ -79,6 +80,18 @@ input {
   padding: 26px 0 48px;
 }
 
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
 .heroBand {
   display: grid;
   grid-template-columns: minmax(0, 1fr) 340px;
@@ -113,21 +126,6 @@ input {
   font-weight: 700;
 }
 
-.heroStats {
-  display: grid;
-  gap: 10px;
-}
-
-.heroStats span {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 12px 14px;
-  border: 1px solid var(--line);
-  border-radius: 8px;
-  background: var(--surface);
-}
-
 .noticeBand {
   margin-top: 18px;
   padding: 12px 14px;
@@ -149,7 +147,7 @@ input {
 
 .qualityBand {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 12px;
 }
 
@@ -204,13 +202,34 @@ input {
   gap: 8px;
 }
 
-.filterControls select {
+.filterControls select,
+.searchControl {
   min-height: 36px;
   border: 1px solid var(--line);
   border-radius: 8px;
   background: var(--surface);
   color: var(--text);
   padding: 0 10px;
+}
+
+.filterControls select {
+  max-width: 190px;
+}
+
+.searchControl {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  min-width: 190px;
+}
+
+.searchControl input {
+  width: 100%;
+  min-width: 0;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  color: var(--text);
 }
 
 .qualityBand div {
@@ -266,14 +285,18 @@ input {
 
 .teamStrip {
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   gap: 10px;
+  overflow-x: auto;
+  padding-bottom: 4px;
+  scrollbar-width: thin;
 }
 
 .teamPill {
   display: inline-flex;
   align-items: center;
   gap: 7px;
+  flex: 0 0 auto;
   min-height: 36px;
   padding: 0 12px;
   border: 1px solid var(--line);
@@ -287,6 +310,45 @@ input {
   border-color: var(--accent);
   color: var(--accent-strong);
   background: #e7f4f6;
+}
+
+.teamPill.selected {
+  border-color: var(--text);
+  box-shadow: inset 0 0 0 1px var(--text);
+}
+
+.teamPill small {
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.teamStripHint {
+  display: inline-flex;
+  align-items: center;
+  flex: 0 0 auto;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.coverageStrip {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 4px 0 16px;
+}
+
+.coverageStrip span {
+  display: inline-flex;
+  align-items: center;
+  min-height: 30px;
+  padding: 0 10px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--surface);
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 700;
 }
 
 .matchGrid {
@@ -326,17 +388,65 @@ input {
   font-size: 12px;
 }
 
+.cardLayer {
+  display: flex;
+  gap: 8px;
+}
+
+.statusLayer {
+  flex-wrap: wrap;
+  align-items: center;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.statusPill {
+  min-height: 24px;
+  padding: 4px 8px;
+  border-radius: 999px;
+  background: var(--surface-soft);
+  color: var(--accent-strong);
+  font-weight: 800;
+}
+
+.scoreLayer {
+  margin-top: 14px;
+}
+
+.scoreLayer .scoreForecast,
+.scoreForecast.scoreLayer {
+  margin: 0;
+}
+
+.sourceLayer {
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 12px;
+  padding-top: 10px;
+  border-top: 1px solid var(--line);
+  color: var(--muted);
+  font-size: 12px;
+}
+
 .matchTitle {
   display: block;
   margin-top: 13px;
-  font-size: 22px;
+  font-size: 20px;
   font-weight: 800;
-  line-height: 1.2;
+  line-height: 1.28;
+  overflow-wrap: anywhere;
 }
 
 .matchTitle span {
   color: var(--muted);
   font-size: 15px;
+}
+
+.teamAuxLine {
+  margin-top: 4px;
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 700;
 }
 
 .matchMeta,
@@ -419,14 +529,41 @@ input {
   border-top: 1px solid var(--line);
 }
 
+.confidenceBox summary {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  align-items: center;
+  color: var(--muted);
+  cursor: pointer;
+  list-style: none;
+}
+
+.confidenceBox summary::-webkit-details-marker {
+  display: none;
+}
+
 .confidenceBox strong {
+  color: var(--text);
   font-size: 13px;
+}
+
+.confidenceBox summary span {
+  font-size: 12px;
+  text-align: right;
 }
 
 .confidenceBox dl {
   display: grid;
   gap: 6px;
-  margin: 0;
+  margin: 8px 0 0;
+}
+
+.confidenceBox p {
+  margin: 8px 0 0;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.5;
 }
 
 .confidenceBox dl div {
@@ -529,6 +666,145 @@ input {
   color: var(--muted);
 }
 
+.standingTabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 10px 0 14px;
+}
+
+.standingTabs button {
+  min-height: 34px;
+  padding: 0 11px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--surface);
+  color: var(--muted);
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.standingTabs button.active {
+  border-color: var(--accent);
+  background: #e7f4f6;
+  color: var(--accent-strong);
+}
+
+.standingTableWrap {
+  overflow-x: auto;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--surface);
+}
+
+.standingTable {
+  width: 100%;
+  min-width: 980px;
+  border-collapse: separate;
+  border-spacing: 0;
+  table-layout: fixed;
+}
+
+.compactStandingTable {
+  min-width: 720px;
+}
+
+.standingTable th,
+.standingTable td {
+  padding: 11px 12px;
+  border-bottom: 1px solid var(--line);
+  text-align: left;
+  font-size: 13px;
+  vertical-align: middle;
+}
+
+.standingTable th {
+  color: var(--muted);
+  font-weight: 700;
+}
+
+.standingTable tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+.standingTable a {
+  color: var(--accent-strong);
+  font-weight: 700;
+}
+
+.standingRankCol {
+  width: 58px;
+}
+
+.standingTeamCol {
+  width: 150px;
+}
+
+.standingSummaryCol {
+  width: 300px;
+}
+
+.standingStatusCol {
+  width: 280px;
+}
+
+.standingTable .numericCell,
+.standingTable th:nth-child(1),
+.standingTable td:nth-child(1) {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.cellSeparator {
+  margin-left: 8px;
+  color: var(--line);
+  font-weight: 400;
+}
+
+.standingTable th:nth-child(2),
+.standingTable td:nth-child(2),
+.standingTable th:nth-child(3),
+.standingTable td:nth-child(3),
+.standingTable th:last-child,
+.standingTable td:last-child {
+  overflow-wrap: anywhere;
+}
+
+.standingSummaryCell {
+  color: var(--text);
+  font-weight: 650;
+}
+
+.standingTable .activeRow,
+.standingTable tr.activeRow {
+  background: #eef8f8;
+}
+
+.performanceGrid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.performanceGrid div {
+  display: grid;
+  gap: 6px;
+  padding: 14px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--surface);
+}
+
+.performanceGrid span {
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.performanceGrid strong {
+  font-size: 26px;
+}
+
 .panel {
   padding: 18px;
 }
@@ -549,7 +825,24 @@ input {
 }
 
 .chartBox {
-  height: 270px;
+  display: grid;
+  gap: 12px;
+}
+
+.chartVisual {
+  height: 220px;
+}
+
+.chartDataFallback {
+  display: grid;
+  gap: 8px;
+}
+
+.chartDataFallback p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 700;
 }
 
 .chartPlaceholder {
@@ -572,6 +865,11 @@ input {
   border-bottom: 1px solid var(--line);
   text-align: left;
   font-size: 13px;
+}
+
+.miniTable thead th {
+  color: var(--text);
+  background: var(--surface-soft);
 }
 
 .miniTable th {
@@ -770,6 +1068,7 @@ input {
   .scenarioGrid,
   .reviewGrid,
   .focusGrid,
+  .performanceGrid,
   .sourceGrid {
     grid-template-columns: 1fr;
   }
@@ -778,13 +1077,16 @@ input {
     justify-content: flex-start;
   }
 
+  .filterControls select,
+  .searchControl {
+    max-width: none;
+    flex: 1 1 180px;
+  }
+
   .qualityBand {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-  .heroStats {
-    grid-template-columns: 1fr;
-  }
 }
 
 @media (max-width: 560px) {
@@ -815,6 +1117,7 @@ input {
   .detailGrid,
   .focusGrid,
   .qualityBand,
+  .performanceGrid,
   .sourceGrid {
     grid-template-columns: 1fr;
   }
@@ -822,5 +1125,34 @@ input {
   .rankList a,
   .focusStats span {
     flex-direction: column;
+  }
+
+  .homepageStandingTable {
+    min-width: 0;
+    table-layout: fixed;
+  }
+
+  .homepageStandingTable .standingRankCol {
+    width: 38px;
+  }
+
+  .homepageStandingTable .standingTeamCol {
+    width: 76px;
+  }
+
+  .homepageStandingTable .standingSummaryCol {
+    width: 124px;
+  }
+
+  .homepageStandingTable .standingStatusCol {
+    width: auto;
+  }
+
+  .homepageStandingTable th,
+  .homepageStandingTable td {
+    padding: 9px 7px;
+    font-size: 12px;
+    line-height: 1.45;
+    white-space: normal;
   }
 }

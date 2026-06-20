@@ -1,6 +1,17 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { SourceBadge } from "../../../components/source-badge";
+import {
+  buildGroupStandings,
+  getTeamFinishedMatches,
+  getTeamRemainingMatches,
+  getTeamStandingRow,
+  getTeamStandingTable,
+  STANDINGS_PAGE_QUALIFICATION_NOTE,
+  STANDINGS_PAGE_RULE_NOTE
+} from "../../../lib/group-standings";
+import { matchStatusLabel } from "../../../lib/match-intelligence";
+import { getEnrichedMatches } from "../../../lib/match-intelligence";
 import { getTeamBundle } from "../../../lib/store";
 
 interface PageProps {
@@ -13,6 +24,42 @@ export default async function TeamPage({ params }: PageProps) {
 
   if (!bundle) {
     notFound();
+  }
+
+  const teamById = new Map(bundle.store.teams.map((team) => [team.id, team]));
+  const fixtures = bundle.fixtures
+    .slice()
+    .sort((a, b) => new Date(a.kickoff).getTime() - new Date(b.kickoff).getTime());
+  const nextFixture = fixtures.find((fixture) => fixture.status === "scheduled" || fixture.status === "live" || fixture.status === "live_pending");
+  const finishedFixtures = fixtures.filter((fixture) => fixture.status === "finished");
+  const enrichedMatches = getEnrichedMatches(bundle.store);
+  const standingTables = buildGroupStandings(enrichedMatches, bundle.store.teams);
+  const teamStanding = getTeamStandingRow(standingTables, id);
+  const groupStanding = getTeamStandingTable(standingTables, id);
+  const remainingMatches = getTeamRemainingMatches(enrichedMatches, id);
+  const finishedMatches = getTeamFinishedMatches(enrichedMatches, id);
+
+  function fixtureLabel(teamId?: string, placeholder?: string) {
+    return teamId ? teamById.get(teamId)?.shortName ?? teamId : placeholder ?? "参赛队待确定";
+  }
+
+  function fixtureResult(fixture: (typeof fixtures)[number]) {
+    if (fixture.result?.homeScore !== undefined && fixture.result.awayScore !== undefined) {
+      return `${fixtureLabel(fixture.homeTeamId, fixture.homePlaceholder)} ${fixture.result.homeScore}-${fixture.result.awayScore} ${fixtureLabel(fixture.awayTeamId, fixture.awayPlaceholder)}`;
+    }
+
+    return matchStatusLabel(fixture.status);
+  }
+
+  function matchOpponentLabel(match: (typeof enrichedMatches)[number]) {
+    return match.home.id === id ? match.away.shortName : match.home.shortName;
+  }
+
+  function matchResultLabel(match: (typeof enrichedMatches)[number]) {
+    if (match.result.homeScore !== undefined && match.result.awayScore !== undefined) {
+      return `${match.home.shortName} ${match.result.homeScore}-${match.result.awayScore} ${match.away.shortName}`;
+    }
+    return matchStatusLabel(match.status);
   }
 
   return (
@@ -40,8 +87,11 @@ export default async function TeamPage({ params }: PageProps) {
 
         <article className="panel">
           <h2>小组形势</h2>
-          <p>积分 {bundle.standing?.points ?? 0}，出线概率演示值 {bundle.standing?.qualificationProbability.toFixed(1) ?? "N/A"}%。</p>
-          <p className="sourceLine">该概率为本地模型推断，不是官方排名。</p>
+          <p>{teamStanding ? `当前排名：${bundle.team.group} 组第 ${teamStanding.rank}` : "当前排名：小组积分榜暂不可用。"}</p>
+          <p>{teamStanding ? `积分 ${teamStanding.points} · 净胜球 ${teamStanding.goalDifference > 0 ? `+${teamStanding.goalDifference}` : teamStanding.goalDifference}` : "积分与净胜球暂不可用。"}</p>
+          <p>{teamStanding ? `当前状态：${teamStanding.qualificationText}` : "当前状态：仍需后续比赛确认。"}</p>
+          <p>已结束 {finishedFixtures.length} 场，下一场 {nextFixture ? `${fixtureLabel(nextFixture.homeTeamId, nextFixture.homePlaceholder)} vs ${fixtureLabel(nextFixture.awayTeamId, nextFixture.awayPlaceholder)} · ${nextFixture.beijingTimeLabel ?? ""}` : "暂无未开始比赛"}。</p>
+          <p className="sourceLine">{STANDINGS_PAGE_RULE_NOTE} {STANDINGS_PAGE_QUALIFICATION_NOTE}</p>
         </article>
 
         <article className="panel">
@@ -54,14 +104,110 @@ export default async function TeamPage({ params }: PageProps) {
         </article>
 
         <article className="panel">
-          <h2>相关比赛</h2>
+          <h2>小组赛程</h2>
           <ul className="cleanList">
-            {bundle.fixtures.map((fixture) => (
+            {fixtures.map((fixture) => (
               <li key={fixture.id}>
-                <Link href={`/matches/${fixture.id}`}>{fixture.homeTeamId} vs {fixture.awayTeamId}</Link>
+                <Link href={`/matches/${fixture.id}`}>
+                  {fixtureLabel(fixture.homeTeamId, fixture.homePlaceholder)} vs {fixtureLabel(fixture.awayTeamId, fixture.awayPlaceholder)}
+                </Link>
+                {" · "}
+                {fixture.beijingDate} {fixture.beijingTimeLabel}
+                {" · "}
+                {fixtureResult(fixture)}
               </li>
             ))}
           </ul>
+        </article>
+
+        {groupStanding ? (
+          <article className="panel widePanel" id="team-group-standings" data-smoke="team-group-standings">
+            <h2>{groupStanding.group} 组积分榜与出线形势</h2>
+            <p className="sourceLine">当前球队：{bundle.team.shortName}</p>
+            <div className="standingTableWrap">
+              <table className="standingTable">
+                <thead>
+                  <tr>
+                    <th>排名</th>
+                    <th>球队</th>
+                    <th>场</th>
+                    <th>胜</th>
+                    <th>平</th>
+                    <th>负</th>
+                    <th>进球</th>
+                    <th>失球</th>
+                    <th>净胜球</th>
+                    <th>积分</th>
+                    <th>出线形势</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {groupStanding.rows.map((row) => (
+                    <tr
+                      key={row.teamId}
+                      className={row.teamId === id ? "activeRow" : ""}
+                      data-current-team={row.teamId === id ? "true" : undefined}
+                    >
+                      <td>{row.rank}</td>
+                      <td>{row.teamName}{row.teamId === id ? " · 当前球队" : ""}</td>
+                      <td>{row.played}</td>
+                      <td>{row.wins}</td>
+                      <td>{row.draws}</td>
+                      <td>{row.losses}</td>
+                      <td>{row.goalsFor}</td>
+                      <td>{row.goalsAgainst}</td>
+                      <td>{row.goalDifference > 0 ? `+${row.goalDifference}` : row.goalDifference}</td>
+                      <td><strong>{row.points}</strong></td>
+                      <td>{row.qualificationText}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+            <p className="sourceLine">{STANDINGS_PAGE_RULE_NOTE} {STANDINGS_PAGE_QUALIFICATION_NOTE}</p>
+          </article>
+        ) : null}
+
+        <article className="panel widePanel">
+          <h2>已结束比赛</h2>
+          {finishedMatches.length ? (
+            <ul className="cleanList">
+              {finishedMatches.map((match) => (
+                <li key={match.fixture.id}>
+                  <Link href={`/matches/${match.fixture.id}`}>
+                    vs {matchOpponentLabel(match)}
+                  </Link>
+                  {" · "}
+                  {match.beijingDate} {match.beijingTimeLabel}
+                  {" · "}
+                  实际比分 {matchResultLabel(match)}
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <p className="sourceLine">该队暂无已结束小组赛。</p>
+          )}
+        </article>
+
+        <article className="panel widePanel">
+          <h2>剩余赛程</h2>
+          {remainingMatches.length ? (
+            <ul className="cleanList">
+              {remainingMatches.map((match) => (
+                <li key={match.fixture.id}>
+                  <Link href={`/matches/${match.fixture.id}`}>
+                    vs {matchOpponentLabel(match)}
+                  </Link>
+                  {" · "}
+                  {match.beijingDate} {match.beijingTimeLabel}，北京时间
+                  {" · "}
+                  {matchStatusLabel(match.status)}
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <p className="sourceLine">该队小组赛已无未完赛赛程。</p>
+          )}
         </article>
       </section>
     </main>

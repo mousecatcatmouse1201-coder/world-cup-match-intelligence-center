@@ -9,37 +9,7 @@
       "sourceName": "MVP 示例补充数据",
       "sourceUrl": "https://example.local/world-cup-match-intelligence-center/manual-seed",
       "sourceKind": "manual",
-      "lastFetchedAt": "2026-06-19T00:53:54.539Z",
-      "confidence": "estimated",
-      "isMockOrEstimated": true
-    }
-  },
-  {
-    "fixtureId": "match-002",
-    "buzz": 80,
-    "positiveHome": 70.66666666666667,
-    "positiveAway": 54,
-    "source": {
-      "sourceId": "manual-sentiment",
-      "sourceName": "MVP 示例补充数据",
-      "sourceUrl": "https://example.local/world-cup-match-intelligence-center/manual-seed",
-      "sourceKind": "manual",
-      "lastFetchedAt": "2026-06-19T00:53:54.539Z",
-      "confidence": "estimated",
-      "isMockOrEstimated": true
-    }
-  },
-  {
-    "fixtureId": "match-003",
-    "buzz": 91,
-    "positiveHome": 74.33333333333333,
-    "positiveAway": 51.25,
-    "source": {
-      "sourceId": "manual-sentiment",
-      "sourceName": "MVP 示例补充数据",
-      "sourceUrl": "https://example.local/world-cup-match-intelligence-center/manual-seed",
-      "sourceKind": "manual",
-      "lastFetchedAt": "2026-06-19T00:53:54.539Z",
+      "lastFetchedAt": "2026-06-19T07:45:55.961Z",
       "confidence": "estimated",
       "isMockOrEstimated": true
     }
@@ -54,7 +24,292 @@
       "sourceName": "MVP 示例补充数据",
       "sourceUrl": "https://example.local/world-cup-match-intelligence-center/manual-seed",
       "sourceKind": "manual",
-      "lastFetchedAt": "2026-06-19T00:53:54.539Z",
+      "lastFetchedAt": "2026-06-19T07:45:55.961Z",
+      "confidence": "estimated",
+      "isMockOrEstimated": true
+    }
+  },
+  {
+    "fixtureId": "match-002",
+    "buzz": 80,
+    "positiveHome": 70.66666666666667,
+    "positiveAway": 54,
+    "source": {
+      "sourceId": "manual-sentiment",
+      "sourceName": "MVP 示例补充数据",
+      "sourceUrl": "https://example.local/world-cup-match-intelligence-center/manual-seed",
+      "sourceKind": "manual",
+      "lastFetchedAt": "2026-06-19T07:45:55.961Z",
+      "confidence": "estimated",
+      "isMockOrEstimated": true
+    }
+  },
+  {
+    "fixtureId": "match-003",
+    "buzz": 91,
+    "positiveHome": 74.33333333333333,
+    "positiveAway": 51.25,
+    "source": {
+      "sourceId": "manual-sentiment",
+      "sourceName": "MVP 示例补充数据",
+      "sourceUrl": "https://example.local/world-cup-match-intelligence-center/manual-seed",
+      "sourceKind": "manual",
+      "lastFetchedAt": "2026-06-19T07:45:55.961Z",
+      "confidence": "estimated",
+      "isMockOrEstimated": true
+    }
+  },
+  {
+    "fixtureId": "match-012",
+    "buzz": 76,
+    "positiveHome": 69.33333333333333,
+    "positiveAway": 55,
+    "source": {
+      "sourceId": "manual-sentiment",
+      "sourceName": "MVP 示例补充数据",
+      "sourceUrl": "https://example.local/world-cup-match-intelligence-center/manual-seed",
+      "sourceKind": "manual",
+      "lastFetchedAt": "2026-06-19T07:45:55.961Z",
+      "confidence": "estimated",
+      "isMockOrEstimated": true
+    }
+  },
+  {
+    "fixtureId": "match-013",
+    "buzz": 90,
+    "positiveHome": 74,
+    "positiveAway": 51.5,
+    "source": {
+      "sourceId": "manual-sentiment",
+      "sourceName": "MVP 示例补充数据",
+      "sourceUrl": "https://example.local/world-cup-match-intelligence-center/manual-seed",
+      "sourceKind": "manual",
+      "lastFetchedAt": "2026-06-19T07:45:55.961Z",
+      "confidence": "estimated",
+      "isMockOrEstimated": true
+    }
+  },
+  {
+    "fixtureId": "match-014",
+    "buzz": 70,
+    "positiveHome": 67.33333333333333,
+    "positiveAway": 56.5,
+    "source": {
+      "sourceId": "manual-sentiment",
+      "sourceName": "MVP 示例补充数据",
+      "sourceUrl": "https://example.local/world-cup-match-intelligence-center/manual-seed",
+      "sourceKind": "manual",
+      "lastFetchedAt": "2026-06-19T07:45:55.961Z",
+      "confidence": "estimated",
+      "isMockOrEstimated": true
+    }
+  },
+  {
+    "fixtureId": "match-015",
+    "buzz": 75,
+    "positiveHome": 69,
+    "positiveAway": 55.25,
+    "source": {
+      "sourceId": "manual-sentiment",
+      "sourceName": "MVP 示例补充数据",
+      "sourceUrl": "https://example.local/world-cup-match-intelligence-center/manual-seed",
+      "sourceKind": "manual",
+      "lastFetchedAt": "2026-06-19T07:45:55.961Z",
+      "confidence": "estimated",
+      "isMockOrEstimated": true
+    }
+  },
+  {
+    "fixtureId": "match-016",
+    "buzz": 86,
+    "positiveHome": 72.66666666666667,
+    "positiveAway": 52.5,
+    "source": {
+      "sourceId": "manual-sentiment",
+      "sourceName": "MVP 示例补充数据",
+      "sourceUrl": "https://example.local/world-cup-match-intelligence-center/manual-seed",
+      "sourceKind": "manual",
+      "lastFetchedAt": "2026-06-19T07:45:55.961Z",
+      "confidence": "estimated",
+      "isMockOrEstimated": true
+    }
+  },
+  {
+    "fixtureId": "match-017",
+    "buzz": 84,
+    "positiveHome": 72,
+    "positiveAway": 53,
+    "source": {
+      "sourceId": "manual-sentiment",
+      "sourceName": "MVP 示例补充数据",
+      "sourceUrl": "https://example.local/world-cup-match-intelligence-center/manual-seed",
+      "sourceKind": "manual",
+      "lastFetchedAt": "2026-06-19T07:45:55.961Z",
+      "confidence": "estimated",
+      "isMockOrEstimated": true
+    }
+  },
+  {
+    "fixtureId": "match-018",
+    "buzz": 72,
+    "positiveHome": 68,
+    "positiveAway": 56,
+    "source": {
+      "sourceId": "manual-sentiment",
+      "sourceName": "MVP 示例补充数据",
+      "sourceUrl": "https://example.local/world-cup-match-intelligence-center/manual-seed",
+      "sourceKind": "manual",
+      "lastFetchedAt": "2026-06-19T07:45:55.961Z",
+      "confidence": "estimated",
+      "isMockOrEstimated": true
+    }
+  },
+  {
+    "fixtureId": "match-019",
+    "buzz": 73,
+    "positiveHome": 68.33333333333333,
+    "positiveAway": 55.75,
+    "source": {
+      "sourceId": "manual-sentiment",
+      "sourceName": "MVP 示例补充数据",
+      "sourceUrl": "https://example.local/world-cup-match-intelligence-center/manual-seed",
+      "sourceKind": "manual",
+      "lastFetchedAt": "2026-06-19T07:45:55.961Z",
+      "confidence": "estimated",
+      "isMockOrEstimated": true
+    }
+  },
+  {
+    "fixtureId": "match-020",
+    "buzz": 79,
+    "positiveHome": 70.33333333333333,
+    "positiveAway": 54.25,
+    "source": {
+      "sourceId": "manual-sentiment",
+      "sourceName": "MVP 示例补充数据",
+      "sourceUrl": "https://example.local/world-cup-match-intelligence-center/manual-seed",
+      "sourceKind": "manual",
+      "lastFetchedAt": "2026-06-19T07:45:55.961Z",
+      "confidence": "estimated",
+      "isMockOrEstimated": true
+    }
+  },
+  {
+    "fixtureId": "match-021",
+    "buzz": 82,
+    "positiveHome": 71.33333333333333,
+    "positiveAway": 53.5,
+    "source": {
+      "sourceId": "manual-sentiment",
+      "sourceName": "MVP 示例补充数据",
+      "sourceUrl": "https://example.local/world-cup-match-intelligence-center/manual-seed",
+      "sourceKind": "manual",
+      "lastFetchedAt": "2026-06-19T07:45:55.961Z",
+      "confidence": "estimated",
+      "isMockOrEstimated": true
+    }
+  },
+  {
+    "fixtureId": "match-022",
+    "buzz": 77,
+    "positiveHome": 69.66666666666667,
+    "positiveAway": 54.75,
+    "source": {
+      "sourceId": "manual-sentiment",
+      "sourceName": "MVP 示例补充数据",
+      "sourceUrl": "https://example.local/world-cup-match-intelligence-center/manual-seed",
+      "sourceKind": "manual",
+      "lastFetchedAt": "2026-06-19T07:45:55.961Z",
+      "confidence": "estimated",
+      "isMockOrEstimated": true
+    }
+  },
+  {
+    "fixtureId": "match-023",
+    "buzz": 68,
+    "positiveHome": 66.66666666666667,
+    "positiveAway": 57,
+    "source": {
+      "sourceId": "manual-sentiment",
+      "sourceName": "MVP 示例补充数据",
+      "sourceUrl": "https://example.local/world-cup-match-intelligence-center/manual-seed",
+      "sourceKind": "manual",
+      "lastFetchedAt": "2026-06-19T07:45:55.961Z",
+      "confidence": "estimated",
+      "isMockOrEstimated": true
+    }
+  },
+  {
+    "fixtureId": "match-024",
+    "buzz": 88,
+    "positiveHome": 73.33333333333333,
+    "positiveAway": 52,
+    "source": {
+      "sourceId": "manual-sentiment",
+      "sourceName": "MVP 示例补充数据",
+      "sourceUrl": "https://example.local/world-cup-match-intelligence-center/manual-seed",
+      "sourceKind": "manual",
+      "lastFetchedAt": "2026-06-19T07:45:55.961Z",
+      "confidence": "estimated",
+      "isMockOrEstimated": true
+    }
+  },
+  {
+    "fixtureId": "match-025",
+    "buzz": 71,
+    "positiveHome": 67.66666666666667,
+    "positiveAway": 56.25,
+    "source": {
+      "sourceId": "manual-sentiment",
+      "sourceName": "MVP 示例补充数据",
+      "sourceUrl": "https://example.local/world-cup-match-intelligence-center/manual-seed",
+      "sourceKind": "manual",
+      "lastFetchedAt": "2026-06-19T07:45:55.961Z",
+      "confidence": "estimated",
+      "isMockOrEstimated": true
+    }
+  },
+  {
+    "fixtureId": "match-026",
+    "buzz": 95,
+    "positiveHome": 75.66666666666667,
+    "positiveAway": 50.25,
+    "source": {
+      "sourceId": "manual-sentiment",
+      "sourceName": "MVP 示例补充数据",
+      "sourceUrl": "https://example.local/world-cup-match-intelligence-center/manual-seed",
+      "sourceKind": "manual",
+      "lastFetchedAt": "2026-06-19T07:45:55.961Z",
+      "confidence": "estimated",
+      "isMockOrEstimated": true
+    }
+  },
+  {
+    "fixtureId": "match-027",
+    "buzz": 70,
+    "positiveHome": 67.33333333333333,
+    "positiveAway": 56.5,
+    "source": {
+      "sourceId": "manual-sentiment",
+      "sourceName": "MVP 示例补充数据",
+      "sourceUrl": "https://example.local/world-cup-match-intelligence-center/manual-seed",
+      "sourceKind": "manual",
+      "lastFetchedAt": "2026-06-19T07:45:55.961Z",
+      "confidence": "estimated",
+      "isMockOrEstimated": true
+    }
+  },
+  {
+    "fixtureId": "match-028",
+    "buzz": 89,
+    "positiveHome": 73.66666666666667,
+    "positiveAway": 51.75,
+    "source": {
+      "sourceId": "manual-sentiment",
+      "sourceName": "MVP 示例补充数据",
+      "sourceUrl": "https://example.local/world-cup-match-intelligence-center/manual-seed",
+      "sourceKind": "manual",
+      "lastFetchedAt": "2026-06-19T07:45:55.961Z",
       "confidence": "estimated",
       "isMockOrEstimated": true
     }
@@ -69,22 +324,7 @@
       "sourceName": "MVP 示例补充数据",
       "sourceUrl": "https://example.local/world-cup-match-intelligence-center/manual-seed",
       "sourceKind": "manual",
-      "lastFetchedAt": "2026-06-19T00:53:54.539Z",
-      "confidence": "estimated",
-      "isMockOrEstimated": true
-    }
-  },
-  {
-    "fixtureId": "match-006",
-    "buzz": 82,
-    "positiveHome": 71.33333333333333,
-    "positiveAway": 53.5,
-    "source": {
-      "sourceId": "manual-sentiment",
-      "sourceName": "MVP 示例补充数据",
-      "sourceUrl": "https://example.local/world-cup-match-intelligence-center/manual-seed",
-      "sourceKind": "manual",
-      "lastFetchedAt": "2026-06-19T00:53:54.539Z",
+      "lastFetchedAt": "2026-06-19T07:45:55.961Z",
       "confidence": "estimated",
       "isMockOrEstimated": true
     }
@@ -99,7 +339,22 @@
       "sourceName": "MVP 示例补充数据",
       "sourceUrl": "https://example.local/world-cup-match-intelligence-center/manual-seed",
       "sourceKind": "manual",
-      "lastFetchedAt": "2026-06-19T00:53:54.539Z",
+      "lastFetchedAt": "2026-06-19T07:45:55.961Z",
+      "confidence": "estimated",
+      "isMockOrEstimated": true
+    }
+  },
+  {
+    "fixtureId": "match-006",
+    "buzz": 82,
+    "positiveHome": 71.33333333333333,
+    "positiveAway": 53.5,
+    "source": {
+      "sourceId": "manual-sentiment",
+      "sourceName": "MVP 示例补充数据",
+      "sourceUrl": "https://example.local/world-cup-match-intelligence-center/manual-seed",
+      "sourceKind": "manual",
+      "lastFetchedAt": "2026-06-19T07:45:55.961Z",
       "confidence": "estimated",
       "isMockOrEstimated": true
     }
@@ -114,7 +369,712 @@
       "sourceName": "MVP 示例补充数据",
       "sourceUrl": "https://example.local/world-cup-match-intelligence-center/manual-seed",
       "sourceKind": "manual",
-      "lastFetchedAt": "2026-06-19T00:53:54.539Z",
+      "lastFetchedAt": "2026-06-19T07:45:55.961Z",
+      "confidence": "estimated",
+      "isMockOrEstimated": true
+    }
+  },
+  {
+    "fixtureId": "match-009",
+    "buzz": 76,
+    "positiveHome": 69.33333333333333,
+    "positiveAway": 55,
+    "source": {
+      "sourceId": "manual-sentiment",
+      "sourceName": "MVP 示例补充数据",
+      "sourceUrl": "https://example.local/world-cup-match-intelligence-center/manual-seed",
+      "sourceKind": "manual",
+      "lastFetchedAt": "2026-06-19T07:45:55.961Z",
+      "confidence": "estimated",
+      "isMockOrEstimated": true
+    }
+  },
+  {
+    "fixtureId": "match-010",
+    "buzz": 88,
+    "positiveHome": 73.33333333333333,
+    "positiveAway": 52,
+    "source": {
+      "sourceId": "manual-sentiment",
+      "sourceName": "MVP 示例补充数据",
+      "sourceUrl": "https://example.local/world-cup-match-intelligence-center/manual-seed",
+      "sourceKind": "manual",
+      "lastFetchedAt": "2026-06-19T07:45:55.961Z",
+      "confidence": "estimated",
+      "isMockOrEstimated": true
+    }
+  },
+  {
+    "fixtureId": "match-011",
+    "buzz": 93,
+    "positiveHome": 75,
+    "positiveAway": 50.75,
+    "source": {
+      "sourceId": "manual-sentiment",
+      "sourceName": "MVP 示例补充数据",
+      "sourceUrl": "https://example.local/world-cup-match-intelligence-center/manual-seed",
+      "sourceKind": "manual",
+      "lastFetchedAt": "2026-06-19T07:45:55.961Z",
+      "confidence": "estimated",
+      "isMockOrEstimated": true
+    }
+  },
+  {
+    "fixtureId": "match-029",
+    "buzz": 91,
+    "positiveHome": 74.33333333333333,
+    "positiveAway": 51.25,
+    "source": {
+      "sourceId": "manual-sentiment",
+      "sourceName": "MVP 示例补充数据",
+      "sourceUrl": "https://example.local/world-cup-match-intelligence-center/manual-seed",
+      "sourceKind": "manual",
+      "lastFetchedAt": "2026-06-19T07:45:55.961Z",
+      "confidence": "estimated",
+      "isMockOrEstimated": true
+    }
+  },
+  {
+    "fixtureId": "match-030",
+    "buzz": 78,
+    "positiveHome": 70,
+    "positiveAway": 54.5,
+    "source": {
+      "sourceId": "manual-sentiment",
+      "sourceName": "MVP 示例补充数据",
+      "sourceUrl": "https://example.local/world-cup-match-intelligence-center/manual-seed",
+      "sourceKind": "manual",
+      "lastFetchedAt": "2026-06-19T07:45:55.961Z",
+      "confidence": "estimated",
+      "isMockOrEstimated": true
+    }
+  },
+  {
+    "fixtureId": "match-031",
+    "buzz": 87,
+    "positiveHome": 73,
+    "positiveAway": 52.25,
+    "source": {
+      "sourceId": "manual-sentiment",
+      "sourceName": "MVP 示例补充数据",
+      "sourceUrl": "https://example.local/world-cup-match-intelligence-center/manual-seed",
+      "sourceKind": "manual",
+      "lastFetchedAt": "2026-06-19T07:45:55.961Z",
+      "confidence": "estimated",
+      "isMockOrEstimated": true
+    }
+  },
+  {
+    "fixtureId": "match-032",
+    "buzz": 73,
+    "positiveHome": 68.33333333333333,
+    "positiveAway": 55.75,
+    "source": {
+      "sourceId": "manual-sentiment",
+      "sourceName": "MVP 示例补充数据",
+      "sourceUrl": "https://example.local/world-cup-match-intelligence-center/manual-seed",
+      "sourceKind": "manual",
+      "lastFetchedAt": "2026-06-19T07:45:55.961Z",
+      "confidence": "estimated",
+      "isMockOrEstimated": true
+    }
+  },
+  {
+    "fixtureId": "match-033",
+    "buzz": 84,
+    "positiveHome": 72,
+    "positiveAway": 53,
+    "source": {
+      "sourceId": "manual-sentiment",
+      "sourceName": "MVP 示例补充数据",
+      "sourceUrl": "https://example.local/world-cup-match-intelligence-center/manual-seed",
+      "sourceKind": "manual",
+      "lastFetchedAt": "2026-06-19T07:45:55.961Z",
+      "confidence": "estimated",
+      "isMockOrEstimated": true
+    }
+  },
+  {
+    "fixtureId": "match-034",
+    "buzz": 86,
+    "positiveHome": 72.66666666666667,
+    "positiveAway": 52.5,
+    "source": {
+      "sourceId": "manual-sentiment",
+      "sourceName": "MVP 示例补充数据",
+      "sourceUrl": "https://example.local/world-cup-match-intelligence-center/manual-seed",
+      "sourceKind": "manual",
+      "lastFetchedAt": "2026-06-19T07:45:55.961Z",
+      "confidence": "estimated",
+      "isMockOrEstimated": true
+    }
+  },
+  {
+    "fixtureId": "match-035",
+    "buzz": 70,
+    "positiveHome": 67.33333333333333,
+    "positiveAway": 56.5,
+    "source": {
+      "sourceId": "manual-sentiment",
+      "sourceName": "MVP 示例补充数据",
+      "sourceUrl": "https://example.local/world-cup-match-intelligence-center/manual-seed",
+      "sourceKind": "manual",
+      "lastFetchedAt": "2026-06-19T07:45:55.961Z",
+      "confidence": "estimated",
+      "isMockOrEstimated": true
+    }
+  },
+  {
+    "fixtureId": "match-036",
+    "buzz": 71,
+    "positiveHome": 67.66666666666667,
+    "positiveAway": 56.25,
+    "source": {
+      "sourceId": "manual-sentiment",
+      "sourceName": "MVP 示例补充数据",
+      "sourceUrl": "https://example.local/world-cup-match-intelligence-center/manual-seed",
+      "sourceKind": "manual",
+      "lastFetchedAt": "2026-06-19T07:45:55.961Z",
+      "confidence": "estimated",
+      "isMockOrEstimated": true
+    }
+  },
+  {
+    "fixtureId": "match-037",
+    "buzz": 86,
+    "positiveHome": 72.66666666666667,
+    "positiveAway": 52.5,
+    "source": {
+      "sourceId": "manual-sentiment",
+      "sourceName": "MVP 示例补充数据",
+      "sourceUrl": "https://example.local/world-cup-match-intelligence-center/manual-seed",
+      "sourceKind": "manual",
+      "lastFetchedAt": "2026-06-19T07:45:55.961Z",
+      "confidence": "estimated",
+      "isMockOrEstimated": true
+    }
+  },
+  {
+    "fixtureId": "match-038",
+    "buzz": 82,
+    "positiveHome": 71.33333333333333,
+    "positiveAway": 53.5,
+    "source": {
+      "sourceId": "manual-sentiment",
+      "sourceName": "MVP 示例补充数据",
+      "sourceUrl": "https://example.local/world-cup-match-intelligence-center/manual-seed",
+      "sourceKind": "manual",
+      "lastFetchedAt": "2026-06-19T07:45:55.961Z",
+      "confidence": "estimated",
+      "isMockOrEstimated": true
+    }
+  },
+  {
+    "fixtureId": "match-039",
+    "buzz": 79,
+    "positiveHome": 70.33333333333333,
+    "positiveAway": 54.25,
+    "source": {
+      "sourceId": "manual-sentiment",
+      "sourceName": "MVP 示例补充数据",
+      "sourceUrl": "https://example.local/world-cup-match-intelligence-center/manual-seed",
+      "sourceKind": "manual",
+      "lastFetchedAt": "2026-06-19T07:45:55.961Z",
+      "confidence": "estimated",
+      "isMockOrEstimated": true
+    }
+  },
+  {
+    "fixtureId": "match-040",
+    "buzz": 68,
+    "positiveHome": 66.66666666666667,
+    "positiveAway": 57,
+    "source": {
+      "sourceId": "manual-sentiment",
+      "sourceName": "MVP 示例补充数据",
+      "sourceUrl": "https://example.local/world-cup-match-intelligence-center/manual-seed",
+      "sourceKind": "manual",
+      "lastFetchedAt": "2026-06-19T07:45:55.961Z",
+      "confidence": "estimated",
+      "isMockOrEstimated": true
+    }
+  },
+  {
+    "fixtureId": "match-041",
+    "buzz": 95,
+    "positiveHome": 75.66666666666667,
+    "positiveAway": 50.25,
+    "source": {
+      "sourceId": "manual-sentiment",
+      "sourceName": "MVP 示例补充数据",
+      "sourceUrl": "https://example.local/world-cup-match-intelligence-center/manual-seed",
+      "sourceKind": "manual",
+      "lastFetchedAt": "2026-06-19T07:45:55.961Z",
+      "confidence": "estimated",
+      "isMockOrEstimated": true
+    }
+  },
+  {
+    "fixtureId": "match-042",
+    "buzz": 88,
+    "positiveHome": 73.33333333333333,
+    "positiveAway": 52,
+    "source": {
+      "sourceId": "manual-sentiment",
+      "sourceName": "MVP 示例补充数据",
+      "sourceUrl": "https://example.local/world-cup-match-intelligence-center/manual-seed",
+      "sourceKind": "manual",
+      "lastFetchedAt": "2026-06-19T07:45:55.961Z",
+      "confidence": "estimated",
+      "isMockOrEstimated": true
+    }
+  },
+  {
+    "fixtureId": "match-043",
+    "buzz": 74,
+    "positiveHome": 68.66666666666667,
+    "positiveAway": 55.5,
+    "source": {
+      "sourceId": "manual-sentiment",
+      "sourceName": "MVP 示例补充数据",
+      "sourceUrl": "https://example.local/world-cup-match-intelligence-center/manual-seed",
+      "sourceKind": "manual",
+      "lastFetchedAt": "2026-06-19T07:45:55.961Z",
+      "confidence": "estimated",
+      "isMockOrEstimated": true
+    }
+  },
+  {
+    "fixtureId": "match-044",
+    "buzz": 69,
+    "positiveHome": 67,
+    "positiveAway": 56.75,
+    "source": {
+      "sourceId": "manual-sentiment",
+      "sourceName": "MVP 示例补充数据",
+      "sourceUrl": "https://example.local/world-cup-match-intelligence-center/manual-seed",
+      "sourceKind": "manual",
+      "lastFetchedAt": "2026-06-19T07:45:55.961Z",
+      "confidence": "estimated",
+      "isMockOrEstimated": true
+    }
+  },
+  {
+    "fixtureId": "match-045",
+    "buzz": 89,
+    "positiveHome": 73.66666666666667,
+    "positiveAway": 51.75,
+    "source": {
+      "sourceId": "manual-sentiment",
+      "sourceName": "MVP 示例补充数据",
+      "sourceUrl": "https://example.local/world-cup-match-intelligence-center/manual-seed",
+      "sourceKind": "manual",
+      "lastFetchedAt": "2026-06-19T07:45:55.961Z",
+      "confidence": "estimated",
+      "isMockOrEstimated": true
+    }
+  },
+  {
+    "fixtureId": "match-046",
+    "buzz": 96,
+    "positiveHome": 76,
+    "positiveAway": 50,
+    "source": {
+      "sourceId": "manual-sentiment",
+      "sourceName": "MVP 示例补充数据",
+      "sourceUrl": "https://example.local/world-cup-match-intelligence-center/manual-seed",
+      "sourceKind": "manual",
+      "lastFetchedAt": "2026-06-19T07:45:55.961Z",
+      "confidence": "estimated",
+      "isMockOrEstimated": true
+    }
+  },
+  {
+    "fixtureId": "match-047",
+    "buzz": 78,
+    "positiveHome": 70,
+    "positiveAway": 54.5,
+    "source": {
+      "sourceId": "manual-sentiment",
+      "sourceName": "MVP 示例补充数据",
+      "sourceUrl": "https://example.local/world-cup-match-intelligence-center/manual-seed",
+      "sourceKind": "manual",
+      "lastFetchedAt": "2026-06-19T07:45:55.961Z",
+      "confidence": "estimated",
+      "isMockOrEstimated": true
+    }
+  },
+  {
+    "fixtureId": "match-048",
+    "buzz": 82,
+    "positiveHome": 71.33333333333333,
+    "positiveAway": 53.5,
+    "source": {
+      "sourceId": "manual-sentiment",
+      "sourceName": "MVP 示例补充数据",
+      "sourceUrl": "https://example.local/world-cup-match-intelligence-center/manual-seed",
+      "sourceKind": "manual",
+      "lastFetchedAt": "2026-06-19T07:45:55.961Z",
+      "confidence": "estimated",
+      "isMockOrEstimated": true
+    }
+  },
+  {
+    "fixtureId": "match-049",
+    "buzz": 88,
+    "positiveHome": 73.33333333333333,
+    "positiveAway": 52,
+    "source": {
+      "sourceId": "manual-sentiment",
+      "sourceName": "MVP 示例补充数据",
+      "sourceUrl": "https://example.local/world-cup-match-intelligence-center/manual-seed",
+      "sourceKind": "manual",
+      "lastFetchedAt": "2026-06-19T07:45:55.961Z",
+      "confidence": "estimated",
+      "isMockOrEstimated": true
+    }
+  },
+  {
+    "fixtureId": "match-050",
+    "buzz": 73,
+    "positiveHome": 68.33333333333333,
+    "positiveAway": 55.75,
+    "source": {
+      "sourceId": "manual-sentiment",
+      "sourceName": "MVP 示例补充数据",
+      "sourceUrl": "https://example.local/world-cup-match-intelligence-center/manual-seed",
+      "sourceKind": "manual",
+      "lastFetchedAt": "2026-06-19T07:45:55.961Z",
+      "confidence": "estimated",
+      "isMockOrEstimated": true
+    }
+  },
+  {
+    "fixtureId": "match-051",
+    "buzz": 78,
+    "positiveHome": 70,
+    "positiveAway": 54.5,
+    "source": {
+      "sourceId": "manual-sentiment",
+      "sourceName": "MVP 示例补充数据",
+      "sourceUrl": "https://example.local/world-cup-match-intelligence-center/manual-seed",
+      "sourceKind": "manual",
+      "lastFetchedAt": "2026-06-19T07:45:55.961Z",
+      "confidence": "estimated",
+      "isMockOrEstimated": true
+    }
+  },
+  {
+    "fixtureId": "match-052",
+    "buzz": 90,
+    "positiveHome": 74,
+    "positiveAway": 51.5,
+    "source": {
+      "sourceId": "manual-sentiment",
+      "sourceName": "MVP 示例补充数据",
+      "sourceUrl": "https://example.local/world-cup-match-intelligence-center/manual-seed",
+      "sourceKind": "manual",
+      "lastFetchedAt": "2026-06-19T07:45:55.961Z",
+      "confidence": "estimated",
+      "isMockOrEstimated": true
+    }
+  },
+  {
+    "fixtureId": "match-053",
+    "buzz": 78,
+    "positiveHome": 70,
+    "positiveAway": 54.5,
+    "source": {
+      "sourceId": "manual-sentiment",
+      "sourceName": "MVP 示例补充数据",
+      "sourceUrl": "https://example.local/world-cup-match-intelligence-center/manual-seed",
+      "sourceKind": "manual",
+      "lastFetchedAt": "2026-06-19T07:45:55.961Z",
+      "confidence": "estimated",
+      "isMockOrEstimated": true
+    }
+  },
+  {
+    "fixtureId": "match-054",
+    "buzz": 93,
+    "positiveHome": 75,
+    "positiveAway": 50.75,
+    "source": {
+      "sourceId": "manual-sentiment",
+      "sourceName": "MVP 示例补充数据",
+      "sourceUrl": "https://example.local/world-cup-match-intelligence-center/manual-seed",
+      "sourceKind": "manual",
+      "lastFetchedAt": "2026-06-19T07:45:55.961Z",
+      "confidence": "estimated",
+      "isMockOrEstimated": true
+    }
+  },
+  {
+    "fixtureId": "match-055",
+    "buzz": 70,
+    "positiveHome": 67.33333333333333,
+    "positiveAway": 56.5,
+    "source": {
+      "sourceId": "manual-sentiment",
+      "sourceName": "MVP 示例补充数据",
+      "sourceUrl": "https://example.local/world-cup-match-intelligence-center/manual-seed",
+      "sourceKind": "manual",
+      "lastFetchedAt": "2026-06-19T07:45:55.961Z",
+      "confidence": "estimated",
+      "isMockOrEstimated": true
+    }
+  },
+  {
+    "fixtureId": "match-056",
+    "buzz": 86,
+    "positiveHome": 72.66666666666667,
+    "positiveAway": 52.5,
+    "source": {
+      "sourceId": "manual-sentiment",
+      "sourceName": "MVP 示例补充数据",
+      "sourceUrl": "https://example.local/world-cup-match-intelligence-center/manual-seed",
+      "sourceKind": "manual",
+      "lastFetchedAt": "2026-06-19T07:45:55.961Z",
+      "confidence": "estimated",
+      "isMockOrEstimated": true
+    }
+  },
+  {
+    "fixtureId": "match-057",
+    "buzz": 84,
+    "positiveHome": 72,
+    "positiveAway": 53,
+    "source": {
+      "sourceId": "manual-sentiment",
+      "sourceName": "MVP 示例补充数据",
+      "sourceUrl": "https://example.local/world-cup-match-intelligence-center/manual-seed",
+      "sourceKind": "manual",
+      "lastFetchedAt": "2026-06-19T07:45:55.961Z",
+      "confidence": "estimated",
+      "isMockOrEstimated": true
+    }
+  },
+  {
+    "fixtureId": "match-058",
+    "buzz": 78,
+    "positiveHome": 70,
+    "positiveAway": 54.5,
+    "source": {
+      "sourceId": "manual-sentiment",
+      "sourceName": "MVP 示例补充数据",
+      "sourceUrl": "https://example.local/world-cup-match-intelligence-center/manual-seed",
+      "sourceKind": "manual",
+      "lastFetchedAt": "2026-06-19T07:45:55.961Z",
+      "confidence": "estimated",
+      "isMockOrEstimated": true
+    }
+  },
+  {
+    "fixtureId": "match-059",
+    "buzz": 91,
+    "positiveHome": 74.33333333333333,
+    "positiveAway": 51.25,
+    "source": {
+      "sourceId": "manual-sentiment",
+      "sourceName": "MVP 示例补充数据",
+      "sourceUrl": "https://example.local/world-cup-match-intelligence-center/manual-seed",
+      "sourceKind": "manual",
+      "lastFetchedAt": "2026-06-19T07:45:55.961Z",
+      "confidence": "estimated",
+      "isMockOrEstimated": true
+    }
+  },
+  {
+    "fixtureId": "match-060",
+    "buzz": 75,
+    "positiveHome": 69,
+    "positiveAway": 55.25,
+    "source": {
+      "sourceId": "manual-sentiment",
+      "sourceName": "MVP 示例补充数据",
+      "sourceUrl": "https://example.local/world-cup-match-intelligence-center/manual-seed",
+      "sourceKind": "manual",
+      "lastFetchedAt": "2026-06-19T07:45:55.961Z",
+      "confidence": "estimated",
+      "isMockOrEstimated": true
+    }
+  },
+  {
+    "fixtureId": "match-061",
+    "buzz": 88,
+    "positiveHome": 73.33333333333333,
+    "positiveAway": 52,
+    "source": {
+      "sourceId": "manual-sentiment",
+      "sourceName": "MVP 示例补充数据",
+      "sourceUrl": "https://example.local/world-cup-match-intelligence-center/manual-seed",
+      "sourceKind": "manual",
+      "lastFetchedAt": "2026-06-19T07:45:55.961Z",
+      "confidence": "estimated",
+      "isMockOrEstimated": true
+    }
+  },
+  {
+    "fixtureId": "match-062",
+    "buzz": 74,
+    "positiveHome": 68.66666666666667,
+    "positiveAway": 55.5,
+    "source": {
+      "sourceId": "manual-sentiment",
+      "sourceName": "MVP 示例补充数据",
+      "sourceUrl": "https://example.local/world-cup-match-intelligence-center/manual-seed",
+      "sourceKind": "manual",
+      "lastFetchedAt": "2026-06-19T07:45:55.961Z",
+      "confidence": "estimated",
+      "isMockOrEstimated": true
+    }
+  },
+  {
+    "fixtureId": "match-063",
+    "buzz": 70,
+    "positiveHome": 67.33333333333333,
+    "positiveAway": 56.5,
+    "source": {
+      "sourceId": "manual-sentiment",
+      "sourceName": "MVP 示例补充数据",
+      "sourceUrl": "https://example.local/world-cup-match-intelligence-center/manual-seed",
+      "sourceKind": "manual",
+      "lastFetchedAt": "2026-06-19T07:45:55.961Z",
+      "confidence": "estimated",
+      "isMockOrEstimated": true
+    }
+  },
+  {
+    "fixtureId": "match-064",
+    "buzz": 88,
+    "positiveHome": 73.33333333333333,
+    "positiveAway": 52,
+    "source": {
+      "sourceId": "manual-sentiment",
+      "sourceName": "MVP 示例补充数据",
+      "sourceUrl": "https://example.local/world-cup-match-intelligence-center/manual-seed",
+      "sourceKind": "manual",
+      "lastFetchedAt": "2026-06-19T07:45:55.961Z",
+      "confidence": "estimated",
+      "isMockOrEstimated": true
+    }
+  },
+  {
+    "fixtureId": "match-065",
+    "buzz": 82,
+    "positiveHome": 71.33333333333333,
+    "positiveAway": 53.5,
+    "source": {
+      "sourceId": "manual-sentiment",
+      "sourceName": "MVP 示例补充数据",
+      "sourceUrl": "https://example.local/world-cup-match-intelligence-center/manual-seed",
+      "sourceKind": "manual",
+      "lastFetchedAt": "2026-06-19T07:45:55.961Z",
+      "confidence": "estimated",
+      "isMockOrEstimated": true
+    }
+  },
+  {
+    "fixtureId": "match-066",
+    "buzz": 77,
+    "positiveHome": 69.66666666666667,
+    "positiveAway": 54.75,
+    "source": {
+      "sourceId": "manual-sentiment",
+      "sourceName": "MVP 示例补充数据",
+      "sourceUrl": "https://example.local/world-cup-match-intelligence-center/manual-seed",
+      "sourceKind": "manual",
+      "lastFetchedAt": "2026-06-19T07:45:55.961Z",
+      "confidence": "estimated",
+      "isMockOrEstimated": true
+    }
+  },
+  {
+    "fixtureId": "match-067",
+    "buzz": 96,
+    "positiveHome": 76,
+    "positiveAway": 50,
+    "source": {
+      "sourceId": "manual-sentiment",
+      "sourceName": "MVP 示例补充数据",
+      "sourceUrl": "https://example.local/world-cup-match-intelligence-center/manual-seed",
+      "sourceKind": "manual",
+      "lastFetchedAt": "2026-06-19T07:45:55.961Z",
+      "confidence": "estimated",
+      "isMockOrEstimated": true
+    }
+  },
+  {
+    "fixtureId": "match-068",
+    "buzz": 78,
+    "positiveHome": 70,
+    "positiveAway": 54.5,
+    "source": {
+      "sourceId": "manual-sentiment",
+      "sourceName": "MVP 示例补充数据",
+      "sourceUrl": "https://example.local/world-cup-match-intelligence-center/manual-seed",
+      "sourceKind": "manual",
+      "lastFetchedAt": "2026-06-19T07:45:55.961Z",
+      "confidence": "estimated",
+      "isMockOrEstimated": true
+    }
+  },
+  {
+    "fixtureId": "match-069",
+    "buzz": 89,
+    "positiveHome": 73.66666666666667,
+    "positiveAway": 51.75,
+    "source": {
+      "sourceId": "manual-sentiment",
+      "sourceName": "MVP 示例补充数据",
+      "sourceUrl": "https://example.local/world-cup-match-intelligence-center/manual-seed",
+      "sourceKind": "manual",
+      "lastFetchedAt": "2026-06-19T07:45:55.961Z",
+      "confidence": "estimated",
+      "isMockOrEstimated": true
+    }
+  },
+  {
+    "fixtureId": "match-070",
+    "buzz": 74,
+    "positiveHome": 68.66666666666667,
+    "positiveAway": 55.5,
+    "source": {
+      "sourceId": "manual-sentiment",
+      "sourceName": "MVP 示例补充数据",
+      "sourceUrl": "https://example.local/world-cup-match-intelligence-center/manual-seed",
+      "sourceKind": "manual",
+      "lastFetchedAt": "2026-06-19T07:45:55.961Z",
+      "confidence": "estimated",
+      "isMockOrEstimated": true
+    }
+  },
+  {
+    "fixtureId": "match-071",
+    "buzz": 73,
+    "positiveHome": 68.33333333333333,
+    "positiveAway": 55.75,
+    "source": {
+      "sourceId": "manual-sentiment",
+      "sourceName": "MVP 示例补充数据",
+      "sourceUrl": "https://example.local/world-cup-match-intelligence-center/manual-seed",
+      "sourceKind": "manual",
+      "lastFetchedAt": "2026-06-19T07:45:55.961Z",
+      "confidence": "estimated",
+      "isMockOrEstimated": true
+    }
+  },
+  {
+    "fixtureId": "match-072",
+    "buzz": 95,
+    "positiveHome": 75.66666666666667,
+    "positiveAway": 50.25,
+    "source": {
+      "sourceId": "manual-sentiment",
+      "sourceName": "MVP 示例补充数据",
+      "sourceUrl": "https://example.local/world-cup-match-intelligence-center/manual-seed",
+      "sourceKind": "manual",
+      "lastFetchedAt": "2026-06-19T07:45:55.961Z",
       "confidence": "estimated",
       "isMockOrEstimated": true
     }
