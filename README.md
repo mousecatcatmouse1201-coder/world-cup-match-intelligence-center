@@ -4,7 +4,7 @@
 
 线上地址：https://world-cup-match-intelligence-center.vercel.app
 
-**当前版本状态：P0.5 Stable**
+**当前版本状态：v0.7.0 / P1.3 Data Freshness and Pending Update Report Accepted**
 
 README 是仓库文档，不是 production 页面的一部分；production 页面以线上地址实际渲染内容为准。
 
@@ -48,6 +48,7 @@ npm run dev
 ```bash
 npm run data:refresh
 npm run data:update-results -- --file data/raw/results-update.example.json
+npm run data:pending
 npm run check:data
 npm test
 npm run build
@@ -69,6 +70,31 @@ npm run deploy:prod
 - 日常检查：运行 `npm run check:data`。它会检查日期、赛果状态、排名、赛程、积分榜和页面结构；赛果检查会拒绝“已结束无比分”、“未结束却有最终比分”、“比分与 result 不同步”、“缺少更新时间”及“已结束比赛缺少赛前预测快照”。模型表现只会统计同时有最终比分和冻结赛前预测快照的比赛。
 
 `data:normalize` 会保留已录入的最终赛果、赛果更新时间和预测快照，并重算积分榜/来源审计等派生数据；不要手工编辑 `standings.json` 或 `source-audit.json`。
+
+## P1.3 数据新鲜度与待更新清单
+
+首页显示“本地数据最近更新”、数据状态与赛果待更新数量，明确说明页面是本地数据快照，不是实时比分 API。比赛详情页会分别显示来源抓取时间、数据规范化时间、赛果更新时间和赛前预测快照时间；这些时间不会相互覆盖。
+
+数据状态按以下本地提示规则计算：
+
+- 正常：时间字段完整，且没有赛果待更新项。
+- 可能过期：本地更新时间或来源抓取时间超过 24 小时。
+- 赛果待更新：开赛后 2 小时仍没有最终比分。
+- 数据时间缺失：缺少来源、规范化或已结束比赛的赛果更新时间。
+
+维护者可运行以下只读命令，列出待补录赛果、缺少预测快照、预测快照晚于开赛、缺少时间字段以及过旧来源。待更新项仅为提醒，不会修改数据文件；结构性完整性错误会以退出码 1 结束。
+
+```bash
+npm run data:pending
+```
+
+赛果需要补录时，先准备本地结果 JSON（包含 `fixtureId`、`status: "finished"`、双方比分、来源和可选 ISO `updatedAt`），再运行：
+
+```bash
+npm run data:update-results -- --file <results.json>
+```
+
+P1.3 仍不接入实时 API：本地 JSON 管道保持可审计、无 API Key 依赖。外部实时赛果源仅是后续可选项。README 仅为仓库文档，不会成为 production 页面；首页也不会恢复“全量样本冷门风险排行”。
 
 ## 数据来源与模型口径
 

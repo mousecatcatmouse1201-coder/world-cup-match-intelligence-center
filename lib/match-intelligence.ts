@@ -17,8 +17,9 @@ import type {
 import { generateMatchAnalysis } from "./analysis";
 import { DISPLAY_TIME_ZONE_LABEL, formatDisplayDateKey, formatDisplayDateTime, formatFullDisplayDateTime, getBeijingDateKey } from "./format";
 import { getFixturePredictionEligibility, predictMatch, type PredictionWindowOptions } from "./prediction";
+import { EXPECTED_MATCH_DURATION_MS } from "./data-freshness";
 
-const liveWindowMs = 2.5 * 60 * 60 * 1000;
+const liveWindowMs = EXPECTED_MATCH_DURATION_MS;
 
 function fixtureScore(fixture: Fixture) {
   if (fixture.score) {

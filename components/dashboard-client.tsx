@@ -20,6 +20,7 @@ import {
 import { Search, Star } from "lucide-react";
 import { getFavoriteTeamMatches, getHighestUpsetRiskMatch, getMostPopularMatch } from "../lib/dashboard-matches";
 import { buildDataQualitySummary, getLatestDataUpdatedAt } from "../lib/data-quality";
+import { buildDataFreshnessSummary, freshnessStatusLabel } from "../lib/data-freshness";
 import { formatBeijingDataTimestamp, formatDisplayDateTime, formatFullDisplayDateTime, getTodayDateKeyInBeijing } from "../lib/format";
 import { buildGroupStandings, getGroupStandingTable, type GroupStandingTable } from "../lib/group-standings";
 import { buildModelPerformanceSummary, confidenceLabel, matchStatusLabel } from "../lib/match-intelligence";
@@ -159,6 +160,7 @@ export function DashboardClient({ store, matches, predictions }: DashboardClient
   const topFixture = store.fixtures.find((fixture) => predictedFixtureIds.has(fixture.id)) ?? store.fixtures[0];
   const qualitySummary = useMemo(() => buildDataQualitySummary(store), [store]);
   const latestDataUpdatedAt = useMemo(() => getLatestDataUpdatedAt(store), [store]);
+  const freshness = useMemo(() => buildDataFreshnessSummary(store, new Date(), latestDataUpdatedAt), [store, latestDataUpdatedAt]);
   const dataUpdatedAtLabel = latestDataUpdatedAt
     ? formatBeijingDataTimestamp(latestDataUpdatedAt)
     : "N/A";
@@ -591,7 +593,7 @@ export function DashboardClient({ store, matches, predictions }: DashboardClient
       </section>
 
       <section className="noticeBand">
-        数据更新时间：{dataUpdatedAtLabel}，北京时间。今日比赛按北京时间日期计算。当前为 MVP 示例数据，部分赛果可能延迟。
+        本地数据最近更新：{dataUpdatedAtLabel}，北京时间。数据状态：{freshnessStatusLabel(freshness.status, freshness.pendingResults.length)}。当前页面展示的是本地数据快照，不是实时比分 API。
         <br />
         build: standings-summary-v2 / no-legacy-columns / group-standings-homepage
       </section>
@@ -606,6 +608,11 @@ export function DashboardClient({ store, matches, predictions }: DashboardClient
           <span>最近更新</span>
           <strong>{dataUpdatedAtLabel}</strong>
           <small>北京时间显示</small>
+        </div>
+        <div>
+          <span>赛果待更新</span>
+          <strong>{freshness.pendingResults.length} 场</strong>
+          <small>开赛两小时后仍无最终比分</small>
         </div>
       </section>
 

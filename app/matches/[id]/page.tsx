@@ -159,6 +159,17 @@ export default async function MatchPage({ params }: PageProps) {
           <p className="sourceLine">{staleResultMessage ?? `数据更新时间：${formatFullDisplayDateTime(fixture.source.lastFetchedAt)}`}</p>
         </article>
 
+        <article className="panel widePanel" data-smoke="match-data-times">
+          <h2>数据时间</h2>
+          <div className="reviewGrid">
+            <span>来源抓取时间 <strong>{fixture.source.lastFetchedAt ? formatFullDisplayDateTime(fixture.source.lastFetchedAt) : "暂无"}</strong></span>
+            <span>数据规范化时间 <strong>{fixture.lastNormalizedAt ? formatFullDisplayDateTime(fixture.lastNormalizedAt) : "暂无，等待规范化"}</strong></span>
+            <span>赛果更新时间 <strong>{fixture.lastResultsUpdatedAt ? formatFullDisplayDateTime(fixture.lastResultsUpdatedAt) : "暂无，等待赛果补录"}</strong></span>
+            <span>赛前预测快照 <strong>{fixture.predictionSnapshot?.capturedAt ? formatFullDisplayDateTime(fixture.predictionSnapshot.capturedAt) : "暂无"}</strong></span>
+          </div>
+          <p className="sourceLine">状态按开赛时间加 2 小时的本地提示规则判断；预测快照与赛果更新时间相互独立。</p>
+        </article>
+
         <article className="panel">
           <h2>比分信息</h2>
           <p>{actualScore ? `实际比分：${homeTeam.shortName} ${actualScore} ${awayTeam.shortName}` : "实际比分：赛果待抓取 / 数据待更新"}</p>
