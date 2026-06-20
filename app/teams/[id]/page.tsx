@@ -62,6 +62,11 @@ export default async function TeamPage({ params }: PageProps) {
     return matchStatusLabel(match.status);
   }
 
+  function standingSummary(row: NonNullable<typeof groupStanding>["rows"][number]) {
+    const goalDifference = row.goalDifference > 0 ? `+${row.goalDifference}` : `${row.goalDifference}`;
+    return `进球 ${row.goalsFor}｜失球 ${row.goalsAgainst}｜净胜球 ${goalDifference}｜积分 ${row.points}`;
+  }
+
   return (
     <main className="pageShell">
       <Link href="/" className="backLink">返回 Dashboard</Link>
@@ -130,14 +135,7 @@ export default async function TeamPage({ params }: PageProps) {
                   <tr>
                     <th>排名</th>
                     <th>球队</th>
-                    <th>场</th>
-                    <th>胜</th>
-                    <th>平</th>
-                    <th>负</th>
-                    <th>进球</th>
-                    <th>失球</th>
-                    <th>净胜球</th>
-                    <th>积分</th>
+                    <th>数据摘要</th>
                     <th>出线形势</th>
                   </tr>
                 </thead>
@@ -150,14 +148,7 @@ export default async function TeamPage({ params }: PageProps) {
                     >
                       <td>{row.rank}</td>
                       <td>{row.teamName}{row.teamId === id ? " · 当前球队" : ""}</td>
-                      <td>{row.played}</td>
-                      <td>{row.wins}</td>
-                      <td>{row.draws}</td>
-                      <td>{row.losses}</td>
-                      <td>{row.goalsFor}</td>
-                      <td>{row.goalsAgainst}</td>
-                      <td>{row.goalDifference > 0 ? `+${row.goalDifference}` : row.goalDifference}</td>
-                      <td><strong>{row.points}</strong></td>
+                      <td className="standingSummaryCell">{standingSummary(row)}</td>
                       <td>{row.qualificationText}</td>
                     </tr>
                   ))}

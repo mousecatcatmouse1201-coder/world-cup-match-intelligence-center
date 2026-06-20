@@ -350,7 +350,9 @@ export function enrichMatch(
   };
   const predictionEligibility = getFixturePredictionEligibility(fixture, options);
   const prediction = predictionEligibility.canPredict ? predictMatch(predictionInput) : null;
-  const reviewPrediction = predictMatch(predictionInput);
+  // Reviews must use the immutable pre-kickoff record, never a model recalculation
+  // after results or other inputs have changed.
+  const reviewPrediction = fixture.predictionSnapshot ?? null;
   const status = resolveMatchStatus(fixture, options.now);
   const result = buildMatchResult(fixture);
   const playerSources = [...homePlayers, ...awayPlayers].map((player: Player) => player.source);
@@ -362,7 +364,7 @@ export function enrichMatch(
     awayTeam,
     homePlayers,
     awayPlayers,
-    prediction: prediction ?? reviewPrediction
+    prediction: prediction ?? reviewPrediction ?? predictMatch(predictionInput)
   });
   const kickoffDate = new Date(fixture.kickoff);
   const beijingDate = getBeijingDateKey(kickoffDate);
@@ -391,9 +393,9 @@ export function enrichMatch(
     review,
     dataConfidence,
     confidence: dataConfidence,
-    predictionExplanation: (prediction ?? reviewPrediction).explanations,
+    predictionExplanation: (prediction ?? reviewPrediction ?? predictMatch(predictionInput)).explanations,
     analysis,
-    upsetRisk: upsetRiskScore(prediction ?? reviewPrediction),
+    upsetRisk: upsetRiskScore(prediction ?? reviewPrediction ?? predictMatch(predictionInput)),
     kickoffAtUtc: kickoffDate.toISOString(),
     kickoffAtBeijing: formatFullDisplayDateTime(kickoffDate),
     beijingDate,

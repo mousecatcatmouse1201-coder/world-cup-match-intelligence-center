@@ -35,6 +35,11 @@ function confidenceRows(confidence: DataConfidence) {
   ] as const;
 }
 
+function standingSummary(row: { goalsFor: number; goalsAgainst: number; goalDifference: number; points: number }) {
+  const goalDifference = row.goalDifference > 0 ? `+${row.goalDifference}` : `${row.goalDifference}`;
+  return `进球 ${row.goalsFor}｜失球 ${row.goalsAgainst}｜净胜球 ${goalDifference}｜积分 ${row.points}`;
+}
+
 export default async function MatchPage({ params }: PageProps) {
   const { id } = await params;
   const match = await getEnrichedFixtureBundle(id);
@@ -171,9 +176,7 @@ export default async function MatchPage({ params }: PageProps) {
                   <tr>
                     <th>排名</th>
                     <th>球队</th>
-                    <th>场</th>
-                    <th>净胜球</th>
-                    <th>积分</th>
+                    <th>数据摘要</th>
                     <th>出线形势</th>
                   </tr>
                 </thead>
@@ -186,9 +189,7 @@ export default async function MatchPage({ params }: PageProps) {
                     >
                       <td>{row.rank}</td>
                       <td><Link href={`/teams/${row.teamId}`}>{row.teamName}</Link></td>
-                      <td>{row.played}</td>
-                      <td>{row.goalDifference > 0 ? `+${row.goalDifference}` : row.goalDifference}</td>
-                      <td><strong>{row.points}</strong></td>
+                      <td className="standingSummaryCell">{standingSummary(row)}</td>
                       <td>{row.qualificationText}</td>
                     </tr>
                   ))}

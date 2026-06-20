@@ -26,6 +26,8 @@ const fixture: Fixture = {
   homeTeamId: "strong",
   awayTeamId: "weaker",
   status: "scheduled",
+  sourceUpdatedAt: "2026-06-18T00:00:00.000Z",
+  lastNormalizedAt: "2026-06-18T00:00:00.000Z",
   heatIndex: 88,
   source
 };

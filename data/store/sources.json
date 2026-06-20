@@ -34,7 +34,7 @@
     "sourceName": "MVP 示例补充数据",
     "sourceUrl": "https://example.local/world-cup-match-intelligence-center/manual-seed",
     "sourceKind": "manual",
-    "lastFetchedAt": "2026-06-19T07:45:55.961Z",
+    "lastFetchedAt": "2026-06-20T01:19:42.050Z",
     "confidence": "estimated",
     "isMockOrEstimated": true,
     "description": "伤停、赔率、舆情、球员状态等无免费权威 API 的演示补充数据。"
@@ -44,7 +44,7 @@
     "sourceName": "本地规则模型推断",
     "sourceUrl": "https://example.local/world-cup-match-intelligence-center/model",
     "sourceKind": "model",
-    "lastFetchedAt": "2026-06-19T07:45:55.961Z",
+    "lastFetchedAt": "2026-06-20T01:19:42.050Z",
     "confidence": "modeled",
     "isMockOrEstimated": true,
     "description": "基于排名、状态、伤停、赛程和示例市场信息计算的模型推断。"

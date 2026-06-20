@@ -68,11 +68,19 @@ export interface Fixture {
   homePlaceholder?: string;
   awayPlaceholder?: string;
   status: MatchStatus;
+  /** Upstream schedule/result source timestamp after normalization. */
+  sourceUpdatedAt: string;
+  /** Local pipeline timestamp for this normalized fixture. */
+  lastNormalizedAt: string;
+  /** Timestamp of the most recent locally recorded final result. */
+  lastResultsUpdatedAt?: string;
   score?: {
     home: number;
     away: number;
   };
   result?: MatchResult;
+  /** Immutable model output captured before kickoff, used exclusively for review. */
+  predictionSnapshot?: PredictionSnapshot;
   heatIndex: number;
   source: RecordSource;
 }
@@ -243,6 +251,11 @@ export interface PredictionResult {
   riskFactors: string[];
   explanations: PredictionExplanation[];
   source: RecordSource;
+}
+
+export interface PredictionSnapshot extends PredictionResult {
+  capturedAt: string;
+  modelVersion: string;
 }
 
 export interface MatchAnalysis {

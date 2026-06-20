@@ -47,12 +47,28 @@ npm run dev
 
 ```bash
 npm run data:refresh
+npm run data:update-results -- --file data/raw/results-update.example.json
+npm run check:data
 npm test
 npm run build
 npm run deploy:prod
 ```
 
 `npm run deploy:prod` 会运行数据检查、类型检查、测试、生产构建，并直接对 Vercel 主域名执行 smoke check。
+
+## P1 数据更新线（本地 JSON）
+
+当前数据闭环保持无 API Key，可完全在本地运行：
+
+`data/raw` 原始抓取快照或人工赛果文件 → `data:normalize` 规范化为 `data/store/*.json` → 本地规则模型生成赛前预测快照 → `data:update-results` 写入赛果并重建派生数据 → 页面/API 展示赛后复盘、积分形势与模型表现。
+
+- 源数据：`data/raw/manifest.json` 与抓取快照、`scripts/world-cup-2026-seed.ts` 的可运行基线，以及人工维护的赛果更新文件。`data/store/fixtures.json` 是本地运行时的赛程/赛果记录。
+- 派生数据：`standings.json`、`source-audit.json`、球队画像/排名补全、赔率与舆情演示数据；`fixtures.json` 中的 `predictionSnapshot` 是赛前模型输出的冻结快照，不会在赛后随结果重算或覆盖。
+- 数据新鲜度：每场比赛都有 `sourceUpdatedAt` 与 `lastNormalizedAt`；已结束比赛还必须有 `lastResultsUpdatedAt`。页面“数据更新时间”读取这些真实来源/规范化时间，不使用硬编码文案。
+- 更新赛果：复制 `data/raw/results-update.example.json`，填写 `fixtureId`、`status: "finished"`、双方比分、来源和可选 ISO `updatedAt`，然后执行 `npm run data:update-results -- --file <文件路径>`。需要明确标记缺失赛果时，使用 `status: "result_pending"` 且不填写比分。
+- 日常检查：运行 `npm run check:data`。它会检查日期、赛果状态、排名、赛程、积分榜和页面结构；赛果检查会拒绝“已结束无比分”、“未结束却有最终比分”、“比分与 result 不同步”、“缺少更新时间”及“已结束比赛缺少赛前预测快照”。模型表现只会统计同时有最终比分和冻结赛前预测快照的比赛。
+
+`data:normalize` 会保留已录入的最终赛果、赛果更新时间和预测快照，并重算积分榜/来源审计等派生数据；不要手工编辑 `standings.json` 或 `source-audit.json`。
 
 ## 数据来源与模型口径
 
@@ -82,10 +98,10 @@ npm run deploy:prod
 - 部分关键球员、伤停、赔率和舆情字段是 MVP 示例或本地补充，页面会明确标注。
 - 小组积分榜采用积分、净胜球、进球数和稳定队名排序的简化规则，非 FIFA 官方确认排名。
 - 出线概率、热度、球队画像和预测均为本地演示模型，不是官方数据、实时舆情或博彩赔率。
-- 赛果缺失时页面只会显示待更新状态，不会生成实际比分。
+- 赛果缺失时页面只会显示待更新状态，不会生成实际比分；赛果仍需由人工核验后写入本地更新文件。外部实时比分源目前只保留抓取/审计接口预留，不是本轮运行依赖。
 - 首页已移除“全量样本冷门风险排行”。冷门风险仅保留在单场比赛卡片、比赛详情页的模型解释，以及筛选排序逻辑中，且均标注为本地规则模型推断。
 
-## P1 计划
+## 后续 P1 计划
 
 - 接入可验证的实时比分与伤停来源。
 - 增加淘汰赛、赛程日历、比赛提醒和主队中心增强。

@@ -19,7 +19,7 @@ import {
 } from "recharts";
 import { Search, Star } from "lucide-react";
 import { getFavoriteTeamMatches, getHighestUpsetRiskMatch, getMostPopularMatch } from "../lib/dashboard-matches";
-import { buildDataQualitySummary } from "../lib/data-quality";
+import { buildDataQualitySummary, getLatestDataUpdatedAt } from "../lib/data-quality";
 import { formatBeijingDataTimestamp, formatDisplayDateTime, formatFullDisplayDateTime, getTodayDateKeyInBeijing } from "../lib/format";
 import { buildGroupStandings, getGroupStandingTable, type GroupStandingTable } from "../lib/group-standings";
 import { buildModelPerformanceSummary, confidenceLabel, matchStatusLabel } from "../lib/match-intelligence";
@@ -158,8 +158,9 @@ export function DashboardClient({ store, matches, predictions }: DashboardClient
   const predictedFixtureIds = useMemo(() => new Set(predictions.map((prediction) => prediction.fixtureId)), [predictions]);
   const topFixture = store.fixtures.find((fixture) => predictedFixtureIds.has(fixture.id)) ?? store.fixtures[0];
   const qualitySummary = useMemo(() => buildDataQualitySummary(store), [store]);
-  const dataUpdatedAtLabel = qualitySummary.latestFetchedAt
-    ? formatBeijingDataTimestamp(qualitySummary.latestFetchedAt)
+  const latestDataUpdatedAt = useMemo(() => getLatestDataUpdatedAt(store), [store]);
+  const dataUpdatedAtLabel = latestDataUpdatedAt
+    ? formatBeijingDataTimestamp(latestDataUpdatedAt)
     : "N/A";
   const radarTeams = useMemo(() => {
     const fixture = topFixture;
@@ -887,12 +888,13 @@ export function DashboardClient({ store, matches, predictions }: DashboardClient
 
       <section className="sourcePanel">
         <h2>数据来源与更新时间</h2>
+        <p className="sourceLine">本地数据最近更新：{dataUpdatedAtLabel}，北京时间。以下为各来源各自的抓取时间。</p>
         <div className="sourceGrid">
           {store.sources.map((source) => (
             <a href={source.sourceUrl} target="_blank" rel="noreferrer" key={source.sourceId}>
               <strong>{source.sourceName}</strong>
               <span>{source.description}</span>
-              <small>{source.confidence} · {formatFullDisplayDateTime(source.lastFetchedAt)}</small>
+              <small>{source.confidence} · 来源抓取时间 {formatFullDisplayDateTime(source.lastFetchedAt)}</small>
             </a>
           ))}
         </div>

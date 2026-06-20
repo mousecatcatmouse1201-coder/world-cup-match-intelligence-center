@@ -1,6 +1,7 @@
 import { readFileSync } from "node:fs";
 import path from "node:path";
 import { getTodayDateKeyInBeijing } from "../lib/format";
+import { assertDataIntegrity } from "../lib/data-integrity";
 import { getEnrichedMatches } from "../lib/match-intelligence";
 import { dataStoreSchema } from "../lib/schemas";
 import type { DataStore, EnrichedMatch } from "../lib/types";
@@ -55,6 +56,7 @@ function assertResult(match: EnrichedMatch, homeScore: number, awayScore: number
 }
 
 const store = loadStore();
+assertDataIntegrity(store);
 const enrichedMatches = getEnrichedMatches(store, { now });
 const todayDateKey = getTodayDateKeyInBeijing(now);
 const todayMatches = enrichedMatches.filter((match) => match.beijingDate === todayDateKey);
@@ -95,6 +97,7 @@ for (const match of resultPendingMatches) {
   console.log(`  ${match.fixture.id} ${matchName(match)}`);
 }
 console.log("PASS check:results");
+console.log("PASS data integrity: result/status/freshness/prediction snapshot");
 console.log("PASS Canada vs Qatar status === finished and result is 6-0");
 console.log("PASS Mexico vs South Korea status === finished and result is 1-0");
 console.log("PASS finished 今日比赛不在未开始或赛果待更新分区");

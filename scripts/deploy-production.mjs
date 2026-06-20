@@ -396,6 +396,8 @@ async function smokeCheckUiReadability() {
     "当前小组/收藏球队",
     "显示当前小组/收藏球队；完整 48 队请用搜索定位。",
     "数据可信度",
+    "本地数据最近更新",
+    "来源抓取时间",
     "首页默认只显示摘要；完整可信度字段请进入比赛详情页查看。",
     "28 场复盘来自当前 72 场样本中已经录入实际比分且存在赛前预测快照的比赛",
     "项目 / 数值",
@@ -637,7 +639,8 @@ async function smokeCheckStandingsLinkedPages() {
         "非 FIFA 官方确认排名",
         "当前排名：A 组第 1",
         "积分 6",
-        "净胜球 +3"
+        "净胜球 +3",
+        "进球 3｜失球 0｜净胜球 +3｜积分 6"
       ],
       forbidden: []
     },
@@ -665,7 +668,8 @@ async function smokeCheckStandingsLinkedPages() {
         "南非获得 1 分",
         "积分",
         "净胜球",
-        "非 FIFA 官方确认排名"
+        "非 FIFA 官方确认排名",
+        "进球 2｜失球 3｜净胜球 -1｜积分 1"
       ],
       forbidden: []
     },
@@ -678,7 +682,8 @@ async function smokeCheckStandingsLinkedPages() {
         "本场赛果已计入 B 组积分榜",
         "加拿大获得 3 分",
         "卡塔尔获得 0 分",
-        "+6"
+        "+6",
+        "进球 7｜失球 1｜净胜球 +6｜积分 4"
       ],
       forbidden: []
     },

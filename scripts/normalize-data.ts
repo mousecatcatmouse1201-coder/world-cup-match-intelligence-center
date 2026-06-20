@@ -2,6 +2,8 @@ import { mkdir, readFile, rename, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { formatDisplayDateTime, formatFullDisplayDateTime, getBeijingDateKey } from "../lib/format";
 import { buildDataQualitySummary, buildSourceAuditReport } from "../lib/data-quality";
+import { assertDataIntegrity } from "../lib/data-integrity";
+import { predictMatch } from "../lib/prediction";
 import {
   dataSourceSchema,
   fixtureSchema,
@@ -193,12 +195,87 @@ function buildFixtures(officialSource: RecordSource, secondarySource: RecordSour
       homeTeamId: seed.homeTeamId,
       awayTeamId: seed.awayTeamId,
       status: seed.status,
+      sourceUpdatedAt: (seed.status === "finished" ? secondarySource : officialSource).lastFetchedAt,
+      lastNormalizedAt: now,
+      ...(score ? { lastResultsUpdatedAt: secondarySource.lastFetchedAt } : {}),
       ...(score ? { score } : {}),
       ...(result ? { result } : {}),
       heatIndex: seed.heatIndex ?? 70,
       source: seed.status === "finished" ? secondarySource : officialSource
     };
   });
+}
+
+async function readExistingFixtures(): Promise<Fixture[]> {
+  try {
+    return fixtureSchema.array().parse(JSON.parse(await readFile(path.join(storeDir, "fixtures.json"), "utf8")));
+  } catch {
+    return [];
+  }
+}
+
+function preserveRecordedResults(fixtures: Fixture[], existingFixtures: Fixture[]) {
+  const existingById = new Map(existingFixtures.map((fixture) => [fixture.id, fixture]));
+  return fixtures.map((fixture) => {
+    const existing = existingById.get(fixture.id);
+    if (!existing) return fixture;
+
+    if (existing.status === "result_pending") {
+      const { score: _score, result: _result, lastResultsUpdatedAt: _lastResultsUpdatedAt, ...withoutResult } = fixture;
+      return {
+        ...withoutResult,
+        status: "result_pending" as const,
+        sourceUpdatedAt: existing.sourceUpdatedAt,
+        source: { ...withoutResult.source, lastFetchedAt: existing.source.lastFetchedAt },
+        ...(existing.predictionSnapshot ? { predictionSnapshot: existing.predictionSnapshot } : {})
+      };
+    }
+
+    const preservedResult = existing.status === "finished" && existing.score && existing.result
+      ? {
+          status: "finished" as const,
+          score: existing.score,
+          result: existing.result,
+          lastResultsUpdatedAt: existing.lastResultsUpdatedAt ?? existing.result.updatedAt,
+          sourceUpdatedAt: existing.sourceUpdatedAt,
+          source: { ...fixture.source, lastFetchedAt: existing.source.lastFetchedAt }
+        }
+      : {};
+
+    return {
+      ...fixture,
+      ...preservedResult,
+      ...(existing.predictionSnapshot ? { predictionSnapshot: existing.predictionSnapshot } : {})
+    };
+  });
+}
+
+function capturePredictionSnapshot(fixture: Fixture, teams: Team[], players: Player[], odds: OddsSnapshot[], sentiment: SentimentSnapshot[]) {
+  if (fixture.predictionSnapshot || !fixture.homeTeamId || !fixture.awayTeamId) return fixture;
+  const homeTeam = teams.find((team) => team.id === fixture.homeTeamId);
+  const awayTeam = teams.find((team) => team.id === fixture.awayTeamId);
+  if (!homeTeam || !awayTeam) return fixture;
+
+  const capturedAt = new Date(Math.min(Date.now(), new Date(fixture.kickoff).getTime() - 60_000)).toISOString();
+  const prediction = predictMatch({
+    fixture,
+    homeTeam,
+    awayTeam,
+    homePlayers: players.filter((player) => player.teamId === homeTeam.id),
+    awayPlayers: players.filter((player) => player.teamId === awayTeam.id),
+    odds: odds.find((item) => item.fixtureId === fixture.id),
+    sentiment: sentiment.find((item) => item.fixtureId === fixture.id)
+  });
+
+  return {
+    ...fixture,
+    predictionSnapshot: {
+      ...prediction,
+      source: { ...prediction.source, lastFetchedAt: capturedAt },
+      capturedAt,
+      modelVersion: "local-rules-v0.5.0"
+    }
+  };
 }
 
 function buildStandings(fixtures: Fixture[], teams: Team[], source: RecordSource): Standing[] {
@@ -292,6 +369,7 @@ function buildPlayers(source: RecordSource): Player[] {
 async function main() {
   await mkdir(storeDir, { recursive: true });
   const manifest = await readManifest();
+  const existingFixtures = await readExistingFixtures();
 
   const fifaFixtures = sourceFromManifest(manifest, "fifa-fixtures-official", {
     sourceId: "fifa-fixtures-official",
@@ -339,7 +417,7 @@ async function main() {
   };
 
   const teams = buildTeams(derivedSource(fifaRanking));
-  const fixtures = buildFixtures(derivedSource(fifaFixtures), derivedSource(espnFixtures));
+  let fixtures = preserveRecordedResults(buildFixtures(derivedSource(fifaFixtures), derivedSource(espnFixtures)), existingFixtures);
   const players = buildPlayers(derivedSource(manualSeed));
   const rankings: Ranking[] = teams.map((team) => ({
     teamId: team.id,
@@ -363,8 +441,10 @@ async function main() {
     positiveAway: Math.max(24, 74 - fixture.heatIndex / 4),
     source: estimateSource("sentiment")
   }));
+  fixtures = fixtures.map((fixture) => capturePredictionSnapshot(fixture, teams, players, odds, sentiment));
   const sources = [fifaFixtures, fifaRanking, espnFixtures, manualSeed, model];
   const store: DataStore = { sources, teams, players, fixtures, standings, rankings, odds, sentiment };
+  assertDataIntegrity(store);
 
   const teamIds = new Set(teams.map((team) => team.id));
   for (const fixture of fixtures) {

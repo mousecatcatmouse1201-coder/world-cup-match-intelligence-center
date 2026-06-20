@@ -3,6 +3,7 @@ import path from "node:path";
 import { describe, expect, it } from "vitest";
 import { getHighestUpsetRiskMatch, getMostPopularMatch, getTodayMatches } from "../lib/dashboard-matches";
 import { buildDataQualitySummary } from "../lib/data-quality";
+import { collectDataIntegrityIssues } from "../lib/data-integrity";
 import { formatDisplayDateKey, formatDisplayDateTime } from "../lib/format";
 import { buildGroupStandings } from "../lib/group-standings";
 import { getEnrichedMatches } from "../lib/match-intelligence";
@@ -34,6 +35,19 @@ describe("data pipeline output", () => {
     expect(store.teams.length).toBeGreaterThanOrEqual(2);
     expect(store.fixtures.length).toBeGreaterThanOrEqual(1);
     expect(store.sources.some((source) => source.sourceKind === "official")).toBe(true);
+  });
+
+  it("keeps result state, freshness, and immutable pre-match snapshots coherent", () => {
+    const store = loadStore();
+    expect(collectDataIntegrityIssues(store)).toEqual([]);
+
+    const finished = store.fixtures.filter((fixture) => fixture.status === "finished");
+    expect(finished.length).toBeGreaterThan(0);
+    for (const fixture of finished) {
+      expect(fixture.predictionSnapshot?.capturedAt).toBeTruthy();
+      expect(Date.parse(fixture.predictionSnapshot!.capturedAt)).toBeLessThanOrEqual(Date.parse(fixture.kickoff));
+      expect(fixture.lastResultsUpdatedAt).toBeTruthy();
+    }
   });
 
   it("keeps source metadata on every record type", () => {

@@ -11,6 +11,7 @@
     "test": "vitest run",
     "data:fetch": "tsx scripts/fetch-data.ts",
     "data:normalize": "tsx scripts/normalize-data.ts",
+    "data:update-results": "tsx scripts/update-results.ts",
     "data:refresh": "npm run data:fetch && npm run data:normalize",
     "check:dates": "tsx scripts/check-dates.ts",
     "check:results": "tsx scripts/check-results.ts",

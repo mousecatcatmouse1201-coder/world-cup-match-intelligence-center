@@ -66,6 +66,9 @@ export const fixtureSchema = z.object({
   homePlaceholder: z.string().min(1).optional(),
   awayPlaceholder: z.string().min(1).optional(),
   status: z.enum(["scheduled", "live", "live_pending", "finished", "result_pending", "unknown"]),
+  sourceUpdatedAt: z.string().datetime(),
+  lastNormalizedAt: z.string().datetime(),
+  lastResultsUpdatedAt: z.string().datetime().optional(),
   score: z
     .object({
       home: z.number().int().min(0),
@@ -78,6 +81,25 @@ export const fixtureSchema = z.object({
       awayScore: z.number().int().min(0),
       source: z.union([z.literal("official"), z.literal("secondary"), z.string()]),
       updatedAt: z.string().datetime()
+    })
+    .optional(),
+  predictionSnapshot: z
+    .object({
+      fixtureId: z.string().min(1),
+      probabilities: z.object({ homeWin: z.number(), draw: z.number(), awayWin: z.number() }),
+      expectedGoals: z.object({ home: z.number(), away: z.number() }),
+      predictedScore: z.object({ home: z.number().int().min(0), away: z.number().int().min(0) }),
+      scoreRange: z.string(),
+      scoreConfidence: z.enum(["low", "medium", "high"]),
+      confidence: z.enum(["low", "medium", "high"]),
+      keyFactors: z.array(z.string()),
+      riskFactors: z.array(z.string()),
+      explanations: z.array(z.object({
+        factor: z.string(), impact: z.number(), direction: z.enum(["home", "away", "draw", "neutral"]), description: z.string()
+      })),
+      source: recordSourceSchema,
+      capturedAt: z.string().datetime(),
+      modelVersion: z.string().min(1)
     })
     .optional(),
   heatIndex: z.number().min(0).max(100),

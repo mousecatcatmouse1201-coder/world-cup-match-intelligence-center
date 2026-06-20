@@ -119,6 +119,33 @@ export function buildDataQualitySummary(store: DataStore): DataQualitySummary {
   return summary;
 }
 
+/**
+ * Canonical local-pipeline freshness value for UI surfaces. It includes source
+ * fetches plus normalization and result-write timestamps, so a manual local
+ * result update cannot leave the dashboard banner behind the source panel.
+ */
+export function getLatestDataUpdatedAt(store: DataStore): string | null {
+  const timestamps = [
+    ...store.sources.map((source) => source.lastFetchedAt),
+    ...store.fixtures.flatMap((fixture) => [
+      fixture.source.lastFetchedAt,
+      fixture.sourceUpdatedAt,
+      fixture.lastNormalizedAt,
+      fixture.lastResultsUpdatedAt,
+      fixture.result?.updatedAt
+    ])
+  ];
+  let latest = 0;
+
+  for (const value of timestamps) {
+    if (!value) continue;
+    const parsed = Date.parse(value);
+    if (Number.isFinite(parsed) && parsed > latest) latest = parsed;
+  }
+
+  return latest ? new Date(latest).toISOString() : null;
+}
+
 export function buildSourceAuditReport(store: DataStore, generatedAt = new Date().toISOString()): SourceAuditReport {
   const summary = buildDataQualitySummary(store);
   const modeledGroups = summary.groups.filter((group) => group.modeledRecords > 0).map((group) => group.label);
