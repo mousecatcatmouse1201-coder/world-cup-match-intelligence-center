@@ -17,6 +17,14 @@ interface ResultUpdateFile {
   results: ResultUpdate[];
 }
 
+interface VerifiedManualResult {
+  matchId: string;
+  homeScore: number;
+  awayScore: number;
+  result: "home_win" | "away_win" | "draw";
+  sourceUpdatedAt: string;
+}
+
 const storeDir = path.join(process.cwd(), "data", "store");
 
 function usage() {
@@ -44,6 +52,37 @@ function assertUpdate(update: ResultUpdate) {
   if (update.updatedAt && Number.isNaN(Date.parse(update.updatedAt))) throw new Error(`${update.fixtureId}: updatedAt must be ISO datetime`);
 }
 
+function outcome(homeScore: number, awayScore: number): VerifiedManualResult["result"] {
+  if (homeScore > awayScore) return "home_win";
+  if (homeScore < awayScore) return "away_win";
+  return "draw";
+}
+
+function parseUpdates(raw: unknown): ResultUpdate[] {
+  if (Array.isArray(raw)) {
+    return raw.map((item) => {
+      const manual = item as VerifiedManualResult;
+      if (!manual.matchId || !Number.isInteger(manual.homeScore) || !Number.isInteger(manual.awayScore) || !manual.sourceUpdatedAt) {
+        throw new Error(`Invalid verified manual result: ${JSON.stringify(item)}`);
+      }
+      if (manual.result !== outcome(manual.homeScore, manual.awayScore)) {
+        throw new Error(`${manual.matchId}: result does not match the supplied score`);
+      }
+      return {
+        fixtureId: manual.matchId,
+        status: "finished",
+        homeScore: manual.homeScore,
+        awayScore: manual.awayScore,
+        updatedAt: manual.sourceUpdatedAt
+      };
+    });
+  }
+
+  const input = raw as ResultUpdateFile;
+  if (!Array.isArray(input.results) || !input.results.length) throw new Error("results must be a non-empty array");
+  return input.results;
+}
+
 async function writeFixtures(fixtures: Fixture[]) {
   const tmp = path.join(storeDir, "fixtures.json.tmp");
   await writeFile(tmp, `${JSON.stringify(fixtures, null, 2)}\n`, "utf8");
@@ -52,16 +91,15 @@ async function writeFixtures(fixtures: Fixture[]) {
 
 async function main() {
   const inputPath = path.resolve(process.cwd(), parseArgs());
-  const input = JSON.parse(await readFile(inputPath, "utf8")) as ResultUpdateFile;
-  if (!Array.isArray(input.results) || !input.results.length) throw new Error("results must be a non-empty array");
-  input.results.forEach(assertUpdate);
-  const requestedIds = input.results.map((item) => item.fixtureId);
+  const updates = parseUpdates(JSON.parse(await readFile(inputPath, "utf8")));
+  updates.forEach(assertUpdate);
+  const requestedIds = updates.map((item) => item.fixtureId);
   if (new Set(requestedIds).size !== requestedIds.length) throw new Error("Duplicate fixtureId in update file");
 
   const fixtures = fixtureSchema.array().parse(JSON.parse(await readFile(path.join(storeDir, "fixtures.json"), "utf8"))) as Fixture[];
   const updateIds = new Set<string>();
   const updated = fixtures.map((fixture) => {
-    const update = input.results.find((item) => item.fixtureId === fixture.id);
+    const update = updates.find((item) => item.fixtureId === fixture.id);
     if (!update) return fixture;
     updateIds.add(update.fixtureId);
     const updatedAt = update.updatedAt ?? new Date().toISOString();
@@ -88,14 +126,14 @@ async function main() {
     };
   });
 
-  const missing = input.results.map((item) => item.fixtureId).filter((id) => !updateIds.has(id));
+  const missing = updates.map((item) => item.fixtureId).filter((id) => !updateIds.has(id));
   if (missing.length) throw new Error(`Unknown fixtureId: ${missing.join(", ")}`);
   await writeFixtures(updated);
 
   const tsx = path.join(process.cwd(), "node_modules", ".bin", "tsx");
   const normalized = spawnSync(tsx, ["scripts/normalize-data.ts"], { cwd: process.cwd(), stdio: "inherit" });
   if (normalized.status !== 0) throw new Error("Normalization after result update failed; fixtures were not accepted by the local pipeline.");
-  console.log(`PASS data:update-results (${input.results.length} updates); standings, source audit, and missing prediction snapshots refreshed.`);
+  console.log(`PASS data:update-results (${updates.length} updates); standings, source audit, and missing prediction snapshots refreshed.`);
 }
 
 main().catch((error) => {

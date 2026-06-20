@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-06-20T01:19:42.083Z",
+  "generatedAt": "2026-06-20T08:05:20.807Z",
   "summary": {
     "totalRecords": 385,
     "sourceCount": 5,
@@ -9,7 +9,7 @@
     "modeledRecords": 49,
     "mockOrEstimatedRecords": 214,
     "trustedRecords": 171,
-    "latestFetchedAt": "2026-06-20T01:19:42.050Z",
+    "latestFetchedAt": "2026-06-20T08:05:20.775Z",
     "groups": [
       {
         "key": "sources",
@@ -21,7 +21,7 @@
         "modeledRecords": 1,
         "mockOrEstimatedRecords": 2,
         "trustedRecords": 3,
-        "latestFetchedAt": "2026-06-20T01:19:42.050Z",
+        "latestFetchedAt": "2026-06-20T08:05:20.775Z",
         "sourceIds": [
           "espn-fixtures-secondary",
           "fifa-fixtures-official",
@@ -40,7 +40,7 @@
         "modeledRecords": 0,
         "mockOrEstimatedRecords": 0,
         "trustedRecords": 48,
-        "latestFetchedAt": "2026-06-19T00:53:53.067Z",
+        "latestFetchedAt": "2026-06-20T07:50:41.216Z",
         "sourceIds": [
           "fifa-ranking-official"
         ]
@@ -55,7 +55,7 @@
         "modeledRecords": 0,
         "mockOrEstimatedRecords": 20,
         "trustedRecords": 0,
-        "latestFetchedAt": "2026-06-20T01:19:42.050Z",
+        "latestFetchedAt": "2026-06-20T08:05:20.775Z",
         "sourceIds": [
           "manual-mvp-intel"
         ]
@@ -70,7 +70,7 @@
         "modeledRecords": 0,
         "mockOrEstimatedRecords": 0,
         "trustedRecords": 72,
-        "latestFetchedAt": "2026-06-19T00:53:53.067Z",
+        "latestFetchedAt": "2026-06-20T08:00:00.000Z",
         "sourceIds": [
           "espn-fixtures-secondary",
           "fifa-fixtures-official"
@@ -86,7 +86,7 @@
         "modeledRecords": 48,
         "mockOrEstimatedRecords": 48,
         "trustedRecords": 0,
-        "latestFetchedAt": "2026-06-20T01:19:42.050Z",
+        "latestFetchedAt": "2026-06-20T08:05:20.775Z",
         "sourceIds": [
           "local-model-derived"
         ]
@@ -101,7 +101,7 @@
         "modeledRecords": 0,
         "mockOrEstimatedRecords": 0,
         "trustedRecords": 48,
-        "latestFetchedAt": "2026-06-19T00:53:53.067Z",
+        "latestFetchedAt": "2026-06-20T07:50:41.216Z",
         "sourceIds": [
           "fifa-ranking-official"
         ]
@@ -116,7 +116,7 @@
         "modeledRecords": 0,
         "mockOrEstimatedRecords": 72,
         "trustedRecords": 0,
-        "latestFetchedAt": "2026-06-20T01:19:42.050Z",
+        "latestFetchedAt": "2026-06-20T08:05:20.775Z",
         "sourceIds": [
           "manual-odds"
         ]
@@ -131,7 +131,7 @@
         "modeledRecords": 0,
         "mockOrEstimatedRecords": 72,
         "trustedRecords": 0,
-        "latestFetchedAt": "2026-06-20T01:19:42.050Z",
+        "latestFetchedAt": "2026-06-20T08:05:20.775Z",
         "sourceIds": [
           "manual-sentiment"
         ]

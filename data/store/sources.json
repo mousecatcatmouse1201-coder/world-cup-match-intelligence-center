@@ -4,7 +4,7 @@
     "sourceName": "FIFA World Cup 2026 官方赛程",
     "sourceUrl": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/scores-fixtures",
     "sourceKind": "official",
-    "lastFetchedAt": "2026-06-19T00:53:53.038Z",
+    "lastFetchedAt": "2026-06-20T07:50:41.188Z",
     "confidence": "official",
     "isMockOrEstimated": false,
     "description": "官方赛程、场馆、分组和比赛时间。"
@@ -14,7 +14,7 @@
     "sourceName": "FIFA/Coca-Cola 男足世界排名",
     "sourceUrl": "https://inside.fifa.com/fifa-world-ranking/men",
     "sourceKind": "official",
-    "lastFetchedAt": "2026-06-19T00:53:53.067Z",
+    "lastFetchedAt": "2026-06-20T07:50:41.216Z",
     "confidence": "official",
     "isMockOrEstimated": false,
     "description": "FIFA 官方男足世界排名原始快照。"
@@ -24,7 +24,7 @@
     "sourceName": "ESPN 2026 World Cup 赛程校验",
     "sourceUrl": "https://www.espn.com/soccer/schedule/_/league/fifa.world",
     "sourceKind": "secondary",
-    "lastFetchedAt": "2026-06-19T00:53:53.067Z",
+    "lastFetchedAt": "2026-06-20T07:50:41.217Z",
     "confidence": "secondary",
     "isMockOrEstimated": false,
     "description": "二级公开来源，用于校验赛程和赛果。"
@@ -34,7 +34,7 @@
     "sourceName": "MVP 示例补充数据",
     "sourceUrl": "https://example.local/world-cup-match-intelligence-center/manual-seed",
     "sourceKind": "manual",
-    "lastFetchedAt": "2026-06-20T01:19:42.050Z",
+    "lastFetchedAt": "2026-06-20T08:05:20.775Z",
     "confidence": "estimated",
     "isMockOrEstimated": true,
     "description": "伤停、赔率、舆情、球员状态等无免费权威 API 的演示补充数据。"
@@ -44,7 +44,7 @@
     "sourceName": "本地规则模型推断",
     "sourceUrl": "https://example.local/world-cup-match-intelligence-center/model",
     "sourceKind": "model",
-    "lastFetchedAt": "2026-06-20T01:19:42.050Z",
+    "lastFetchedAt": "2026-06-20T08:05:20.775Z",
     "confidence": "modeled",
     "isMockOrEstimated": true,
     "description": "基于排名、状态、伤停、赛程和示例市场信息计算的模型推断。"

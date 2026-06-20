@@ -1,0 +1,30 @@
+[
+  {
+    "matchId": "match-029",
+    "homeScore": 2,
+    "awayScore": 0,
+    "result": "home_win",
+    "sourceUpdatedAt": "2026-06-20T08:00:00.000Z"
+  },
+  {
+    "matchId": "match-030",
+    "homeScore": 0,
+    "awayScore": 1,
+    "result": "away_win",
+    "sourceUpdatedAt": "2026-06-20T08:00:00.000Z"
+  },
+  {
+    "matchId": "match-031",
+    "homeScore": 3,
+    "awayScore": 0,
+    "result": "home_win",
+    "sourceUpdatedAt": "2026-06-20T08:00:00.000Z"
+  },
+  {
+    "matchId": "match-032",
+    "homeScore": 0,
+    "awayScore": 1,
+    "result": "away_win",
+    "sourceUpdatedAt": "2026-06-20T08:00:00.000Z"
+  }
+]

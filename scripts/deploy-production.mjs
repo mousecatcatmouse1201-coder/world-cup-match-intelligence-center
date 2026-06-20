@@ -3,8 +3,8 @@ import { spawn } from "node:child_process";
 
 const productionUrl = "https://world-cup-match-intelligence-center.vercel.app";
 const checks = [
-  ["/", ["今日焦点", "完整小组赛数据", "小组积分榜与出线形势（本地规则推断）", "今日比赛按北京时间日期计算"]],
-  ["/matches/match-001", ["预测复盘", "总进球偏差"]],
+  ["/", ["今日焦点", "完整小组赛数据", "小组积分榜与出线形势（本地规则推断）", "本地数据最近更新", "数据状态", "本地数据快照", "不是实时比分 API"]],
+  ["/matches/match-001", ["预测复盘", "总进球偏差", "数据时间", "来源抓取时间", "赛前预测快照"]],
   ["/matches/match-010", ["加拿大 vs 卡塔尔", "实际比分", "6-0", "赛后预测复盘"]],
   ["/api/matches", ["match-008", "match-009", "match-010", "match-011", "predictions"]]
 ];
@@ -85,6 +85,21 @@ function assertProductionInspect(output, deploymentId) {
   if (missing.length) {
     throw new Error(`Production inspect did not confirm alias target: missing ${missing.join(", ")}`);
   }
+}
+
+async function inspectProductionAlias(deploymentId) {
+  let lastError;
+  for (let attempt = 0; attempt < 6; attempt += 1) {
+    const output = await runCaptured("npx", ["vercel", "inspect", "world-cup-match-intelligence-center.vercel.app"]);
+    try {
+      assertProductionInspect(output, deploymentId);
+      return output;
+    } catch (error) {
+      lastError = error;
+      await new Promise((resolve) => setTimeout(resolve, 5000));
+    }
+  }
+  throw lastError;
 }
 
 function normalizeHtmlText(body) {
@@ -399,7 +414,7 @@ async function smokeCheckUiReadability() {
     "本地数据最近更新",
     "来源抓取时间",
     "首页默认只显示摘要；完整可信度字段请进入比赛详情页查看。",
-    "28 场复盘来自当前 72 场样本中已经录入实际比分且存在赛前预测快照的比赛",
+    "场复盘来自当前 72 场样本中已经录入实际比分且存在赛前预测快照的比赛",
     "项目 / 数值",
     "小组积分榜与出线形势（本地规则推断）",
     "数据摘要",
@@ -693,12 +708,14 @@ async function smokeCheckStandingsLinkedPages() {
         "美国 vs Australia",
         "D 组",
         "D 组积分榜摘要",
-        "本场比赛结果将影响",
-        "直接出线区",
-        "第三名竞争区",
-        "赛果尚未产生"
+        "实际比分",
+        "2-0",
+        "本场赛果已计入 D 组积分榜",
+        "美国获得 3 分",
+        "赛后预测复盘",
+        "赛前预测"
       ],
-      forbidden: ["本场赛果已计入"]
+      forbidden: ["赛果尚未产生"]
     }
   ];
   const results = [];
@@ -776,8 +793,7 @@ await run("npm", ["test"]);
 await run("npm", ["run", "build"]);
 const deployOutput = await run("npx", ["vercel", "deploy", "--prod", "--yes"]);
 const deployment = extractDeployment(deployOutput);
-const inspectOutput = await run("npx", ["vercel", "inspect", "world-cup-match-intelligence-center.vercel.app"]);
-assertProductionInspect(inspectOutput, deployment.id);
+await inspectProductionAlias(deployment.id);
 const results = [
   ...await smokeCheck(),
   await smokeCheckScheduleCoverageApi(),

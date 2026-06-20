@@ -19,21 +19,21 @@ describe("api routes", () => {
     vi.useRealTimers();
   });
 
-  it("keeps matches API shape with only eligible predictions", async () => {
+  it("keeps matches API shape after all current prediction-window matches finish", async () => {
     const response = await getMatches();
     const body = await response.json();
 
     expect(body.fixtures.length).toBeGreaterThan(0);
     expect(body.matches.length).toBe(body.fixtures.length);
     expect(body.fixtures.length).toBe(72);
-    expect(body.predictions.length).toBe(4);
-    expect(body.predictions.map((prediction: { fixtureId: string }) => prediction.fixtureId)).toEqual([
-      "match-029",
-      "match-030",
-      "match-031",
-      "match-032"
-    ]);
-    expect(body.predictions.map((prediction: { fixtureId: string }) => prediction.fixtureId)).not.toContain("match-001");
+    expect(body.predictions).toEqual([]);
+    for (const fixtureId of ["match-029", "match-030", "match-031", "match-032"]) {
+      const match = body.matches.find((item: { fixture: { id: string } }) => item.fixture.id === fixtureId);
+      expect(match.status).toBe("finished");
+      expect(match.prediction).toBeNull();
+      expect(match.reviewPrediction).toBeTruthy();
+      expect(match.review).toBeTruthy();
+    }
   });
 
   it("keeps list and detail enriched predictions consistent", async () => {

@@ -123,6 +123,25 @@ assertFinishedImpact("match-010", [
   "加拿大获得 3 分",
   "卡塔尔获得 0 分"
 ]);
-assertScheduledImpact("match-029");
+assertFinishedImpact("match-029", [
+  "本场赛果已计入 D 组积分榜",
+  "美国获得 3 分",
+  "Australia获得 0 分"
+]);
+assertFinishedImpact("match-030", [
+  "本场赛果已计入 C 组积分榜",
+  "Morocco获得 3 分",
+  "Scotland获得 0 分"
+]);
+assertFinishedImpact("match-031", [
+  "本场赛果已计入 C 组积分榜",
+  "Brazil获得 3 分",
+  "Haiti获得 0 分"
+]);
+assertFinishedImpact("match-032", [
+  "本场赛果已计入 D 组积分榜",
+  "巴拉圭获得 3 分",
+  "Turkiye获得 0 分"
+]);
 
 console.log("PASS check:standings-pages");
