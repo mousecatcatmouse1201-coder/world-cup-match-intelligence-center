@@ -1,6 +1,7 @@
 [
   {
     "id": "mexico",
+    "nameZh": "墨西哥",
     "name": "墨西哥",
     "shortName": "墨西哥",
     "fifaCode": "MEX",
@@ -25,6 +26,7 @@
   },
   {
     "id": "south-africa",
+    "nameZh": "南非",
     "name": "南非",
     "shortName": "南非",
     "fifaCode": "RSA",
@@ -49,6 +51,7 @@
   },
   {
     "id": "south-korea",
+    "nameZh": "韩国",
     "name": "韩国",
     "shortName": "韩国",
     "fifaCode": "KOR",
@@ -73,6 +76,7 @@
   },
   {
     "id": "czechia",
+    "nameZh": "捷克",
     "name": "捷克",
     "shortName": "捷克",
     "fifaCode": "CZE",
@@ -97,6 +101,7 @@
   },
   {
     "id": "canada",
+    "nameZh": "加拿大",
     "name": "加拿大",
     "shortName": "加拿大",
     "fifaCode": "CAN",
@@ -121,6 +126,7 @@
   },
   {
     "id": "bosnia",
+    "nameZh": "波黑",
     "name": "波黑",
     "shortName": "波黑",
     "fifaCode": "BIH",
@@ -145,6 +151,7 @@
   },
   {
     "id": "switzerland",
+    "nameZh": "瑞士",
     "name": "瑞士",
     "shortName": "瑞士",
     "fifaCode": "SUI",
@@ -169,6 +176,7 @@
   },
   {
     "id": "qatar",
+    "nameZh": "卡塔尔",
     "name": "卡塔尔",
     "shortName": "卡塔尔",
     "fifaCode": "QAT",
@@ -193,6 +201,7 @@
   },
   {
     "id": "brazil",
+    "nameZh": "巴西",
     "name": "Brazil",
     "shortName": "Brazil",
     "fifaCode": "BRA",
@@ -217,6 +226,7 @@
   },
   {
     "id": "morocco",
+    "nameZh": "摩洛哥",
     "name": "Morocco",
     "shortName": "Morocco",
     "fifaCode": "MAR",
@@ -241,6 +251,7 @@
   },
   {
     "id": "scotland",
+    "nameZh": "苏格兰",
     "name": "Scotland",
     "shortName": "Scotland",
     "fifaCode": "SCO",
@@ -265,6 +276,7 @@
   },
   {
     "id": "haiti",
+    "nameZh": "海地",
     "name": "Haiti",
     "shortName": "Haiti",
     "fifaCode": "HAI",
@@ -289,6 +301,7 @@
   },
   {
     "id": "united-states",
+    "nameZh": "美国",
     "name": "美国",
     "shortName": "美国",
     "fifaCode": "USA",
@@ -313,6 +326,7 @@
   },
   {
     "id": "paraguay",
+    "nameZh": "巴拉圭",
     "name": "巴拉圭",
     "shortName": "巴拉圭",
     "fifaCode": "PAR",
@@ -337,6 +351,7 @@
   },
   {
     "id": "australia",
+    "nameZh": "澳大利亚",
     "name": "Australia",
     "shortName": "Australia",
     "fifaCode": "AUS",
@@ -361,6 +376,7 @@
   },
   {
     "id": "turkiye",
+    "nameZh": "土耳其",
     "name": "Turkiye",
     "shortName": "Turkiye",
     "fifaCode": "TUR",
@@ -385,6 +401,7 @@
   },
   {
     "id": "germany",
+    "nameZh": "德国",
     "name": "Germany",
     "shortName": "Germany",
     "fifaCode": "GER",
@@ -409,6 +426,7 @@
   },
   {
     "id": "curacao",
+    "nameZh": "库拉索",
     "name": "Curacao",
     "shortName": "Curacao",
     "fifaCode": "CUW",
@@ -433,6 +451,7 @@
   },
   {
     "id": "ivory-coast",
+    "nameZh": "科特迪瓦",
     "name": "Ivory Coast",
     "shortName": "Ivory Coast",
     "fifaCode": "CIV",
@@ -457,6 +476,7 @@
   },
   {
     "id": "ecuador",
+    "nameZh": "厄瓜多尔",
     "name": "Ecuador",
     "shortName": "Ecuador",
     "fifaCode": "ECU",
@@ -481,6 +501,7 @@
   },
   {
     "id": "netherlands",
+    "nameZh": "荷兰",
     "name": "Netherlands",
     "shortName": "Netherlands",
     "fifaCode": "NED",
@@ -505,6 +526,7 @@
   },
   {
     "id": "japan",
+    "nameZh": "日本",
     "name": "Japan",
     "shortName": "Japan",
     "fifaCode": "JPN",
@@ -529,6 +551,7 @@
   },
   {
     "id": "sweden",
+    "nameZh": "瑞典",
     "name": "Sweden",
     "shortName": "Sweden",
     "fifaCode": "SWE",
@@ -553,6 +576,7 @@
   },
   {
     "id": "tunisia",
+    "nameZh": "突尼斯",
     "name": "Tunisia",
     "shortName": "Tunisia",
     "fifaCode": "TUN",
@@ -577,6 +601,7 @@
   },
   {
     "id": "belgium",
+    "nameZh": "比利时",
     "name": "Belgium",
     "shortName": "Belgium",
     "fifaCode": "BEL",
@@ -601,6 +626,7 @@
   },
   {
     "id": "egypt",
+    "nameZh": "埃及",
     "name": "Egypt",
     "shortName": "Egypt",
     "fifaCode": "EGY",
@@ -625,6 +651,7 @@
   },
   {
     "id": "iran",
+    "nameZh": "伊朗",
     "name": "Iran",
     "shortName": "Iran",
     "fifaCode": "IRN",
@@ -649,6 +676,7 @@
   },
   {
     "id": "new-zealand",
+    "nameZh": "新西兰",
     "name": "New Zealand",
     "shortName": "New Zealand",
     "fifaCode": "NZL",
@@ -673,6 +701,7 @@
   },
   {
     "id": "spain",
+    "nameZh": "西班牙",
     "name": "Spain",
     "shortName": "Spain",
     "fifaCode": "ESP",
@@ -697,6 +726,7 @@
   },
   {
     "id": "cabo-verde",
+    "nameZh": "佛得角",
     "name": "Cabo Verde",
     "shortName": "Cabo Verde",
     "fifaCode": "CPV",
@@ -721,6 +751,7 @@
   },
   {
     "id": "saudi-arabia",
+    "nameZh": "沙特阿拉伯",
     "name": "Saudi Arabia",
     "shortName": "Saudi Arabia",
     "fifaCode": "KSA",
@@ -745,6 +776,7 @@
   },
   {
     "id": "uruguay",
+    "nameZh": "乌拉圭",
     "name": "Uruguay",
     "shortName": "Uruguay",
     "fifaCode": "URU",
@@ -769,6 +801,7 @@
   },
   {
     "id": "france",
+    "nameZh": "法国",
     "name": "France",
     "shortName": "France",
     "fifaCode": "FRA",
@@ -793,6 +826,7 @@
   },
   {
     "id": "senegal",
+    "nameZh": "塞内加尔",
     "name": "Senegal",
     "shortName": "Senegal",
     "fifaCode": "SEN",
@@ -817,6 +851,7 @@
   },
   {
     "id": "norway",
+    "nameZh": "挪威",
     "name": "Norway",
     "shortName": "Norway",
     "fifaCode": "NOR",
@@ -841,6 +876,7 @@
   },
   {
     "id": "iraq",
+    "nameZh": "伊拉克",
     "name": "Iraq",
     "shortName": "Iraq",
     "fifaCode": "IRQ",
@@ -865,6 +901,7 @@
   },
   {
     "id": "argentina",
+    "nameZh": "阿根廷",
     "name": "Argentina",
     "shortName": "Argentina",
     "fifaCode": "ARG",
@@ -889,6 +926,7 @@
   },
   {
     "id": "algeria",
+    "nameZh": "阿尔及利亚",
     "name": "Algeria",
     "shortName": "Algeria",
     "fifaCode": "ALG",
@@ -913,6 +951,7 @@
   },
   {
     "id": "austria",
+    "nameZh": "奥地利",
     "name": "Austria",
     "shortName": "Austria",
     "fifaCode": "AUT",
@@ -937,6 +976,7 @@
   },
   {
     "id": "jordan",
+    "nameZh": "约旦",
     "name": "Jordan",
     "shortName": "Jordan",
     "fifaCode": "JOR",
@@ -961,6 +1001,7 @@
   },
   {
     "id": "portugal",
+    "nameZh": "葡萄牙",
     "name": "Portugal",
     "shortName": "Portugal",
     "fifaCode": "POR",
@@ -985,6 +1026,7 @@
   },
   {
     "id": "dr-congo",
+    "nameZh": "刚果（金）",
     "name": "DR Congo",
     "shortName": "DR Congo",
     "fifaCode": "COD",
@@ -1009,6 +1051,7 @@
   },
   {
     "id": "colombia",
+    "nameZh": "哥伦比亚",
     "name": "哥伦比亚",
     "shortName": "哥伦比亚",
     "fifaCode": "COL",
@@ -1033,6 +1076,7 @@
   },
   {
     "id": "uzbekistan",
+    "nameZh": "乌兹别克斯坦",
     "name": "乌兹别克斯坦",
     "shortName": "乌兹别克",
     "fifaCode": "UZB",
@@ -1057,6 +1101,7 @@
   },
   {
     "id": "england",
+    "nameZh": "英格兰",
     "name": "英格兰",
     "shortName": "英格兰",
     "fifaCode": "ENG",
@@ -1081,6 +1126,7 @@
   },
   {
     "id": "croatia",
+    "nameZh": "克罗地亚",
     "name": "克罗地亚",
     "shortName": "克罗地亚",
     "fifaCode": "CRO",
@@ -1105,6 +1151,7 @@
   },
   {
     "id": "ghana",
+    "nameZh": "加纳",
     "name": "加纳",
     "shortName": "加纳",
     "fifaCode": "GHA",
@@ -1129,6 +1176,7 @@
   },
   {
     "id": "panama",
+    "nameZh": "巴拿马",
     "name": "巴拿马",
     "shortName": "巴拿马",
     "fifaCode": "PAN",

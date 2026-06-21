@@ -1,8 +1,12 @@
+.env
+.env.local
+.env.production
 .next
 .vercel
 node_modules
 coverage
 dist
+build
 .DS_Store
 *.log
 tsconfig.tsbuildinfo

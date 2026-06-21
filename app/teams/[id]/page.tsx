@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { SourceBadge } from "../../../components/source-badge";
+import { StandingsSummary } from "../../../components/standings-summary";
 import {
   buildGroupStandings,
   getTeamFinishedMatches,
@@ -13,6 +14,7 @@ import {
 import { matchStatusLabel } from "../../../lib/match-intelligence";
 import { getEnrichedMatches } from "../../../lib/match-intelligence";
 import { getTeamBundle } from "../../../lib/store";
+import { teamLabel } from "../../../lib/team-display";
 
 interface PageProps {
   params: Promise<{ id: string }>;
@@ -40,7 +42,7 @@ export default async function TeamPage({ params }: PageProps) {
   const finishedMatches = getTeamFinishedMatches(enrichedMatches, id);
 
   function fixtureLabel(teamId?: string, placeholder?: string) {
-    return teamId ? teamById.get(teamId)?.shortName ?? teamId : placeholder ?? "参赛队待确定";
+    return teamId ? (teamById.get(teamId) ? teamLabel(teamById.get(teamId)!) : teamId) : placeholder ?? "参赛队待确定";
   }
 
   function fixtureResult(fixture: (typeof fixtures)[number]) {
@@ -52,12 +54,12 @@ export default async function TeamPage({ params }: PageProps) {
   }
 
   function matchOpponentLabel(match: (typeof enrichedMatches)[number]) {
-    return match.home.id === id ? match.away.shortName : match.home.shortName;
+    return teamLabel(match.home.id === id ? match.away : match.home);
   }
 
   function matchResultLabel(match: (typeof enrichedMatches)[number]) {
     if (match.result.homeScore !== undefined && match.result.awayScore !== undefined) {
-      return `${match.home.shortName} ${match.result.homeScore}-${match.result.awayScore} ${match.away.shortName}`;
+      return `${teamLabel(match.home)} ${match.result.homeScore}-${match.result.awayScore} ${teamLabel(match.away)}`;
     }
     return matchStatusLabel(match.status);
   }
@@ -73,7 +75,7 @@ export default async function TeamPage({ params }: PageProps) {
       <section className="teamHeader">
         <div>
           <p className="eyebrow">{bundle.team.group} 组 · {bundle.team.region}</p>
-          <h1>{bundle.team.name}</h1>
+          <h1>{teamLabel(bundle.team)}</h1>
           <p>FIFA 排名第 {bundle.team.fifaRank} · 积分 {bundle.team.rankingPoints}</p>
         </div>
         <SourceBadge source={bundle.team.source} />
@@ -128,33 +130,8 @@ export default async function TeamPage({ params }: PageProps) {
         {groupStanding ? (
           <article className="panel widePanel" id="team-group-standings" data-smoke="team-group-standings">
             <h2>{groupStanding.group} 组积分榜与出线形势</h2>
-            <p className="sourceLine">当前球队：{bundle.team.shortName}</p>
-            <div className="standingTableWrap">
-              <table className="standingTable">
-                <thead>
-                  <tr>
-                    <th>排名</th>
-                    <th>球队</th>
-                    <th>数据摘要</th>
-                    <th>出线形势</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {groupStanding.rows.map((row) => (
-                    <tr
-                      key={row.teamId}
-                      className={row.teamId === id ? "activeRow" : ""}
-                      data-current-team={row.teamId === id ? "true" : undefined}
-                    >
-                      <td>{row.rank}</td>
-                      <td>{row.teamName}{row.teamId === id ? " · 当前球队" : ""}</td>
-                      <td className="standingSummaryCell">{standingSummary(row)}</td>
-                      <td>{row.qualificationText}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
+            <p className="sourceLine">当前球队：{teamLabel(bundle.team)}</p>
+            <StandingsSummary table={groupStanding} teams={bundle.store.teams} currentTeamIds={[id]} />
             <p className="sourceLine">{STANDINGS_PAGE_RULE_NOTE} {STANDINGS_PAGE_QUALIFICATION_NOTE}</p>
           </article>
         ) : null}

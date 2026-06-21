@@ -24,8 +24,10 @@ import { buildDataFreshnessSummary, freshnessStatusLabel } from "../lib/data-fre
 import { formatBeijingDataTimestamp, formatDisplayDateTime, formatFullDisplayDateTime, getTodayDateKeyInBeijing } from "../lib/format";
 import { buildGroupStandings, getGroupStandingTable, type GroupStandingTable } from "../lib/group-standings";
 import { buildModelPerformanceSummary, confidenceLabel, matchStatusLabel } from "../lib/match-intelligence";
+import { teamLabel } from "../lib/team-display";
 import type { DataConfidence, DataStore, EnrichedMatch, MatchStatus, PredictionResult, Team } from "../lib/types";
 import { SourceBadge } from "./source-badge";
+import { StandingsSummary } from "./standings-summary";
 
 const FAVORITES_KEY = "wcmic.favoriteTeams";
 
@@ -60,8 +62,7 @@ function teamDisplay(team: Team) {
 }
 
 function teamInlineLabel(team: Team) {
-  const display = teamDisplay(team);
-  return display.secondary ? `${display.primary} (${display.secondary})` : display.primary;
+  return teamLabel(team);
 }
 
 const TEAM_LOCALE_LABELS: Record<string, { flag: string; name: string }> = {
@@ -116,12 +117,7 @@ const TEAM_LOCALE_LABELS: Record<string, { flag: string; name: string }> = {
 };
 
 function localizedTeamLabel(team: Team) {
-  const localized = TEAM_LOCALE_LABELS[team.id];
-  if (localized) {
-    return `${localized.flag} ${localized.name}`;
-  }
-
-  return team.shortName || team.name;
+  return teamLabel(team);
 }
 
 function localizedTeamNameById(teams: Team[], id: string) {
@@ -148,6 +144,8 @@ function fixtureDisplayName(match: EnrichedMatch) {
 export function DashboardClient({ store, matches, predictions }: DashboardClientProps) {
   const todayDateKey = getTodayDateKeyInBeijing();
   const [favoriteTeams, setFavoriteTeams] = useState<string[]>([]);
+  const [favoriteTeamPicker, setFavoriteTeamPicker] = useState("");
+  const [favoriteTeamSearch, setFavoriteTeamSearch] = useState("");
   const [statusFilter, setStatusFilter] = useState<"all" | MatchStatus>("all");
   const [groupFilter, setGroupFilter] = useState("all");
   const [teamFilter, setTeamFilter] = useState("all");
@@ -155,27 +153,123 @@ export function DashboardClient({ store, matches, predictions }: DashboardClient
   const [dateFilter, setDateFilter] = useState(todayDateKey);
   const [sortMode, setSortMode] = useState<"time" | "upset">("time");
   const [standingGroup, setStandingGroup] = useState("A");
+  const [radarHomeTeamId, setRadarHomeTeamId] = useState("");
+  const [radarAwayTeamId, setRadarAwayTeamId] = useState("");
   const [mounted, setMounted] = useState(false);
-  const predictedFixtureIds = useMemo(() => new Set(predictions.map((prediction) => prediction.fixtureId)), [predictions]);
-  const topFixture = store.fixtures.find((fixture) => predictedFixtureIds.has(fixture.id)) ?? store.fixtures[0];
+  const [mobileFilterOpen, setMobileFilterOpen] = useState(false);
+  const [showCharts, setShowCharts] = useState(false);
   const qualitySummary = useMemo(() => buildDataQualitySummary(store), [store]);
   const latestDataUpdatedAt = useMemo(() => getLatestDataUpdatedAt(store), [store]);
   const freshness = useMemo(() => buildDataFreshnessSummary(store, new Date(), latestDataUpdatedAt), [store, latestDataUpdatedAt]);
   const dataUpdatedAtLabel = latestDataUpdatedAt
     ? formatBeijingDataTimestamp(latestDataUpdatedAt)
     : "N/A";
-  const radarTeams = useMemo(() => {
-    const fixture = topFixture;
-    return fixture?.homeTeamId && fixture.awayTeamId ? [teamById(store.teams, fixture.homeTeamId), teamById(store.teams, fixture.awayTeamId)] : store.teams.slice(0, 2);
-  }, [store.teams, topFixture]);
+  const defaultRadarTeams = useMemo(() => {
+    const byProfile = store.teams
+      .slice()
+      .sort((a, b) => (b.attack + b.defense + b.midfield + b.form + b.tempo) - (a.attack + a.defense + a.midfield + a.form + a.tempo));
+    return byProfile.length > 1 ? [byProfile[0], byProfile[byProfile.length - 1]] : byProfile;
+  }, [store.teams]);
+  const selectedRadarHomeTeamId = radarHomeTeamId || defaultRadarTeams[0]?.id || "";
+  const selectedRadarAwayTeamId = radarAwayTeamId || defaultRadarTeams[1]?.id || "";
+  const radarTeams = [selectedRadarHomeTeamId, selectedRadarAwayTeamId]
+    .map((id) => store.teams.find((team) => team.id === id))
+    .filter((team): team is Team => Boolean(team));
+  const radarTeamOptions = store.teams.slice().sort((a, b) => localizedTeamLabel(a).localeCompare(localizedTeamLabel(b), "zh-Hans-CN"));
 
   useEffect(() => {
     setMounted(true);
+    setShowCharts(!window.matchMedia("(max-width: 560px)").matches);
     const raw = window.localStorage.getItem(FAVORITES_KEY);
     if (raw) {
       setFavoriteTeams(JSON.parse(raw) as string[]);
     }
   }, []);
+
+  function renderFilterFields(className = "") {
+    const normalizedTeamSearch = teamSearch.trim().toLocaleLowerCase();
+    const matchingTeams = store.teams.filter((team) => {
+      if (!normalizedTeamSearch) return true;
+      return [team.name, team.shortName, team.fifaCode, team.id, localizedTeamLabel(team)]
+        .some((value) => value.toLocaleLowerCase().includes(normalizedTeamSearch));
+    });
+    const defaultTeamIds = new Set([
+      ...matches.filter((match) => match.beijingDate === todayDateKey).flatMap((match) => [match.home.id, match.away.id]),
+      ...favoriteTeams
+    ]);
+    const selectableTeams = normalizedTeamSearch ? matchingTeams : store.teams.filter((team) => defaultTeamIds.has(team.id));
+
+    return (
+      <div className={className}>
+        <label className="filterField">
+          <span>日期</span>
+          <select aria-label="按日期筛选" value={dateFilter} onChange={(event) => setDateFilter(event.target.value)}>
+            {dates.map((date) => <option value={date} key={date}>{date === "all" ? "全部日期" : date}</option>)}
+          </select>
+        </label>
+        <label className="filterField">
+          <span>小组</span>
+          <select aria-label="按小组筛选" value={groupFilter} onChange={(event) => setGroupFilter(event.target.value)}>
+            {groups.map((group) => <option value={group} key={group}>{group === "all" ? "全部小组" : `${group} 组`}</option>)}
+          </select>
+        </label>
+        <label className="filterField searchField">
+          <span>搜索球队</span>
+          <span className="searchControl">
+            <Search size={15} />
+            <input
+              aria-label="搜索球队"
+              placeholder="搜索球队 / FIFA code"
+              value={teamSearch}
+              onChange={(event) => {
+                setTeamSearch(event.target.value);
+                setTeamFilter("all");
+              }}
+            />
+          </span>
+        </label>
+        <label className="filterField">
+          <span>球队</span>
+          <select
+            aria-label="按球队筛选"
+            value={teamFilter}
+            onChange={(event) => {
+              setTeamFilter(event.target.value);
+              setTeamSearch("");
+            }}
+          >
+            <option value="all">{normalizedTeamSearch ? `搜索到 ${matchingTeams.length} 支球队` : "今日相关与收藏球队"}</option>
+            {selectableTeams.sort((a, b) => a.fifaRank - b.fifaRank).map((team) => <option value={team.id} key={team.id}>{teamInlineLabel(team)}</option>)}
+          </select>
+        </label>
+        {teamSearch || teamFilter !== "all" ? (
+          <div className="teamFilterSummary" role="status">
+            <span>{teamFilter !== "all" ? `已选择：${localizedTeamNameById(store.teams, teamFilter)}` : `搜索：${teamSearch}`}</span>
+            <button type="button" onClick={() => { setTeamSearch(""); setTeamFilter("all"); }}>清除球队筛选</button>
+          </div>
+        ) : null}
+        <label className="filterField">
+          <span>状态</span>
+          <select aria-label="按比赛状态筛选" value={statusFilter} onChange={(event) => setStatusFilter(event.target.value as "all" | MatchStatus)}>
+            <option value="all">全部状态</option>
+            <option value="live">进行中</option>
+            <option value="live_pending">进行中，比分待更新</option>
+            <option value="finished">已结束</option>
+            <option value="scheduled">未开始</option>
+            <option value="result_pending">赛果待更新</option>
+            <option value="unknown">时间或数据异常</option>
+          </select>
+        </label>
+        <label className="filterField">
+          <span>排序</span>
+          <select aria-label="比赛排序方式" value={sortMode} onChange={(event) => setSortMode(event.target.value as "time" | "upset")}>
+            <option value="time">按开赛时间</option>
+            <option value="upset">按冷门风险</option>
+          </select>
+        </label>
+      </div>
+    );
+  }
 
   function toggleFavorite(teamId: string) {
     setFavoriteTeams((current) => {
@@ -207,8 +301,10 @@ export function DashboardClient({ store, matches, predictions }: DashboardClient
       return [
         item.home.name,
         item.home.shortName,
+        localizedTeamLabel(item.home),
         item.away.name,
         item.away.shortName,
+        localizedTeamLabel(item.away),
         item.fixture.homeTeamId,
         item.fixture.awayTeamId
       ].some((value) => value?.toLowerCase().includes(query));
@@ -232,6 +328,13 @@ export function DashboardClient({ store, matches, predictions }: DashboardClient
   const favoriteTodayFixtures = getFavoriteTeamMatches(todayMatches, favoriteTeams);
   const focusMatch = getMostPopularMatch(todayMatches);
   const upsetFocus = getHighestUpsetRiskMatch(todayMatches);
+  const todayLiveFocus = todayMatches.find((match) => match.status === "live" || match.status === "live_pending");
+  const todayScheduledMatches = todayMatches.filter((match) => match.status === "scheduled");
+  const todayFinishedMatches = todayMatches.filter((match) => match.status === "finished");
+  const largestPredictionError = todayFinishedMatches
+    .filter((match) => match.review)
+    .sort((a, b) => (b.review!.totalGoalError + b.review!.goalDiffError) - (a.review!.totalGoalError + a.review!.goalDiffError))[0];
+  const exactScoreMatch = todayFinishedMatches.find((match) => match.review?.exactScoreHit);
   const nextFavorite = favoriteFixtures
     .filter((item) => item.status === "scheduled" || item.status === "live")
     .sort((a, b) => new Date(a.fixture.kickoff).getTime() - new Date(b.fixture.kickoff).getTime())[0];
@@ -253,16 +356,6 @@ export function DashboardClient({ store, matches, predictions }: DashboardClient
     return rows;
   }, [groupStandingTables]);
   const groupStageMatches = useMemo(() => enrichedMatches.filter((match) => match.fixture.stage === "小组赛"), [enrichedMatches]);
-  const quickTeamChips = useMemo(() => {
-    const preferredGroup = groupFilter === "all" ? standingGroup : groupFilter;
-    const groupTeams = store.teams.filter((team) => team.group === preferredGroup);
-    const favoriteRows = favoriteTeams
-      .map((id) => store.teams.find((team) => team.id === id))
-      .filter((team): team is Team => Boolean(team));
-    const rows = [...favoriteRows, ...groupTeams].filter((team, index, items) => items.findIndex((item) => item.id === team.id) === index);
-    return rows.slice(0, 8);
-  }, [favoriteTeams, groupFilter, standingGroup, store.teams]);
-  const compactTeamOptions = quickTeamChips;
   const schedulePreview = useMemo(() => {
     const upcomingGroupMatches = enrichedMatches
       .filter((match) => match.fixture.stage === "小组赛" && match.status === "scheduled")
@@ -279,10 +372,13 @@ export function DashboardClient({ store, matches, predictions }: DashboardClient
     const scheduleDates = groupStageMatches.map((match) => match.beijingDate).sort();
     return scheduleDates.length ? `${scheduleDates[0]} 至 ${scheduleDates[scheduleDates.length - 1]}` : "暂无赛程日期";
   }, [groupStageMatches]);
-  const heatData = store.fixtures
-    .map((fixture) => ({
-      name: `${fixture.homeTeamId ? localizedTeamNameById(store.teams, fixture.homeTeamId) : fixture.homePlaceholder ?? "TBD"}-${fixture.awayTeamId ? localizedTeamNameById(store.teams, fixture.awayTeamId) : fixture.awayPlaceholder ?? "TBD"}`,
-      heat: fixture.heatIndex
+  const schedulePreviewDate = schedulePreview[0]?.beijingDate;
+  const heatData = enrichedMatches
+    .filter((match) => match.status === "scheduled" || match.status === "live" || match.status === "live_pending")
+    .map((match) => ({
+      name: fixtureDisplayName(match),
+      axisLabel: `${match.home.fifaCode}–${match.away.fifaCode}`,
+      heat: match.fixture.heatIndex
     }))
     .sort((a, b) => b.heat - a.heat)
     .slice(0, 6);
@@ -291,10 +387,20 @@ export function DashboardClient({ store, matches, predictions }: DashboardClient
     .map((team) => {
       const standing = standingByTeam.get(team.id);
       const played = standing?.played ?? 0;
+      const rankingSignal = clamp((52 - team.fifaRank) / 4.5, -8, 11);
+      const resultsSignal = clamp(
+        (standing?.points ?? 0) * 1.8 +
+          (standing?.goalDifference ?? 0) * 1.4 +
+          (standing?.goalsFor ?? 0) * 0.5 -
+          (standing?.goalsAgainst ?? 0) * 0.4 -
+          Math.max(0, 2 - played) * 1.5,
+        -5,
+        13
+      );
       const formScore = clamp(
-        Math.round(team.form + (standing?.points ?? 0) * 1.5 + (standing?.goalDifference ?? 0) * 1.2 + (standing?.goalsFor ?? 0) * 0.5 - (standing?.goalsAgainst ?? 0) * 0.5 - Math.max(0, 2 - played)),
+        Math.round(48 + (team.form - 60) * 0.45 + rankingSignal + resultsSignal),
         45,
-        96
+        90
       );
       return {
         name: localizedTeamLabel(team),
@@ -447,49 +553,7 @@ export function DashboardClient({ store, matches, predictions }: DashboardClient
   }
 
   function renderStandingTable(table: GroupStandingTable) {
-    function standingGoalDifferenceLabel(row: GroupStandingTable["rows"][number]) {
-      return row.goalDifference > 0 ? `+${row.goalDifference}` : `${row.goalDifference}`;
-    }
-
-    function standingSummary(row: GroupStandingTable["rows"][number]) {
-      return `进球 ${row.goalsFor}｜失球 ${row.goalsAgainst}｜净胜球 ${standingGoalDifferenceLabel(row)}｜积分 ${row.points}`;
-    }
-
-    return (
-      <div className="standingTableWrap">
-        <table className="standingTable homepageStandingTable">
-          <colgroup>
-            <col className="standingRankCol" />
-            <col className="standingTeamCol" />
-            <col className="standingSummaryCol" />
-            <col className="standingStatusCol" />
-          </colgroup>
-          <thead>
-            <tr>
-              <th className="numericCell">排名</th>
-              <th>球队</th>
-              <th>数据摘要</th>
-              <th>出线形势</th>
-            </tr>
-          </thead>
-          <tbody>
-            {table.rows.map((row) => (
-              <tr
-                key={row.teamId}
-                aria-label={`${localizedTeamNameById(store.teams, row.teamId)}：${standingSummary(row)}`}
-              >
-                <td className="numericCell">{row.rank}</td>
-                <td>
-                  <Link href={`/teams/${row.teamId}`}>{localizedTeamNameById(store.teams, row.teamId)}</Link>
-                </td>
-                <td className="standingSummaryCell">{standingSummary(row)}</td>
-                <td>{row.qualificationText}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-    );
+    return <StandingsSummary table={table} teams={store.teams} />;
   }
 
   function renderMatchCard(item: (typeof enrichedMatches)[number], variant: "compact" | "full" = "full") {
@@ -509,6 +573,7 @@ export function DashboardClient({ store, matches, predictions }: DashboardClient
           {localizedTeamLabel(home)} <span>vs</span> {localizedTeamLabel(away)}
         </Link>
         <div className="matchMeta">{item.displayTimezoneLabel} {item.displayTime} · {fixture.city}</div>
+        <div className="mobileMatchMeta">{item.beijingTimeLabel} · {matchStatusLabel(status)}</div>
         <div className="teamAuxLine">{localizedTeamLabel(home)}（{home.fifaCode}） / {localizedTeamLabel(away)}（{away.fifaCode}）</div>
 
         {status === "finished" ? (
@@ -593,12 +658,15 @@ export function DashboardClient({ store, matches, predictions }: DashboardClient
       </section>
 
       <section className="noticeBand">
-        本地数据最近更新：{dataUpdatedAtLabel}，北京时间。数据状态：{freshnessStatusLabel(freshness.status, freshness.pendingResults.length)}。当前页面展示的是本地数据快照，不是实时比分 API。
-        <br />
-        build: standings-summary-v2 / no-legacy-columns / group-standings-homepage
+        数据更新：{dataUpdatedAtLabel}（北京时间） · 状态：{freshnessStatusLabel(freshness.status, freshness.pendingResults.length)} · 本页为本地数据快照，不是实时比分 API。
       </section>
 
-      <section className="qualityBand" aria-label="数据可信度摘要">
+      <details className="mobileDataSummary">
+        <summary>数据状态与可信度</summary>
+        <span>{qualitySummary.sourceCount} 个来源 · 最近更新 {dataUpdatedAtLabel} · 赛果待更新 {freshness.pendingResults.length} 场</span>
+      </details>
+
+      <section className="qualityBand desktopQualityBand" aria-label="数据可信度摘要">
         <div>
           <span>来源目录</span>
           <strong>{qualitySummary.sourceCount}</strong>
@@ -616,14 +684,24 @@ export function DashboardClient({ store, matches, predictions }: DashboardClient
         </div>
       </section>
 
-      <section className="focusGrid">
-        <article className="panel focusPanel">
+      <section className="focusGrid" id="mobile-today">
+        <article className="panel focusPanel" id="team-center">
           <h2>今日焦点</h2>
           {todayMatches.length ? (
             <div className="focusStats">
               <span>今日比赛 <strong>{todayMatches.length}</strong></span>
               <span>最受关注 <strong>{focusMatch ? fixtureDisplayName(focusMatch) : "今日暂无比赛"}</strong></span>
-              <span>最大冷门风险 <strong>{upsetFocus ? fixtureDisplayName(upsetFocus) : "今日暂无冷门风险数据"}</strong></span>
+              {todayLiveFocus ? (
+                <span>进行中焦点 <strong>{fixtureDisplayName(todayLiveFocus)}</strong></span>
+              ) : todayScheduledMatches.length ? (
+                <span>最大冷门风险 <strong>{upsetFocus ? fixtureDisplayName(upsetFocus) : "今日暂无冷门风险数据"}</strong></span>
+              ) : (
+                <>
+                  <span>今日复盘重点 <strong>{largestPredictionError ? fixtureDisplayName(largestPredictionError) : "暂无可复盘比赛"}</strong></span>
+                  <span>最大预测偏差 <strong>{largestPredictionError?.review ? `总进球 ${largestPredictionError.review.totalGoalError} · 净胜球 ${largestPredictionError.review.goalDiffError}` : "暂无"}</strong></span>
+                  <span>比分命中比赛 <strong>{exactScoreMatch ? fixtureDisplayName(exactScoreMatch) : "0 场"}</strong></span>
+                </>
+              )}
               <span>主队相关 <strong>{favoriteTodayFixtures.length || (favoriteTeams.length ? "今日暂无主队相关比赛" : "未收藏")}</strong></span>
             </div>
           ) : (
@@ -652,62 +730,60 @@ export function DashboardClient({ store, matches, predictions }: DashboardClient
           <strong>筛选比赛</strong>
           <span>按日期、小组、球队、状态和排序方式浏览。</span>
         </div>
-        <div className="filterControls">
-          <select value={dateFilter} onChange={(event) => setDateFilter(event.target.value)}>
-            {dates.map((date) => <option value={date} key={date}>{date === "all" ? "全部日期" : date}</option>)}
-          </select>
-          <select value={groupFilter} onChange={(event) => setGroupFilter(event.target.value)}>
-            {groups.map((group) => <option value={group} key={group}>{group === "all" ? "全部小组" : `${group} 组`}</option>)}
-          </select>
-          <select value={teamFilter} onChange={(event) => setTeamFilter(event.target.value)}>
-            <option value="all">当前小组/收藏球队</option>
-            {compactTeamOptions.map((team) => <option value={team.id} key={team.id}>{teamInlineLabel(team)}</option>)}
-          </select>
-          <label className="searchControl">
-            <Search size={15} />
-            <input
-              aria-label="搜索球队"
-              placeholder="搜索球队 / FIFA code"
-              value={teamSearch}
-              onChange={(event) => setTeamSearch(event.target.value)}
-            />
-          </label>
-          <select value={statusFilter} onChange={(event) => setStatusFilter(event.target.value as "all" | MatchStatus)}>
-            <option value="all">全部状态</option>
-            <option value="live">进行中</option>
-            <option value="live_pending">进行中，比分待更新</option>
-            <option value="finished">已结束</option>
-            <option value="scheduled">未开始</option>
-            <option value="result_pending">赛果待更新</option>
-            <option value="unknown">时间或数据异常</option>
-          </select>
-          <select value={sortMode} onChange={(event) => setSortMode(event.target.value as "time" | "upset")}>
-            <option value="time">按开赛时间</option>
-            <option value="upset">按冷门风险</option>
-          </select>
+        {renderFilterFields("filterControls desktopFilters")}
+        <div className="mobileFilterBar">
+          <button onClick={() => setDateFilter(todayDateKey)} className={dateFilter === todayDateKey ? "active" : ""}>今天</button>
+          <button onClick={() => setDateFilter("all")} className={dateFilter === "all" ? "active" : ""}>全部</button>
+          <button onClick={() => setMobileFilterOpen(true)}>筛选</button>
         </div>
       </section>
 
-      <section className="teamStrip">
-        {quickTeamChips.map((team) => (
-          <button
-            key={team.id}
-            className={`teamPill ${favoriteTeams.includes(team.id) ? "active" : ""}`}
-            onClick={() => toggleFavorite(team.id)}
-            title={`${favoriteTeams.includes(team.id) ? "取消收藏" : "收藏"} ${teamInlineLabel(team)}`}
-          >
-            <Star size={15} fill={favoriteTeams.includes(team.id) ? "currentColor" : "none"} />
-            <span>{teamDisplay(team).primary}</span>
-            <small>{team.fifaCode}</small>
-          </button>
-        ))}
-        <span className="teamStripHint">显示当前小组/收藏球队；完整 48 队请用搜索定位。</span>
+      {mobileFilterOpen ? (
+        <div className="mobileFilterSheet" role="dialog" aria-modal="true" aria-label="筛选比赛">
+          <button className="sheetBackdrop" aria-label="关闭筛选" onClick={() => setMobileFilterOpen(false)} />
+          <section>
+            <div className="sheetHeader"><h2>筛选比赛</h2><button onClick={() => setMobileFilterOpen(false)}>完成</button></div>
+            {renderFilterFields("mobileFilterFields")}
+          </section>
+        </div>
+      ) : null}
+
+      <section className="teamStrip favoriteTeamStrip" aria-label="选择主队">
+        <div>
+          <strong>选择主队</strong>
+          <span>从完整 48 队中选择；仅用于“我的主队中心”，不会筛选比赛。</span>
+        </div>
+        <label className="favoritePickerControl">
+          <span>主队</span>
+          <input aria-label="搜索主队" placeholder="搜索全部 48 队" value={favoriteTeamSearch} onChange={(event) => setFavoriteTeamSearch(event.target.value)} />
+          <select value={favoriteTeamPicker} onChange={(event) => setFavoriteTeamPicker(event.target.value)}>
+            <option value="">请选择球队</option>
+            {store.teams.filter((team) => !favoriteTeamSearch.trim() ? favoriteTeams.includes(team.id) || todayMatches.some((match) => match.home.id === team.id || match.away.id === team.id) : [team.nameZh, team.name, team.fifaCode, team.id].some((value) => value?.toLowerCase().includes(favoriteTeamSearch.trim().toLowerCase()))).sort((a, b) => a.fifaRank - b.fifaRank).map((team) => <option key={team.id} value={team.id}>{teamInlineLabel(team)}</option>)}
+          </select>
+        </label>
+        <button
+          className="favoritePickerAction"
+          disabled={!favoriteTeamPicker}
+          onClick={() => favoriteTeamPicker && toggleFavorite(favoriteTeamPicker)}
+        >
+          <Star size={16} fill={favoriteTeams.includes(favoriteTeamPicker) ? "currentColor" : "none"} />
+          {favoriteTeams.includes(favoriteTeamPicker) ? "取消收藏" : "收藏主队"}
+        </button>
+        {favoriteTeams.length ? (
+          <div className="favoritePickerSelected" aria-label="已收藏主队">
+            <span>已收藏：</span>
+            {favoriteTeams.map((id) => {
+              const team = teamById(store.teams, id);
+              return <button key={id} onClick={() => toggleFavorite(id)} title={`取消收藏 ${teamInlineLabel(team)}`}>{teamDisplay(team).primary} ×</button>;
+            })}
+          </div>
+        ) : null}
       </section>
 
-      <section className="dashboardSection">
+      <section className="dashboardSection" id="mobile-schedule">
         <div className="sectionHeader">
-          <h2>完整小组赛数据</h2>
-          <span>{groupStageMatches.length} 场小组赛数据 · {scheduleDateRange}</span>
+          <h2>下一比赛日赛程</h2>
+          <span>{schedulePreviewDate ?? "暂无赛程"} · 全部 {groupStageMatches.length} 场小组赛覆盖 {scheduleDateRange}</span>
         </div>
         <div className="coverageStrip">
           {groupCoverage.map((group) => <span key={group}>{group} 组</span>)}
@@ -716,7 +792,7 @@ export function DashboardClient({ store, matches, predictions }: DashboardClient
           {schedulePreview.map((item) => (
             <Link href={`/matches/${item.fixture.id}`} key={item.fixture.id}>
               <strong>{fixtureDisplayName(item)}</strong>
-              <span>{item.beijingDate} {item.beijingTimeLabel} · {matchStatusLabel(item.status)}</span>
+              <span>{item.beijingTimeLabel} · {matchStatusLabel(item.status)}</span>
             </Link>
           ))}
         </div>
@@ -819,15 +895,15 @@ export function DashboardClient({ store, matches, predictions }: DashboardClient
         </p>
       </section>
 
-      <section className="chartsGrid">
+      {showCharts ? <section className="chartsGrid" id="mobile-models">
         <article className="panel">
-          <h2>全量样本热度排行（演示口径）</h2>
+          <h2>未开始 / 进行中比赛热度排行（演示口径）</h2>
           <div className="chartBox">
-            {renderChartFrame(heatData.map((item) => ({ name: item.name, value: item.heat })), "暂无比赛热度数据。", (
+            {renderChartFrame(heatData.map((item) => ({ name: item.name, value: item.heat })), "暂无未开始或进行中的比赛热度数据。", (
               <ResponsiveContainer>
                 <BarChart data={heatData}>
                   <CartesianGrid strokeDasharray="3 3" vertical={false} />
-                  <XAxis dataKey="name" tick={{ fontSize: 12 }} />
+                  <XAxis dataKey="axisLabel" interval={0} tick={{ fontSize: 11 }} />
                   <YAxis width={30} />
                   <Tooltip />
                   <Bar dataKey="heat" fill="#1f7a8c" radius={[4, 4, 0, 0]} />
@@ -835,11 +911,25 @@ export function DashboardClient({ store, matches, predictions }: DashboardClient
               </ResponsiveContainer>
             ))}
           </div>
-          <p className="sourceLine">全量 72 场样本的演示热度字段，用于界面排序和模型示例；不是官方数据、官方关注度，也不是全网实时舆情。</p>
+          <p className="sourceLine">热度指数（0–100）是基于本地示例舆情输入生成的关注度排序分，仅展示未开始或进行中的比赛；用于界面排序和模型示例，不是官方关注度，也不是全网实时舆情。</p>
         </article>
 
         <article className="panel">
           <h2>全量样本球队雷达图（演示模型）</h2>
+          <div className="radarControls" aria-label="选择雷达图比较球队">
+            <label>
+              球队一
+              <select value={selectedRadarHomeTeamId} onChange={(event) => setRadarHomeTeamId(event.target.value)}>
+                {radarTeamOptions.map((team) => <option key={team.id} value={team.id} disabled={team.id === selectedRadarAwayTeamId}>{localizedTeamLabel(team)}</option>)}
+              </select>
+            </label>
+            <label>
+              球队二
+              <select value={selectedRadarAwayTeamId} onChange={(event) => setRadarAwayTeamId(event.target.value)}>
+                {radarTeamOptions.map((team) => <option key={team.id} value={team.id} disabled={team.id === selectedRadarHomeTeamId}>{localizedTeamLabel(team)}</option>)}
+              </select>
+            </label>
+          </div>
           <div className="chartBox">
             {renderChartFrame(radarData.map((item) => ({ name: item.metric, value: `${radarHomeLabel} ${item[radarHomeLabel]} / ${radarAwayLabel} ${item[radarAwayLabel]}` })), "暂无球队对比数据。", (
               <ResponsiveContainer>
@@ -853,7 +943,7 @@ export function DashboardClient({ store, matches, predictions }: DashboardClient
               </ResponsiveContainer>
             ))}
           </div>
-          <p className="sourceLine">球队画像基于 FIFA 排名和 MVP 手动补充输入生成，属于本地演示模型口径；不是官方数据、官方能力评分或实时状态。</p>
+          <p className="sourceLine">可从全量样本中任选两队比较；初始展示综合画像最高与最低的球队，以清楚展示五项维度差异。球队画像基于 FIFA 排名和 MVP 手动补充输入生成，属于本地演示模型口径；不是官方数据、官方能力评分或实时状态。</p>
         </article>
 
         <article className="panel">
@@ -864,7 +954,7 @@ export function DashboardClient({ store, matches, predictions }: DashboardClient
                 <AreaChart data={formData}>
                   <CartesianGrid strokeDasharray="3 3" vertical={false} />
                   <XAxis dataKey="name" tick={{ fontSize: 12 }} />
-                  <YAxis domain={[50, 100]} width={30} />
+                  <YAxis domain={[45, 90]} width={30} />
                   <Tooltip />
                   <Area dataKey="form" stroke="#475569" fill="#94a3b8" fillOpacity={0.35} />
                 </AreaChart>
@@ -879,10 +969,10 @@ export function DashboardClient({ store, matches, predictions }: DashboardClient
           <div className="chartBox">
             {renderChartFrame(qualificationData.map((item) => ({ name: item.name, value: `${item.probability}%` })), "暂无小组出线概率数据。", (
               <ResponsiveContainer>
-                <BarChart data={qualificationData} layout="vertical" margin={{ left: 18 }}>
+                <BarChart data={qualificationData} layout="vertical" margin={{ left: 4 }}>
                   <CartesianGrid strokeDasharray="3 3" horizontal={false} />
                   <XAxis type="number" domain={[0, 100]} />
-                  <YAxis type="category" dataKey="name" tick={{ fontSize: 12 }} width={58} />
+                  <YAxis type="category" dataKey="name" tick={{ fontSize: 12 }} width={104} />
                   <Tooltip />
                   <Bar dataKey="probability" fill="#64748b" radius={[0, 4, 4, 0]} />
                 </BarChart>
@@ -891,9 +981,15 @@ export function DashboardClient({ store, matches, predictions }: DashboardClient
           </div>
           <p className="sourceLine">出线概率覆盖全量小组赛样本，为本地演示模型推断；不是官方数据、官方概率、博彩赔率或实时预测。</p>
         </article>
-      </section>
+      </section> : (
+        <section className="mobileChartsTeaser" id="mobile-models">
+          <strong>模型数据与图表</strong>
+          <span>热度、球队对比、近期状态与出线概率</span>
+          <button onClick={() => setShowCharts(true)}>查看图表</button>
+        </section>
+      )}
 
-      <section className="sourcePanel">
+      <section className="sourcePanel" id="mobile-sources">
         <h2>数据来源与更新时间</h2>
         <p className="sourceLine">本地数据最近更新：{dataUpdatedAtLabel}，北京时间。以下为各来源各自的抓取时间。</p>
         <div className="sourceGrid">
@@ -906,6 +1002,12 @@ export function DashboardClient({ store, matches, predictions }: DashboardClient
           ))}
         </div>
       </section>
+      <nav className="mobileBottomNav" aria-label="移动端快捷导航">
+        <a href="#mobile-today">今日</a>
+        <a href="#mobile-schedule">赛程</a>
+        <a href="#group-standings">积分榜</a>
+        <a href="#team-center">我的主队</a>
+      </nav>
     </main>
   );
 }

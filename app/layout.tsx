@@ -3,8 +3,28 @@ import Link from "next/link";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "World Cup Match Intelligence Center",
-  description: "世界杯比赛智能分析中心"
+  metadataBase: new URL("https://world-cup-match-intelligence-center.vercel.app"),
+  title: {
+    default: "世界杯比赛智能分析中心",
+    template: "%s | 世界杯比赛智能分析中心"
+  },
+  description: "整合世界杯赛程、赛果、积分榜与本地模型预测的比赛分析中心。",
+  alternates: {
+    canonical: "/"
+  },
+  openGraph: {
+    type: "website",
+    locale: "zh_CN",
+    url: "/",
+    siteName: "世界杯比赛智能分析中心",
+    title: "世界杯比赛智能分析中心",
+    description: "赛程、赛果、积分榜与本地模型预测。"
+  },
+  twitter: {
+    card: "summary",
+    title: "世界杯比赛智能分析中心",
+    description: "赛程、赛果、积分榜与本地模型预测。"
+  }
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {

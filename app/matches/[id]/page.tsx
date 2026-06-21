@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { SourceBadge } from "../../../components/source-badge";
+import { StandingsSummary } from "../../../components/standings-summary";
 import { formatFullDisplayDateTime } from "../../../lib/format";
 import {
   buildGroupStandings,
@@ -10,7 +11,9 @@ import {
   STANDINGS_PAGE_RULE_NOTE
 } from "../../../lib/group-standings";
 import { confidenceLabel, matchStatusLabel } from "../../../lib/match-intelligence";
+import { isScheduleVerified } from "../../../lib/schedule-validation";
 import { getEnrichedFixtureBundle, getEnrichedFixtureBundles } from "../../../lib/store";
+import { teamLabel } from "../../../lib/team-display";
 import type { DataConfidence } from "../../../lib/types";
 
 interface PageProps {
@@ -109,7 +112,7 @@ export default async function MatchPage({ params }: PageProps) {
       <section className="matchHero">
         <div>
           <p className="eyebrow">{matchStatusLabel(status)} · {fixture.stage} · {fixture.group} 组</p>
-          <h1>{homeTeam.name} vs {awayTeam.name}</h1>
+          <h1>{teamLabel(homeTeam)} vs {teamLabel(awayTeam)}</h1>
           <p>{displayTimezoneLabel} {displayTime} · {fixture.city} · {fixture.venue}</p>
           {staleResultMessage ? <p className="sourceLine">{staleResultMessage}</p> : null}
         </div>
@@ -121,10 +124,10 @@ export default async function MatchPage({ params }: PageProps) {
       </section>
 
       <section className="detailGrid">
-        <article className="panel widePanel">
+        <article className={`panel widePanel ${status === "finished" ? "postMatchPreAnalysis" : ""}`}>
           <div className="panelTitle">
-            <h2>{analysis.title}</h2>
-            <SourceBadge source={fixture.source} />
+            <h2>{status === "finished" ? "赛前分析（赛前快照）" : analysis.title}</h2>
+            <SourceBadge source={fixture.source} verified={isScheduleVerified(fixture)} />
           </div>
           <p className="lead">{analysis.summary}</p>
           {activePrediction ? (
@@ -159,8 +162,8 @@ export default async function MatchPage({ params }: PageProps) {
           <p className="sourceLine">{staleResultMessage ?? `数据更新时间：${formatFullDisplayDateTime(fixture.source.lastFetchedAt)}`}</p>
         </article>
 
-        <article className="panel widePanel" data-smoke="match-data-times">
-          <h2>数据时间</h2>
+        <article className={`panel widePanel ${status === "finished" ? "postMatchSnapshot" : ""}`} data-smoke="match-data-times">
+          <h2>{status === "finished" ? "赛前预测快照" : "数据时间"}</h2>
           <div className="reviewGrid">
             <span>来源抓取时间 <strong>{fixture.source.lastFetchedAt ? formatFullDisplayDateTime(fixture.source.lastFetchedAt) : "暂无"}</strong></span>
             <span>数据规范化时间 <strong>{fixture.lastNormalizedAt ? formatFullDisplayDateTime(fixture.lastNormalizedAt) : "暂无，等待规范化"}</strong></span>
@@ -170,49 +173,24 @@ export default async function MatchPage({ params }: PageProps) {
           <p className="sourceLine">状态按开赛时间加 2 小时的本地提示规则判断；预测快照与赛果更新时间相互独立。</p>
         </article>
 
-        <article className="panel">
+        <article className={`panel ${status === "finished" ? "postMatchScore" : ""}`}>
           <h2>比分信息</h2>
           <p>{actualScore ? `实际比分：${homeTeam.shortName} ${actualScore} ${awayTeam.shortName}` : "实际比分：赛果待抓取 / 数据待更新"}</p>
           <p className="sourceLine">{reviewPrediction ? `赛前预测：${reviewPrediction.predictedScore.home}-${reviewPrediction.predictedScore.away}；期望进球 ${reviewPrediction.expectedGoals.home}-${reviewPrediction.expectedGoals.away}` : "参赛队待确定，不生成赛前预测。"}</p>
         </article>
 
         {groupStanding ? (
-          <article className="panel widePanel" id="match-group-standings" data-smoke="match-group-standings">
+          <article className={`panel widePanel ${status === "finished" ? "postMatchStandings" : ""}`} id="match-group-standings" data-smoke="match-group-standings">
             <h2>{fixture.group} 组积分榜摘要</h2>
             <p className="sourceLine">所属小组：{fixture.group} 组</p>
             <p className="lead">{resultImpactText(match)}</p>
-            <div className="standingTableWrap">
-              <table className="standingTable compactStandingTable">
-                <thead>
-                  <tr>
-                    <th>排名</th>
-                    <th>球队</th>
-                    <th>数据摘要</th>
-                    <th>出线形势</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {groupStanding.rows.map((row) => (
-                    <tr
-                      key={row.teamId}
-                      className={row.teamId === homeTeam.id || row.teamId === awayTeam.id ? "activeRow" : ""}
-                      data-current-match-team={row.teamId === homeTeam.id || row.teamId === awayTeam.id ? "true" : undefined}
-                    >
-                      <td>{row.rank}</td>
-                      <td><Link href={`/teams/${row.teamId}`}>{row.teamName}</Link></td>
-                      <td className="standingSummaryCell">{standingSummary(row)}</td>
-                      <td>{row.qualificationText}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
+            <StandingsSummary table={groupStanding} teams={allMatchesBundle.store.teams} currentTeamIds={[homeTeam.id, awayTeam.id]} />
             <p className="sourceLine">{STANDINGS_PAGE_RULE_NOTE} {STANDINGS_PAGE_QUALIFICATION_NOTE}</p>
           </article>
         ) : null}
 
         {review ? (
-          <article className="panel widePanel">
+          <article className={`panel widePanel ${status === "finished" ? "postMatchReview" : ""}`}>
             <h2>赛后预测复盘</h2>
             <div className="reviewGrid">
               <span>实际比分 <strong>{review.actualHomeScore}-{review.actualAwayScore}</strong></span>
@@ -235,7 +213,7 @@ export default async function MatchPage({ params }: PageProps) {
           </article>
         ) : null}
 
-        <article className="panel widePanel">
+        <article className={`panel widePanel ${status === "finished" ? "postMatchPreAnalysis" : ""}`}>
           <h2>数据可信度</h2>
           <div className="reviewGrid">
             {confidenceRows(dataConfidence).map(([label, value]) => (
@@ -244,7 +222,7 @@ export default async function MatchPage({ params }: PageProps) {
           </div>
         </article>
 
-        <article className="panel widePanel">
+        <article className={`panel widePanel ${status === "finished" ? "postMatchPreAnalysis" : ""}`}>
           <h2>模型判断依据</h2>
           <div className="explanationGrid">
             {predictionExplanation.map((item) => (
@@ -273,21 +251,21 @@ export default async function MatchPage({ params }: PageProps) {
           </table>
         </article>
 
-        <article className="panel">
+        <article className={`panel ${status === "finished" ? "postMatchPreAnalysis" : ""}`}>
           <h2>战术看点</h2>
           <ul className="cleanList">
             {analysis.tacticalFocus.map((item) => <li key={item}>{item}</li>)}
           </ul>
         </article>
 
-        <article className="panel">
+        <article className={`panel ${status === "finished" ? "postMatchPreAnalysis" : ""}`}>
           <h2>关键球员</h2>
           <ul className="cleanList">
             {analysis.keyPlayers.map((item) => <li key={item}>{item}</li>)}
           </ul>
         </article>
 
-        <article className="panel">
+        <article className={`panel ${status === "finished" ? "postMatchPreAnalysis" : ""}`}>
           <h2>风险提示</h2>
           <p>{analysis.upsetRisk}</p>
           {activePrediction ? (
@@ -297,16 +275,19 @@ export default async function MatchPage({ params }: PageProps) {
           ) : null}
         </article>
 
-        <article className="panel widePanel">
-          <h2>比赛三种可能剧本</h2>
-          <div className="scenarioGrid">
+        <article className={`panel widePanel ${status === "finished" ? "postMatchPreAnalysis" : ""}`}>
+          <h2>赛前剧本（历史预测）</h2>
+          <details>
+            <summary>展开赛前预测剧本</summary>
+            <div className="scenarioGrid">
             {analysis.scenarios.map((scenario) => (
               <div key={scenario.title}>
                 <strong>{scenario.title}</strong>
                 <p>{scenario.description}</p>
               </div>
             ))}
-          </div>
+            </div>
+          </details>
         </article>
       </section>
     </main>

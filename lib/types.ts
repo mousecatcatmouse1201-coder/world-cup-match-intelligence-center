@@ -21,6 +21,7 @@ export interface DataSource extends RecordSource {
 export interface Team {
   id: string;
   name: string;
+  nameZh?: string;
   shortName: string;
   fifaCode: string;
   group: string;

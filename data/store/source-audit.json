@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-06-20T08:05:20.807Z",
+  "generatedAt": "2026-06-20T14:16:22.256Z",
   "summary": {
     "totalRecords": 385,
     "sourceCount": 5,
@@ -9,7 +9,7 @@
     "modeledRecords": 49,
     "mockOrEstimatedRecords": 214,
     "trustedRecords": 171,
-    "latestFetchedAt": "2026-06-20T08:05:20.775Z",
+    "latestFetchedAt": "2026-06-20T14:16:22.223Z",
     "groups": [
       {
         "key": "sources",
@@ -21,7 +21,7 @@
         "modeledRecords": 1,
         "mockOrEstimatedRecords": 2,
         "trustedRecords": 3,
-        "latestFetchedAt": "2026-06-20T08:05:20.775Z",
+        "latestFetchedAt": "2026-06-20T14:16:22.223Z",
         "sourceIds": [
           "espn-fixtures-secondary",
           "fifa-fixtures-official",
@@ -55,7 +55,7 @@
         "modeledRecords": 0,
         "mockOrEstimatedRecords": 20,
         "trustedRecords": 0,
-        "latestFetchedAt": "2026-06-20T08:05:20.775Z",
+        "latestFetchedAt": "2026-06-20T14:16:22.223Z",
         "sourceIds": [
           "manual-mvp-intel"
         ]
@@ -86,7 +86,7 @@
         "modeledRecords": 48,
         "mockOrEstimatedRecords": 48,
         "trustedRecords": 0,
-        "latestFetchedAt": "2026-06-20T08:05:20.775Z",
+        "latestFetchedAt": "2026-06-20T14:16:22.223Z",
         "sourceIds": [
           "local-model-derived"
         ]
@@ -116,7 +116,7 @@
         "modeledRecords": 0,
         "mockOrEstimatedRecords": 72,
         "trustedRecords": 0,
-        "latestFetchedAt": "2026-06-20T08:05:20.775Z",
+        "latestFetchedAt": "2026-06-20T14:16:22.223Z",
         "sourceIds": [
           "manual-odds"
         ]
@@ -131,7 +131,7 @@
         "modeledRecords": 0,
         "mockOrEstimatedRecords": 72,
         "trustedRecords": 0,
-        "latestFetchedAt": "2026-06-20T08:05:20.775Z",
+        "latestFetchedAt": "2026-06-20T14:16:22.223Z",
         "sourceIds": [
           "manual-sentiment"
         ]

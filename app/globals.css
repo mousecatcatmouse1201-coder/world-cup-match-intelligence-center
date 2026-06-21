@@ -35,6 +35,23 @@ select {
   font: inherit;
 }
 
+button,
+a,
+select,
+input,
+summary {
+  -webkit-tap-highlight-color: transparent;
+}
+
+button:focus-visible,
+a:focus-visible,
+select:focus-visible,
+input:focus-visible,
+summary:focus-visible {
+  outline: 3px solid #67c4d3;
+  outline-offset: 2px;
+}
+
 .topbar {
   position: sticky;
   top: 0;
@@ -136,6 +153,16 @@ select {
   line-height: 1.55;
 }
 
+.mobileDataSummary,
+.mobileFilterBar,
+.mobileFilterSheet,
+.mobileStandingCards,
+.mobileMatchMeta,
+.mobileBottomNav,
+.mobileChartsTeaser {
+  display: none;
+}
+
 .toolbar,
 .teamStrip,
 .qualityBand,
@@ -200,6 +227,10 @@ select {
   flex-wrap: wrap;
   justify-content: flex-end;
   gap: 8px;
+}
+
+.filterControls .filterField > span:first-child {
+  display: none;
 }
 
 .filterControls select,
@@ -290,6 +321,100 @@ select {
   overflow-x: auto;
   padding-bottom: 4px;
   scrollbar-width: thin;
+}
+
+.favoriteTeamStrip > div {
+  display: grid;
+  flex: 0 0 100%;
+  gap: 3px;
+}
+
+.favoriteTeamStrip > div span {
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.favoritePickerControl {
+  display: grid;
+  min-width: 260px;
+  gap: 5px;
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.favoritePickerControl select {
+  min-height: 44px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--surface);
+  color: var(--text);
+  padding: 0 10px;
+}
+
+.favoritePickerAction {
+  display: inline-flex;
+  min-height: 44px;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  padding: 0 14px;
+  border: 1px solid var(--accent);
+  border-radius: 8px;
+  background: #e7f4f6;
+  color: var(--accent-strong);
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.favoritePickerAction:disabled {
+  border-color: var(--line);
+  background: var(--surface-soft);
+  color: var(--muted);
+  cursor: not-allowed;
+}
+
+.favoritePickerSelected {
+  display: flex;
+  flex: 1 1 100%;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 7px;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.favoritePickerSelected button {
+  min-height: 32px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--surface);
+  color: var(--text);
+  cursor: pointer;
+}
+
+.teamFilterSummary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  flex: 1 1 100%;
+  padding: 8px 10px;
+  border-radius: 8px;
+  background: var(--surface-soft);
+  color: var(--accent-strong);
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.teamFilterSummary button {
+  min-height: 32px;
+  border: 0;
+  border-radius: 6px;
+  background: transparent;
+  color: var(--accent-strong);
+  cursor: pointer;
+  text-decoration: underline;
 }
 
 .teamPill {
@@ -623,6 +748,12 @@ select {
   margin-top: 26px;
 }
 
+.postMatchScore { order: 1; }
+.postMatchReview { order: 2; }
+.postMatchStandings { order: 3; }
+.postMatchSnapshot { order: 4; }
+.postMatchPreAnalysis { order: 5; }
+
 .sectionHeader {
   display: flex;
   justify-content: space-between;
@@ -674,7 +805,7 @@ select {
 }
 
 .standingTabs button {
-  min-height: 34px;
+  min-height: 44px;
   padding: 0 11px;
   border: 1px solid var(--line);
   border-radius: 8px;
@@ -827,6 +958,31 @@ select {
 .chartBox {
   display: grid;
   gap: 12px;
+}
+
+.radarControls {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin: 0 0 12px;
+}
+
+.radarControls label {
+  display: grid;
+  gap: 5px;
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.radarControls select {
+  width: 100%;
+  min-height: 38px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--surface);
+  color: var(--text);
+  padding: 0 10px;
 }
 
 .chartVisual {
@@ -1090,6 +1246,18 @@ select {
 }
 
 @media (max-width: 560px) {
+  .radarControls {
+    grid-template-columns: 1fr;
+  }
+
+  html {
+    scroll-padding-bottom: 80px;
+  }
+
+  body {
+    padding-bottom: 72px;
+  }
+
   .pageShell {
     width: min(100vw - 22px, 1180px);
   }
@@ -1102,10 +1270,224 @@ select {
     display: none;
   }
 
+  .heroBand {
+    padding: 20px 0 16px;
+  }
+
+  .heroCopy .eyebrow {
+    font-size: 14px;
+  }
+
+  .heroCopy p {
+    font-size: 16px;
+    line-height: 1.55;
+  }
+
+  .noticeBand {
+    margin-top: 14px;
+    padding: 10px 12px;
+    font-size: 14px;
+  }
+
+  .desktopQualityBand,
+  .desktopFilters,
+  .desktopStandingTable,
+  .matchMeta,
+  .teamAuxLine,
+  .sourceLayer,
+  .confidenceBox,
+  .probabilityRows,
+  .riskText {
+    display: none;
+  }
+
+  .mobileDataSummary {
+    display: grid;
+    gap: 8px;
+    margin-top: 10px;
+    padding: 10px 12px;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    background: var(--surface);
+    color: var(--muted);
+    font-size: 13px;
+  }
+
+  .mobileDataSummary summary {
+    color: var(--accent-strong);
+    font-weight: 700;
+    cursor: pointer;
+  }
+
+  .focusGrid {
+    margin-top: 14px;
+  }
+
+  .focusPanel {
+    padding: 15px;
+  }
+
+  .focusStats {
+    gap: 6px;
+    margin-top: 10px;
+  }
+
+  .focusStats span {
+    flex-direction: row;
+    padding: 9px 10px;
+    align-items: baseline;
+  }
+
+  .toolbar {
+    margin-top: 16px;
+    padding: 13px 0;
+  }
+
+  .mobileFilterBar {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1.25fr;
+    gap: 8px;
+    margin-top: 2px;
+  }
+
+  .mobileFilterBar button,
+  .sheetHeader button,
+  .mobileChartsTeaser button {
+    min-height: 44px;
+    border: 1px solid var(--line);
+    border-radius: 9px;
+    background: var(--surface);
+    color: var(--text);
+    font-weight: 700;
+  }
+
+  .mobileFilterBar button.active,
+  .mobileChartsTeaser button {
+    border-color: var(--accent);
+    background: #e7f4f6;
+    color: var(--accent-strong);
+  }
+
+  .mobileFilterSheet {
+    display: block;
+    position: fixed;
+    inset: 0;
+    z-index: 30;
+  }
+
+  .sheetBackdrop {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    border: 0;
+    background: rgba(23, 32, 38, 0.42);
+  }
+
+  .mobileFilterSheet section {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    max-height: min(82vh, 720px);
+    overflow-y: auto;
+    padding: 18px 16px calc(18px + env(safe-area-inset-bottom));
+    border-radius: 18px 18px 0 0;
+    background: var(--surface);
+    box-shadow: 0 -18px 48px rgba(24, 39, 52, 0.18);
+  }
+
+  .sheetHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 14px;
+  }
+
+  .sheetHeader h2 {
+    margin: 0;
+    font-size: 20px;
+  }
+
+  .sheetHeader button {
+    min-width: 68px;
+    color: var(--accent-strong);
+  }
+
+  .mobileFilterFields {
+    display: grid;
+    gap: 12px;
+  }
+
+  .mobileFilterFields label {
+    display: grid;
+    gap: 6px;
+    color: var(--muted);
+    font-size: 13px;
+    font-weight: 700;
+  }
+
+  .mobileFilterFields select,
+  .mobileFilterFields .searchControl {
+    width: 100%;
+    min-height: 48px;
+    border: 1px solid var(--line);
+    border-radius: 9px;
+    background: var(--surface);
+    color: var(--text);
+    padding: 0 12px;
+  }
+
+  .mobileFilterFields .searchControl {
+    display: flex;
+  }
+
+  .teamStrip {
+    display: flex;
+    flex-wrap: wrap;
+    overflow: visible;
+    padding: 0;
+    gap: 8px;
+  }
+
+  .teamPill {
+    min-height: 44px;
+    flex: 0 0 auto;
+  }
+
+  .teamStripHint {
+    display: none;
+  }
+
+  .favoriteTeamStrip > div {
+    margin-bottom: 2px;
+  }
+
+  .favoritePickerControl,
+  .favoritePickerAction {
+    width: 100%;
+  }
+
+  .favoritePickerSelected button {
+    min-height: 40px;
+    padding: 0 10px;
+  }
+
+  .teamFilterSummary {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .teamFilterSummary button {
+    min-height: 44px;
+    padding: 0 8px;
+  }
+
   .heroCopy h1,
   .matchHero h1,
   .teamHeader h1 {
-    font-size: 36px;
+    font-size: clamp(30px, 9vw, 34px);
+    line-height: 1.12;
+    letter-spacing: -0.02em;
   }
 
   .probabilityRows > div {
@@ -1125,6 +1507,176 @@ select {
   .rankList a,
   .focusStats span {
     flex-direction: column;
+  }
+
+  .focusStats span {
+    flex-direction: row;
+  }
+
+  .rankList a {
+    min-height: 64px;
+    justify-content: center;
+  }
+
+  .sectionHeader {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  .sectionHeader h2 {
+    font-size: 21px;
+  }
+
+  .matchCard {
+    padding: 14px;
+  }
+
+  .statusLayer {
+    gap: 7px;
+    font-size: 12px;
+  }
+
+  .statusLayer span:last-child {
+    display: none;
+  }
+
+  .matchTitle {
+    margin-top: 9px;
+    font-size: 18px;
+    line-height: 1.35;
+  }
+
+  .mobileMatchMeta {
+    display: block;
+    margin-top: 5px;
+    color: var(--muted);
+    font-size: 13px;
+  }
+
+  .scoreLayer {
+    margin-top: 12px;
+  }
+
+  .resultBlock strong,
+  .scoreForecast strong {
+    font-size: 21px;
+  }
+
+  .reviewPills {
+    display: grid;
+    grid-template-columns: 1fr;
+    margin-top: 8px;
+  }
+
+  .reviewPills span:nth-child(2),
+  .reviewPills span:nth-child(3) {
+    display: none;
+  }
+
+  .reviewPills a {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .standingTabs {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    margin-right: -11px;
+    padding-right: 11px;
+    scrollbar-width: none;
+  }
+
+  .standingTabs button {
+    flex: 0 0 auto;
+  }
+
+  .mobileStandingCards {
+    display: grid;
+    gap: 8px;
+  }
+
+  .mobileStandingCard {
+    display: grid;
+    grid-template-columns: 28px minmax(0, 1fr) auto;
+    gap: 3px 9px;
+    align-items: center;
+    min-height: 72px;
+    padding: 11px;
+    border: 1px solid var(--line);
+    border-radius: 9px;
+    background: var(--surface);
+  }
+
+  .mobileStandingCard > strong {
+    display: grid;
+    grid-row: span 2;
+    width: 28px;
+    height: 28px;
+    place-items: center;
+    border-radius: 50%;
+    background: var(--surface-soft);
+    color: var(--accent-strong);
+  }
+
+  .mobileStandingCard span {
+    font-weight: 700;
+  }
+
+  .mobileStandingCard b {
+    color: var(--accent-strong);
+    font-size: 13px;
+  }
+
+  .mobileStandingCard small {
+    grid-column: 2 / -1;
+    color: var(--muted);
+    font-size: 12px;
+    line-height: 1.35;
+  }
+
+  .chartsGrid {
+    margin-top: 18px;
+  }
+
+  .mobileChartsTeaser {
+    display: grid;
+    gap: 7px;
+    margin-top: 22px;
+    padding: 15px;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    background: var(--surface);
+  }
+
+  .mobileChartsTeaser span {
+    color: var(--muted);
+    font-size: 14px;
+  }
+
+  .mobileBottomNav {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 20;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    padding: 7px max(10px, env(safe-area-inset-right)) calc(7px + env(safe-area-inset-bottom)) max(10px, env(safe-area-inset-left));
+    border-top: 1px solid var(--line);
+    background: rgba(255, 255, 255, 0.96);
+    backdrop-filter: blur(12px);
+  }
+
+  .mobileBottomNav a {
+    display: grid;
+    min-height: 44px;
+    place-items: center;
+    color: var(--accent-strong);
+    font-size: 12px;
+    font-weight: 700;
   }
 
   .homepageStandingTable {

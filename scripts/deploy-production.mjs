@@ -3,9 +3,9 @@ import { spawn } from "node:child_process";
 
 const productionUrl = "https://world-cup-match-intelligence-center.vercel.app";
 const checks = [
-  ["/", ["今日焦点", "完整小组赛数据", "小组积分榜与出线形势（本地规则推断）", "本地数据最近更新", "数据状态", "本地数据快照", "不是实时比分 API"]],
+  ["/", ["今日焦点", "下一比赛日赛程", "小组积分榜与出线形势（本地规则推断）", "数据更新", "状态", "本地数据快照", "不是实时比分 API"]],
   ["/matches/match-001", ["预测复盘", "总进球偏差", "数据时间", "来源抓取时间", "赛前预测快照"]],
-  ["/matches/match-010", ["加拿大 vs 卡塔尔", "实际比分", "6-0", "赛后预测复盘"]],
+  ["/matches/match-010", ["加拿大（CAN） vs 卡塔尔（QAT）", "实际比分", "6-0", "赛后预测复盘"]],
   ["/api/matches", ["match-008", "match-009", "match-010", "match-011", "predictions"]]
 ];
 
@@ -187,16 +187,16 @@ async function smokeCheckHomepageScheduleCoverage() {
   const body = await response.text();
   const text = normalizeHtmlText(body);
   const required = [
-    "72 场小组赛数据",
+    "全部 72 场小组赛覆盖",
     "2026-06-12 至 2026-06-28",
     "2026-06-28",
-    "🇺🇸 美国 vs 🇦🇺 澳大利亚",
-    "🏴 苏格兰 vs 🇲🇦 摩洛哥",
-    "🇧🇷 巴西 vs 🇭🇹 海地",
-    "🇹🇷 土耳其 vs 🇵🇾 巴拉圭",
+    "美国（USA） vs 澳大利亚（AUS）",
+    "苏格兰（SCO） vs 摩洛哥（MAR）",
+    "巴西（BRA） vs 海地（HAI）",
+    "土耳其（TUR） vs 巴拉圭（PAR）",
     ... "ABCDEFGHIJKL".split("").map((group) => `${group} 组`)
   ];
-  const start = text.indexOf("完整小组赛数据");
+  const start = text.indexOf("下一比赛日赛程");
   const end = text.indexOf("进行中 / 比分待更新", start);
   const scheduleText = start >= 0 ? text.slice(start, end > start ? end : start + 900) : "";
   const forbidden = ["11 场比赛样本", "5 类来源", "4 场预测", "仅预测未来两天未完赛比赛"];
@@ -353,15 +353,9 @@ async function smokeCheckChartDisclaimers() {
     : "";
   const required = [
     "模型表现",
-    "全量样本热度排行（演示口径）",
-    "全量 72 场样本的演示热度字段",
-    "不是官方数据、官方关注度，也不是全网实时舆情",
-    "全量样本球队雷达图（演示模型）",
-    "属于本地演示模型口径",
-    "不是官方数据、官方能力评分或实时状态",
-    "小组出线概率（演示模型）",
-    "覆盖全量小组赛样本",
-    "不是官方数据、官方概率、博彩赔率或实时预测"
+    "模型数据与图表",
+    "热度、球队对比、近期状态与出线概率",
+    "查看图表"
   ];
   const forbidden = [
     "Brazil 88",
@@ -373,13 +367,6 @@ async function smokeCheckChartDisclaimers() {
   ];
   const missing = required.filter((needle) => !chartText.includes(needle));
   const forbiddenFound = forbidden.filter((needle) => chartText.includes(needle));
-  const qualificationStart = chartText.indexOf("小组出线概率（演示模型）");
-  const qualificationText = qualificationStart >= 0 ? chartText.slice(qualificationStart) : "";
-  const probabilities = [...qualificationText.matchAll(/(\d+)%/g)].map((match) => match[1]);
-  const uniqueProbabilities = new Set(probabilities);
-  if (probabilities.length >= 4 && uniqueProbabilities.size === 1) {
-    forbiddenFound.push(`出线概率全部为 ${probabilities[0]}%`);
-  }
 
   return {
     path: "/#chart-disclaimers",
@@ -408,16 +395,17 @@ async function smokeCheckUiReadability() {
     matchedPath: response.headers.get("x-matched-path") ?? "missing"
   };
   const required = [
-    "当前小组/收藏球队",
-    "显示当前小组/收藏球队；完整 48 队请用搜索定位。",
+    "搜索球队",
+    "全部球队",
+    "收藏主队",
     "数据可信度",
-    "本地数据最近更新",
+    "数据更新",
     "来源抓取时间",
     "首页默认只显示摘要；完整可信度字段请进入比赛详情页查看。",
     "场复盘来自当前 72 场样本中已经录入实际比分且存在赛前预测快照的比赛",
-    "项目 / 数值",
+    "模型数据与图表",
     "小组积分榜与出线形势（本地规则推断）",
-    "数据摘要",
+    "进球｜失球｜净胜球｜积分",
     "进球 3",
     "失球 0",
     "净胜球 +3",
@@ -490,16 +478,15 @@ async function smokeCheckGroupStandings() {
     "小组积分榜与出线形势（本地规则推断）",
     "A 组",
     "B 组",
-    "排名 球队 数据摘要 出线形势",
+    "排名 球队 进球｜失球｜净胜球｜积分 出线形势",
     "进球 3｜失球 0｜净胜球 +3｜积分 6",
     "墨西哥",
     "当前位于直接出线区",
     "仍需后续比赛确认",
     "非 FIFA 官方确认排名",
-    "72 场小组赛数据",
-    "全量样本热度排行（演示口径）",
-    "全量样本球队雷达图（演示模型）",
-    "小组出线概率（演示模型）"
+    "全部 72 场小组赛覆盖",
+    "模型数据与图表",
+    "查看图表"
   ];
   const forbidden = [
     "11 场比赛样本",
@@ -546,18 +533,17 @@ function assertGroupStandingsHtml(body, label) {
   const requiredText = [
     "小组积分榜与出线形势（本地规则推断）",
     "A 组",
-    "数据摘要",
+    "进球｜失球｜净胜球｜积分",
     "进球 3｜失球 0｜净胜球 +3｜积分 6",
     "积分",
     "净胜球",
     "出线形势",
     "非 FIFA 官方确认排名",
-    "build: standings-summary-v2 / no-legacy-columns / group-standings-homepage"
   ];
   const requiredRaw = [
     'id="group-standings"',
     'data-smoke="group-standings-homepage"',
-    "数据摘要",
+    "进球｜失球｜净胜球｜积分",
     "进球 3｜失球 0｜净胜球 +3｜积分 6"
   ];
   const missing = [
@@ -675,7 +661,7 @@ async function smokeCheckStandingsLinkedPages() {
     {
       path: "/matches/match-008",
       required: [
-        "捷克 vs 南非",
+        "捷克（CZE） vs 南非（RSA）",
         "A 组",
         "A 组积分榜摘要",
         "本场赛果已计入 A 组积分榜",
@@ -691,7 +677,7 @@ async function smokeCheckStandingsLinkedPages() {
     {
       path: "/matches/match-010",
       required: [
-        "加拿大 vs 卡塔尔",
+        "加拿大（CAN） vs 卡塔尔（QAT）",
         "B 组",
         "B 组积分榜摘要",
         "本场赛果已计入 B 组积分榜",

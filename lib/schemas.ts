@@ -17,6 +17,7 @@ export const dataSourceSchema = recordSourceSchema.extend({
 export const teamSchema = z.object({
   id: z.string().min(1),
   name: z.string().min(1),
+  nameZh: z.string().min(1),
   shortName: z.string().min(1),
   fifaCode: z.string().min(2).max(4),
   group: z.string().min(1),

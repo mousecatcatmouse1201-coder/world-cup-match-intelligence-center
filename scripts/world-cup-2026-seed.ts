@@ -3,6 +3,7 @@ import type { MatchStatus } from "../lib/types";
 export interface TeamSeed {
   id: string;
   name: string;
+  nameZh: string;
   shortName: string;
   fifaCode: string;
   group: string;
@@ -28,6 +29,10 @@ export interface FixtureSeed {
 
 type TeamSeedRow = [string, string, string, string, string, string, number, number];
 type FixtureSeedRow = [string, string, string, string, string, string, string, string, MatchStatus, [number, number] | undefined, number];
+
+const TEAM_NAMES_ZH: Record<string, string> = {
+  algeria: "阿尔及利亚", argentina: "阿根廷", austria: "奥地利", australia: "澳大利亚", belgium: "比利时", bosnia: "波黑", brazil: "巴西", "cabo-verde": "佛得角", canada: "加拿大", colombia: "哥伦比亚", croatia: "克罗地亚", curacao: "库拉索", czechia: "捷克", "dr-congo": "刚果（金）", ecuador: "厄瓜多尔", egypt: "埃及", england: "英格兰", france: "法国", germany: "德国", ghana: "加纳", haiti: "海地", iran: "伊朗", iraq: "伊拉克", "ivory-coast": "科特迪瓦", japan: "日本", jordan: "约旦", mexico: "墨西哥", morocco: "摩洛哥", netherlands: "荷兰", "new-zealand": "新西兰", norway: "挪威", panama: "巴拿马", paraguay: "巴拉圭", portugal: "葡萄牙", qatar: "卡塔尔", "saudi-arabia": "沙特阿拉伯", scotland: "苏格兰", senegal: "塞内加尔", "south-africa": "南非", "south-korea": "韩国", spain: "西班牙", sweden: "瑞典", switzerland: "瑞士", tunisia: "突尼斯", turkiye: "土耳其", uruguay: "乌拉圭", "united-states": "美国", uzbekistan: "乌兹别克斯坦"
+};
 
 const teamRows: TeamSeedRow[] = [
   ["mexico", "墨西哥", "墨西哥", "MEX", "A", "CONCACAF", 13, 1681],
@@ -81,7 +86,7 @@ const teamRows: TeamSeedRow[] = [
 ];
 
 export const teamSeeds: TeamSeed[] = teamRows.map(([id, name, shortName, fifaCode, group, region, fifaRank, rankingPoints]) => ({
-  id,
+  id, nameZh: TEAM_NAMES_ZH[id] ?? name,
   name,
   shortName,
   fifaCode,
@@ -122,12 +127,12 @@ const fixtureRows: FixtureSeedRow[] = [
   ["match-011", "A", "2026-06-19T01:00:00Z", "Guadalajara Stadium", "Guadalajara", "Mexico", "mexico", "south-korea", "finished", [1, 0], 93],
   ["match-029", "D", "2026-06-19T15:00:00-04:00", "Seattle Stadium", "Seattle", "United States", "united-states", "australia", "scheduled", undefined, 91],
   ["match-030", "C", "2026-06-19T18:00:00-04:00", "Boston Stadium", "Boston", "United States", "scotland", "morocco", "scheduled", undefined, 78],
-  ["match-031", "C", "2026-06-19T20:30:00-04:00", "Miami Stadium", "Miami", "United States", "brazil", "haiti", "scheduled", undefined, 87],
-  ["match-032", "D", "2026-06-19T23:00:00-04:00", "Kansas City Stadium", "Kansas City", "United States", "turkiye", "paraguay", "scheduled", undefined, 73],
-  ["match-033", "F", "2026-06-20T13:00:00-04:00", "Dallas Stadium", "Dallas", "United States", "netherlands", "sweden", "scheduled", undefined, 84],
-  ["match-034", "E", "2026-06-20T16:00:00-04:00", "New York New Jersey Stadium", "New York/New Jersey", "United States", "germany", "ivory-coast", "scheduled", undefined, 86],
-  ["match-035", "E", "2026-06-20T20:00:00-04:00", "Philadelphia Stadium", "Philadelphia", "United States", "ecuador", "curacao", "scheduled", undefined, 70],
-  ["match-036", "F", "2026-06-21T00:00:00-04:00", "Seattle Stadium", "Seattle", "United States", "tunisia", "japan", "scheduled", undefined, 71],
+  ["match-031", "C", "2026-06-19T20:30:00-04:00", "Philadelphia Stadium", "Philadelphia", "United States", "brazil", "haiti", "scheduled", undefined, 87],
+  ["match-032", "D", "2026-06-19T20:00:00-07:00", "San Francisco Bay Area Stadium", "San Francisco Bay Area", "United States", "turkiye", "paraguay", "scheduled", undefined, 73],
+  ["match-033", "F", "2026-06-20T12:00:00-05:00", "Houston Stadium", "Houston", "United States", "netherlands", "sweden", "scheduled", undefined, 84],
+  ["match-034", "E", "2026-06-20T16:00:00-04:00", "Toronto Stadium", "Toronto", "Canada", "germany", "ivory-coast", "scheduled", undefined, 86],
+  ["match-035", "E", "2026-06-20T19:00:00-05:00", "Kansas City Stadium", "Kansas City", "United States", "ecuador", "curacao", "scheduled", undefined, 70],
+  ["match-036", "F", "2026-06-20T22:00:00-06:00", "Monterrey Stadium", "Monterrey", "Mexico", "tunisia", "japan", "scheduled", undefined, 71],
   ["match-037", "H", "2026-06-21T12:00:00-04:00", "Atlanta Stadium", "Atlanta", "United States", "spain", "saudi-arabia", "scheduled", undefined, 86],
   ["match-038", "G", "2026-06-21T15:00:00-04:00", "Toronto Stadium", "Toronto", "Canada", "belgium", "iran", "scheduled", undefined, 82],
   ["match-039", "H", "2026-06-21T18:00:00-04:00", "Miami Stadium", "Miami", "United States", "uruguay", "cabo-verde", "scheduled", undefined, 79],
