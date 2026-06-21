@@ -10,6 +10,8 @@ build
 .DS_Store
 *.log
 tsconfig.tsbuildinfo
+agents.local.backup.md
+cloudbaserc.json
 data/raw/*.html
 data/raw/*.json
 !data/raw/.gitkeep
