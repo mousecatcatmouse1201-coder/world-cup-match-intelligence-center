@@ -574,7 +574,7 @@ export function DashboardClient({ store, matches, predictions }: DashboardClient
         </Link>
         <div className="matchMeta">{item.displayTimezoneLabel} {item.displayTime} · {fixture.city}</div>
         <div className="mobileMatchMeta">{item.beijingTimeLabel} · {matchStatusLabel(status)}</div>
-        <div className="teamAuxLine">{localizedTeamLabel(home)}（{home.fifaCode}） / {localizedTeamLabel(away)}（{away.fifaCode}）</div>
+        <div className="teamAuxLine">{localizedTeamLabel(home)} / {localizedTeamLabel(away)}</div>
 
         {status === "finished" ? (
           <div className="scoreLayer">
