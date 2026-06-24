@@ -9,5 +9,12 @@ export function teamNameZh(team: Team) {
 }
 
 export function teamLabel(team: Team) {
-  return `${teamNameZh(team)}（${team.fifaCode}）`;
+  const name = teamNameZh(team);
+  const trimmedName = name.trimEnd();
+
+  if (trimmedName.endsWith(`（${team.fifaCode}）`) || trimmedName.endsWith(`(${team.fifaCode})`)) {
+    return name;
+  }
+
+  return `${name}（${team.fifaCode}）`;
 }
