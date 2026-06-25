@@ -652,7 +652,7 @@ export function DashboardClient({ store, matches, predictions }: DashboardClient
           <p className="eyebrow">无 API Key · 自动 JSON 入库 · 来源标注</p>
           <h1>世界杯比赛智能分析中心</h1>
           <p>
-            从官方赛程和排名快照整理结构化数据，用本地模型生成胜平负概率、预测比分、战术看点和比赛风险。
+            整理官方赛程和排名快照，用本地模型生成胜平负概率、预测比分、战术看点和比赛风险。
           </p>
         </div>
       </section>
