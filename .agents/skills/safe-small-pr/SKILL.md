@@ -56,10 +56,13 @@ If the working tree is not clean, stop and explain.
 
 4. Create a task branch.
 
-Use a clear branch name, for example:
+For small PR learning tasks, create the branch from `main` using the default format `learning/<short-task-name>`.
+Use another prefix or branch name only when the user explicitly asks for it; do not suggest `codex/...` as the default learning branch format.
+
+Example:
 
 ```bash
-git switch -c learning/<short-task-name>
+git switch -c learning/clarify-homepage-copy
 ```
 
 5. Investigate before editing.
